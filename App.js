@@ -2,13 +2,12 @@ import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import "react-native-gesture-handler";
 import { createStackNavigator } from "@react-navigation/stack";
-import Registration from "./Screens/components/Registration";
-import Login from "./Screens/components/Login";
-import IntroScreen from "./Screens/IntroScreen";
-import Home from "./Screens/Home";
-import Quotes from "./Screens/components/Quotes";
-import Profile from "./Screens/Profile";
-// import Home from "./Screens/Home";
+import Registration from "./src/components/Registration";
+import Login from "./src/components/Login";
+import IntroScreen from "./src/Screens/IntroScreen";
+import Quotes from "./src/components/Quotes";
+// import Profile from "./Screens/Profile";
+import Home from "./src/Screens/Home";
 
 // import CreatePostsScreen from "./Screens/CreatePostsScreen";
 

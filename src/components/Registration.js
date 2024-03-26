@@ -13,6 +13,7 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
+import * as imagePicker from "expo-image-picker";
 import Svg, { Path } from "react-native-svg";
 
 const RegistrationScreen = () => {
@@ -22,6 +23,7 @@ const RegistrationScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [keyboardVisible, setKeyboardVisible] = useState(false);
   const navigation = useNavigation();
+  const [avatarSource, setAvatarSource] = useState(null);
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -47,6 +49,18 @@ const RegistrationScreen = () => {
     setShowPassword(!showPassword);
   };
 
+  const selectImage = async () => {
+    let result = await imagePicker.launchImageLibraryAsync({
+      mediaTypes: imagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+    if (!result.canceled) {
+      setAvatarSource(result.uri);
+    }
+  };
+
   const handleRegister = () => {
     console.log({ userName, password, email });
     navigation.navigate("Home", {
@@ -59,6 +73,7 @@ const RegistrationScreen = () => {
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
+
   return (
     <ImageBackground
       source={{
@@ -78,10 +93,14 @@ const RegistrationScreen = () => {
           <View style={styles.container}>
             <View style={styles.imageContainer}>
               <Image
-                source={{ uri: "https://via.placeholder.com/120" }}
+                source={
+                  avatarSource
+                    ? { uri: avatarSource.uri }
+                    : { uri: "https://via.placeholder.com/120" }
+                }
                 style={styles.image}
               />
-              <Pressable style={styles.addButton}>
+              <Pressable onPress={() => selectImage()} style={styles.addButton}>
                 <Svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"

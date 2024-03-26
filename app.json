@@ -4,10 +4,10 @@
     "slug": "app-med",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./img/logo.png",
+    "icon": "./src/img/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./img/logo.png",
+      "image": "./src/img/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -18,7 +18,7 @@
     "android": {
       "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
-        "foregroundImage": "./img/logo.png",
+        "foregroundImage": "./src/img/logo.png",
         "backgroundColor": "#ffffff"
       }
     },

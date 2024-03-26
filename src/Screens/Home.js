@@ -1,15 +1,13 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { useRoute } from "@react-navigation/native";
+import IconForProfile from "react-native-vector-icons/Ionicons";
 import Profile from "./Profile";
 import Favorite from "./Favorite";
-import MainMenu from "./components/MainMenu";
+import MainMenu from "../components/MainMenu";
 
 const Tab = createBottomTabNavigator();
 const Home = () => {
-  const route = useRoute();
-  const { email, password, name } = route.params;
   return (
     <Tab.Navigator
       screenOptions={{
@@ -26,6 +24,7 @@ const Home = () => {
         name="MainMenu"
         component={MainMenu}
         options={({ navigation }) => ({
+          headerShown: false,
           title: null,
           headerLeft: null,
           tabBarLabel: "",
@@ -60,7 +59,8 @@ const Home = () => {
         name="Favorite"
         component={Favorite}
         options={({ navigation }) => ({
-          title: "Створити пост",
+          headerShown: false,
+          title: "Обрані",
           headerTitleAlign: "center",
           tabBarLabel: "",
           tabBarIcon: ({ size, focused }) => (
@@ -68,7 +68,7 @@ const Home = () => {
               style={{ alignItems: "center", marginTop: focused ? -10 : 0 }}
             >
               <Icon
-                name="plus"
+                name="heart-o"
                 size={focused ? size + 5 : size + 3}
                 color={focused ? "tomato" : "gray"}
               />
@@ -89,8 +89,10 @@ const Home = () => {
       <Tab.Screen
         name="Profile"
         component={Profile}
-        options={{
+        options={({ navigation }) => ({
           headerShown: false,
+          title: "Профіль",
+          headerTitleAlign: "center",
           tabBarLabel: "",
           tabBarIcon: ({ size, focused }) => (
             <View
@@ -103,7 +105,17 @@ const Home = () => {
               />
             </View>
           ),
-        }}
+          headerRight: () => (
+            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+              <IconForProfile
+                name="settings-outline"
+                size={30}
+                color="black"
+                style={{ marginRight: 10 }}
+              />
+            </TouchableOpacity>
+          ),
+        })}
       />
     </Tab.Navigator>
   );
