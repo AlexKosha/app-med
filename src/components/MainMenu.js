@@ -1,9 +1,21 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
+import {
+  Image,
+  ImageBackground,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 
 const Home = () => {
   const navigation = useNavigation();
+
+  const handleLogOut = () => {
+    navigation.navigate("Login");
+  };
+
   const handleNavigateToQuotes = () => {
     navigation.navigate("Quotes");
   };
@@ -16,18 +28,25 @@ const Home = () => {
     navigation.navigate("Meditation");
   };
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={{
+        uri: "https://kartinki.pics/uploads/posts/2021-07/thumbs/1625809191_52-kartinkin-com-p-meditatsiya-art-art-krasivo-54.jpg",
+      }}
+      style={styles.container}
+    >
+      <Pressable style={styles.logOut} onPress={handleLogOut}>
+        <Icon name="sign-out" size={30} color="black" />
+      </Pressable>
       <Image
-        source={require("../../img/logo.png")}
+        source={require("../img/logo.png")}
         style={styles.image}
         resizeMode="contain"
       />
-      {/* <View> */}
       <Pressable style={styles.btn} onPress={handleNavigateToQuotes}>
         <Text style={styles.positionPass}>Мудрість дня</Text>
       </Pressable>
       <Pressable style={styles.btn} onPress={handleNavigateToArchangels}>
-        <Text style={styles.positionPass}>Послання Архангелів</Text>
+        <Text style={styles.positionPass}>Ангельська терапія</Text>
       </Pressable>
       <Pressable style={styles.btn} onPress={handleNavigateToMeditation}>
         <Text style={styles.positionPass}>Медитації</Text>
@@ -35,8 +54,7 @@ const Home = () => {
       <Pressable style={styles.btn} onPress={handleNavigateToMeditation}>
         <Text style={styles.positionPass}>??????</Text>
       </Pressable>
-      {/* </View> */}
-    </View>
+    </ImageBackground>
   );
 };
 
@@ -46,11 +64,17 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     alignItems: "center",
   },
+  logOut: {
+    position: "absolute",
+    top: 30,
+    right: 10,
+  },
   image: {
     // marginBottom: 20,
     width: 350,
     height: 350,
   },
+
   btn: {
     width: 190,
     height: 70,
