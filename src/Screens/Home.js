@@ -16,7 +16,7 @@ const Home = () => {
         tabBarStyle: {
           display: "flex",
           paddingHorizontal: 40,
-          paddingTop: 10,
+          paddingTop: 5,
         },
       }}
     >
@@ -33,7 +33,7 @@ const Home = () => {
             <View
               style={{
                 alignItems: "center",
-                marginTop: focused ? -10 : 0,
+                marginTop: focused ? -7 : 0,
               }}
             >
               <Icon
@@ -64,9 +64,7 @@ const Home = () => {
           headerTitleAlign: "center",
           tabBarLabel: "",
           tabBarIcon: ({ size, focused }) => (
-            <View
-              style={{ alignItems: "center", marginTop: focused ? -10 : 0 }}
-            >
+            <View style={{ alignItems: "center", marginTop: focused ? -7 : 0 }}>
               <Icon
                 name="heart-o"
                 size={focused ? size + 5 : size + 3}
@@ -95,9 +93,7 @@ const Home = () => {
           headerTitleAlign: "center",
           tabBarLabel: "",
           tabBarIcon: ({ size, focused }) => (
-            <View
-              style={{ alignItems: "center", marginTop: focused ? -10 : 0 }}
-            >
+            <View style={{ alignItems: "center", marginTop: focused ? -7 : 0 }}>
               <Icon
                 name="user-o"
                 size={focused ? size + 5 : size + 3}

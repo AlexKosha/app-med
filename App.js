@@ -8,6 +8,7 @@ import IntroScreen from "./src/Screens/IntroScreen";
 import Quotes from "./src/components/Quotes";
 // import Profile from "./Screens/Profile";
 import Home from "./src/Screens/Home";
+import Archangels from "./src/components/Archangels";
 
 // import CreatePostsScreen from "./Screens/CreatePostsScreen";
 
@@ -41,11 +42,11 @@ export default function App() {
           component={Quotes}
           options={{ headerShown: false }}
         />
-        {/* <MainStack.Screen
-          name="Profile"
-          component={Profile}
+        <MainStack.Screen
+          name="Archangels"
+          component={Archangels}
           options={{ headerShown: false }}
-        /> */}
+        />
       </MainStack.Navigator>
     </NavigationContainer>
   );

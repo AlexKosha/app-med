@@ -76,17 +76,17 @@ const styles = StyleSheet.create({
   },
 
   btn: {
-    width: 190,
+    width: 270,
     height: 70,
     backgroundColor: "orange",
     borderRadius: 15,
     marginBottom: 20,
-    paddingBottom: 22,
-    paddingTop: 22,
+    justifyContent: "center",
+    alignItems: "center",
   },
   positionPass: {
     textAlign: "center",
-    fontSize: 18,
+    fontSize: 24,
   },
 });
 
