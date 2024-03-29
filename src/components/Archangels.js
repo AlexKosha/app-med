@@ -1,13 +1,46 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import Icon from "react-native-vector-icons/AntDesign";
+import {
+  Image,
+  ImageBackground,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import ArchangelsModal from "./Modal";
+// import * as TherapyService from "../service/therapyService";
 
 const Archangels = () => {
   const navigation = useNavigation();
+  const [isModalVisible, setModalVisible] = useState(false);
+  // const [therapy, setTheraphy] = useState("");
+
+  // useEffect(() => {
+  //   const getTherapy = async () => {
+  //     try {
+  //       const data = await TherapyService.getTherapy();
+  //       setTheraphy(data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getTherapy();
+  // }, []);
+
+  const toggleModalSurvey = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   const handleNavigationToHome = () => {
     navigation.navigate("Home");
   };
+
+  const handleNavigationToMeditation = () => {
+    navigation.navigate("Meditation");
+  };
+
   return (
     <View>
       <View style={styles.headerContainer}>
@@ -16,6 +49,65 @@ const Archangels = () => {
           <Text style={styles.positionPass}>Ангельська терапія</Text>
         </Pressable>
       </View>
+      <Text style={{ textAlign: "center" }}>
+        ...............Text...............
+      </Text>
+      <View style={styles.imageContainer}>
+        <Pressable onPress={toggleModalSurvey}>
+          <View style={{ borderRadius: 16, overflow: "hidden" }}>
+            <ImageBackground
+              style={styles.imageBtn}
+              source={{
+                uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLUThBvMeLWZI_CHHlDlntaAjYpC8e7Uk8Bw&usqp=CAU",
+              }}
+              resizeMode="cover"
+            />
+          </View>
+        </Pressable>
+        <Pressable onPress={toggleModalSurvey}>
+          <View style={{ borderRadius: 16, overflow: "hidden" }}>
+            <ImageBackground
+              style={styles.imageBtn}
+              source={{
+                uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaWLHGHL13JmM4wDa_DIZQbBcYMMai2uK6AA&usqp=CAU",
+              }}
+              resizeMode="cover"
+            />
+          </View>
+        </Pressable>
+      </View>
+      <View style={styles.btnContainer}>
+        <Pressable style={styles.btn} onPress={handleNavigationToMeditation}>
+          <Text style={styles.positionPass}>Медитації</Text>
+        </Pressable>
+        <Pressable style={styles.btn} onPress={handleNavigationToHome}>
+          <Text style={styles.positionPass}>Навчання</Text>
+        </Pressable>
+      </View>
+      <ArchangelsModal isVisible={isModalVisible} onClose={toggleModalSurvey}>
+        <ImageBackground
+          source={{
+            uri: "https://img.freepik.com/free-photo/cute-pastel-purple-marble-background_53876-104400.jpg?size=626&ext=jpg&ga=GA1.1.1695762122.1711480779&semt=ais",
+          }}
+          style={styles.modalContainer}
+        >
+          <Pressable onPress={toggleModalSurvey}>
+            <Icon style={styles.closeButton} name="closecircleo" />
+          </Pressable>
+          <Text style={styles.title}>АРХАНГЕЛ МИХАЇЛ</Text>
+          <Text style={styles.firstParagraph}>
+            Захистить і проведе вас у ситуації, що склалася. Дасть мужність та
+            силу волі, щоби ви відчули впевненість та легко вийшли із ситуації.
+          </Text>
+          <Text style={styles.secondParagraph}>
+            Щоб примножити вашу мужність і упевненість, промовте: «Архангеле
+            Михаїле, я закликаю до тебе. Будь ласка, захисти мене своїм мечем та
+            щитом зі світла, дозволь мені спертися на твою силу і мужність. Дай
+            мені знати і відчувати, що я в безпеці і захищений емоційно,
+            фізично, фінансово, енергетично та духовно. Дякую."
+          </Text>
+        </ImageBackground>
+      </ArchangelsModal>
     </View>
   );
 };
@@ -43,6 +135,65 @@ const styles = StyleSheet.create({
   positionPass: {
     textAlign: "center",
     fontSize: 20,
+  },
+  imageContainer: {
+    flexDirection: "row",
+    marginTop: 10,
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 40,
+  },
+  imageBtn: {
+    width: 150,
+    height: 200,
+  },
+  imageBtnLast: {
+    margin: 0,
+  },
+  btnContainer: {
+    marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  btn: {
+    width: 200,
+    height: 60,
+    backgroundColor: "orange",
+    borderRadius: 50,
+    marginBottom: 20,
+    paddingVertical: "auto",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalContainer: {
+    position: "relative",
+    backgroundColor: "grey",
+    paddingVertical: 30,
+    paddingHorizontal: 15,
+  },
+  title: {
+    textAlign: "center",
+    fontSize: 20,
+    marginBottom: 15,
+    color: "#4B3621",
+  },
+  firstParagraph: {
+    fontSize: 18,
+    marginBottom: 15,
+    color: "#4B3621",
+    fontFamily: "Montserrat-Bold",
+  },
+  secondParagraph: {
+    fontSize: 16,
+    color: "#4B3621",
+    fontFamily: "Montserrat-Regular",
+  },
+  closeButton: {
+    fontSize: 18,
+    color: "black",
+    position: "absolute",
+    right: -10,
+    top: -20,
   },
 });
 
