@@ -77,7 +77,7 @@ const RegistrationScreen = () => {
   return (
     <ImageBackground
       source={{
-        uri: "https://s3-alpha-sig.figma.com/img/f6c9/a386/3060bf968d92368179ce26a756ce4271?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=V3ryBxBx6W2DVY2lz9axZg9isKzpmM7XGM3krujztdNpxfP2lzHIlnse6oHbQ7qmP2RzfYeMYSHJxkbmG77BQr8wRqzD6I21XUKDxD9xcU8TGo5qEbQC4r2vlKg4XJQ6T4f-sN2SurdsHu2jwVpp2TOP6UYXVgXzPkaFx5ZwQ5S8LDo~BNmkkMuW6p~KfnNO~ECLYwzHj3isG1FnkCeiZDaERqFhzxSYnoH9MhDJA7fNu6L1ZGGhOU9odFS78HPt2lT23eBLgDDZiVdH-R7rubNyJH6QGOvjTlRiEuv4N4f9LOUMYXB0EneX32UNg7TvBBm1FtWWHDqULSZ6tvy~rQ__",
+        uri: "https://kartinki.pics/uploads/posts/2021-07/thumbs/1625809191_52-kartinkin-com-p-meditatsiya-art-art-krasivo-54.jpg",
       }}
       style={styles.backgroundImage}
     >
@@ -184,6 +184,7 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     resizeMode: "cover",
+    justifyContent: "flex-end",
   },
   inner: {
     flex: 1,
