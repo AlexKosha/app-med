@@ -15,15 +15,19 @@ import {
 } from "react-native";
 import * as imagePicker from "expo-image-picker";
 import Svg, { Path } from "react-native-svg";
+import * as Validate from "../helpers/validationInput";
 
 const RegistrationScreen = () => {
-  const [userName, setUserName] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [keyboardVisible, setKeyboardVisible] = useState(false);
-  const navigation = useNavigation();
   const [avatarSource, setAvatarSource] = useState(null);
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const navigation = useNavigation();
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -53,31 +57,61 @@ const RegistrationScreen = () => {
     let result = await imagePicker.launchImageLibraryAsync({
       mediaTypes: imagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [2, 2],
       quality: 1,
     });
     if (!result.canceled) {
-      setAvatarSource(result.uri);
+      setAvatarSource(result.assets[0].uri);
     }
   };
 
+  const deleteImage = async () => {
+    setAvatarSource(null);
+  };
+
   const handleRegister = () => {
-    console.log({ userName, password, email });
-    navigation.navigate("Home", {
-      name: userName,
-      email: email,
-      password: password,
-    });
+    navigation.navigate("Home");
   };
 
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
 
+  const handleNameChange = (text) => {
+    setName(text);
+    if (!Validate.validateName(text)) {
+      setNameError("Починатися з великої літери і мінімум 3 букви");
+    } else {
+      setNameError("");
+    }
+  };
+
+  const handleEmailChange = (text) => {
+    setEmail(text);
+    if (!Validate.validateEmail(text)) {
+      setEmailError("Введіть коректну електронну пошту");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const handlePasswordChange = (text) => {
+    setPassword(text);
+    if (!Validate.validatePassword(text)) {
+      setPasswordError("Пароль повинен містити щонайменше 6 символів");
+    } else {
+      setPasswordError("");
+    }
+  };
+
+  const renderError = (error, errorMessage) => {
+    return error ? <Text style={errorMessage}>{error}</Text> : null;
+  };
+
   return (
     <ImageBackground
       source={{
-        uri: "https://kartinki.pics/uploads/posts/2021-07/thumbs/1625809191_52-kartinkin-com-p-meditatsiya-art-art-krasivo-54.jpg",
+        uri: "https://img.freepik.com/free-photo/cute-pastel-purple-marble-background_53876-104400.jpg?size=626&ext=jpg&ga=GA1.1.1695762122.1711480779&semt=ais",
       }}
       style={styles.backgroundImage}
     >
@@ -95,51 +129,78 @@ const RegistrationScreen = () => {
               <Image
                 source={
                   avatarSource
-                    ? { uri: avatarSource.uri }
+                    ? { uri: avatarSource }
                     : { uri: "https://via.placeholder.com/120" }
                 }
                 style={styles.image}
               />
-              <Pressable onPress={() => selectImage()} style={styles.addButton}>
-                <Svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill=""
-                  stroke="#FF6C00"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              {!avatarSource ? (
+                <Pressable
+                  onPress={() => selectImage()}
+                  style={styles.addButton}
                 >
-                  <Path d="M12 5v14M5 12h14" />
-                </Svg>
-              </Pressable>
+                  <Svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill=""
+                    stroke="#FF6C00"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <Path d="M12 5v14M5 12h14" />
+                  </Svg>
+                </Pressable>
+              ) : (
+                <Pressable
+                  onPress={() => deleteImage()}
+                  style={styles.addButton}
+                >
+                  <Svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill=""
+                    stroke="#FF6C00"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <Path d="M18 6L6 18M6 6l12 12" />
+                  </Svg>
+                </Pressable>
+              )}
             </View>
             <Text style={styles.title}>Реєстрація</Text>
             <View style={styles.inputContainer}>
               <TextInput
                 style={styles.input}
                 placeholder="Name"
-                value={userName}
+                value={name}
                 placeholderTextColor="#BDBDBD"
-                onChangeText={(text) => setUserName(text)}
+                onChangeText={handleNameChange}
               />
+              {renderError(nameError, styles.errorTextName)}
               <TextInput
                 style={styles.input}
                 placeholder="Email"
                 value={email}
                 placeholderTextColor="#BDBDBD"
-                onChangeText={(text) => setEmail(text)}
+                onChangeText={handleEmailChange}
               />
+              {renderError(emailError, styles.errorTextEmail)}
               <TextInput
                 style={[styles.input, styles.lastInput]}
                 placeholder="Password"
                 secureTextEntry={!showPassword}
                 value={password}
                 placeholderTextColor="#BDBDBD"
-                onChangeText={(text) => setPassword(text)}
+                onChangeText={handlePasswordChange}
               />
+              {renderError(passwordError, styles.errorTextPassword)}
               <Pressable
                 style={styles.positionBtn}
                 onPress={toggleShowPassword}
@@ -204,18 +265,44 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   inputContainer: {
+    position: "relative",
     width: "100%",
   },
   input: {
-    backgroundColor: "#F6F6F6",
+    position: "relative",
     height: 40,
     width: "100%",
-    height: 50,
+    backgroundColor: "#F6F6F6",
     borderColor: "#E8E8E8",
     borderWidth: 1,
     marginBottom: 10,
     paddingHorizontal: 10,
     marginBottom: 16,
+  },
+  lastInput: {
+    marginBottom: 0,
+  },
+  errorTextName: {
+    position: "absolute",
+    top: -20,
+    left: 0,
+    fontSize: 12,
+    color: "red",
+  },
+  errorTextEmail: {
+    position: "absolute",
+    top: 38,
+    left: 0,
+    color: "red",
+    fontSize: 12,
+  },
+
+  errorTextPassword: {
+    color: "red",
+    fontSize: 12,
+    position: "absolute",
+    bottom: 40,
+    left: 0,
   },
 
   positionPass: {
@@ -224,9 +311,6 @@ const styles = StyleSheet.create({
     right: 16,
   },
 
-  lastInput: {
-    marginBottom: 0,
-  },
   button: {
     backgroundColor: "#FF6C00",
     borderRadius: 100,

@@ -12,12 +12,15 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
+import * as Validate from "../helpers/validationInput";
 
 const LoginScreen = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [keyboardVisible, setKeyboardVisible] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const navigation = useNavigation();
 
   const toggleShowPassword = () => {
@@ -51,10 +54,32 @@ const LoginScreen = () => {
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
+
+  const handleEmailChange = (text) => {
+    setEmail(text);
+    if (!Validate.validateEmail(text)) {
+      setEmailError("Введіть коректну електронну пошту");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const handlePasswordChange = (text) => {
+    setPassword(text);
+    if (!Validate.validatePassword(text)) {
+      setPasswordError("Пароль повинен містити щонайменше 6 символів");
+    } else {
+      setPasswordError("");
+    }
+  };
+
+  const renderError = (error, errorMessage) => {
+    return error ? <Text style={errorMessage}>{error}</Text> : null;
+  };
   return (
     <ImageBackground
       source={{
-        uri: "https://s3-alpha-sig.figma.com/img/f6c9/a386/3060bf968d92368179ce26a756ce4271?Expires=1711324800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=V3ryBxBx6W2DVY2lz9axZg9isKzpmM7XGM3krujztdNpxfP2lzHIlnse6oHbQ7qmP2RzfYeMYSHJxkbmG77BQr8wRqzD6I21XUKDxD9xcU8TGo5qEbQC4r2vlKg4XJQ6T4f-sN2SurdsHu2jwVpp2TOP6UYXVgXzPkaFx5ZwQ5S8LDo~BNmkkMuW6p~KfnNO~ECLYwzHj3isG1FnkCeiZDaERqFhzxSYnoH9MhDJA7fNu6L1ZGGhOU9odFS78HPt2lT23eBLgDDZiVdH-R7rubNyJH6QGOvjTlRiEuv4N4f9LOUMYXB0EneX32UNg7TvBBm1FtWWHDqULSZ6tvy~rQ__",
+        uri: "https://img.freepik.com/free-photo/cute-pastel-purple-marble-background_53876-104400.jpg?size=626&ext=jpg&ga=GA1.1.1695762122.1711480779&semt=ais",
       }}
       style={styles.backgroundImage}
     >
@@ -75,16 +100,18 @@ const LoginScreen = () => {
                 placeholder="Email"
                 value={email}
                 placeholderTextColor="#BDBDBD"
-                onChangeText={(text) => setEmail(text)}
+                onChangeText={handleEmailChange}
               />
+              {renderError(emailError, styles.errorTextEmail)}
               <TextInput
                 style={[styles.input, styles.lastInput]}
                 placeholder="Password"
                 secureTextEntry={!showPassword}
                 value={password}
                 placeholderTextColor="#BDBDBD"
-                onChangeText={(text) => setPassword(text)}
+                onChangeText={handlePasswordChange}
               />
+              {renderError(passwordError, styles.errorTextPassword)}
               <Pressable
                 style={styles.positionPass}
                 onPress={toggleShowPassword}
@@ -101,7 +128,7 @@ const LoginScreen = () => {
                   title="Увійти"
                   onPress={handleRegister}
                 >
-                  <Text style={styles.buttonText}>Login</Text>
+                  <Text style={styles.buttonText}>Увійти</Text>
                 </Pressable>
                 <View style={styles.textContainer}>
                   <Text style={styles.question}>Немає акаунту?</Text>
@@ -150,6 +177,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width: "100%",
+    position: "relative",
   },
   input: {
     backgroundColor: "#F6F6F6",
@@ -163,13 +191,28 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
 
+  lastInput: {
+    marginBottom: 0,
+  },
+
+  errorTextEmail: {
+    position: "absolute",
+    top: -18,
+    left: 0,
+    color: "red",
+    fontSize: 12,
+  },
+  errorTextPassword: {
+    color: "red",
+    fontSize: 12,
+    position: "absolute",
+    top: 50,
+    left: 0,
+  },
   positionPass: {
     position: "absolute",
     bottom: 16,
     right: 16,
-  },
-  lastInput: {
-    marginBottom: 0,
   },
   button: {
     backgroundColor: "#FF6C00",
