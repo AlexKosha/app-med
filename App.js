@@ -12,6 +12,7 @@ import Home from "./src/Screens/Home";
 import Archangels from "./src/components/Archangels";
 import Meditation from "./src/components/Meditation";
 import { useEffect, useState } from "react";
+import Exercises from "./src/components/Exercises";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -76,6 +77,11 @@ export default function App() {
         <MainStack.Screen
           name="Meditation"
           component={Meditation}
+          options={{ headerShown: false }}
+        />
+        <MainStack.Screen
+          name="Exercises"
+          component={Exercises}
           options={{ headerShown: false }}
         />
       </MainStack.Navigator>

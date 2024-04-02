@@ -8,6 +8,7 @@ import {
   Text,
   View,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Home = () => {
   const navigation = useNavigation();
@@ -43,16 +44,44 @@ const Home = () => {
         resizeMode="contain"
       />
       <Pressable style={styles.btn} onPress={handleNavigateToQuotes}>
-        <Text style={styles.positionPass}>Мудрість дня</Text>
+        <LinearGradient
+          style={styles.gradiend}
+          colors={["orange", "white", "orange"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+        >
+          <Text style={styles.positionPass}>Мудрість дня</Text>
+        </LinearGradient>
       </Pressable>
       <Pressable style={styles.btn} onPress={handleNavigateToArchangels}>
-        <Text style={styles.positionPass}>Ангельська терапія</Text>
+        <LinearGradient
+          style={styles.gradiend}
+          colors={["orange", "white", "orange"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+        >
+          <Text style={styles.positionPass}>Ангельська терапія</Text>
+        </LinearGradient>
       </Pressable>
       <Pressable style={styles.btn} onPress={handleNavigateToMeditation}>
-        <Text style={styles.positionPass}>Медитації</Text>
+        <LinearGradient
+          style={styles.gradiend}
+          colors={["orange", "white", "orange"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+        >
+          <Text style={styles.positionPass}>Медитації</Text>
+        </LinearGradient>
       </Pressable>
       <Pressable style={styles.btn} onPress={handleNavigateToMeditation}>
-        <Text style={styles.positionPass}>??????</Text>
+        <LinearGradient
+          style={styles.gradiend}
+          colors={["orange", "white", "orange"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+        >
+          <Text style={styles.positionPass}>??????</Text>
+        </LinearGradient>
       </Pressable>
     </ImageBackground>
   );
@@ -76,11 +105,14 @@ const styles = StyleSheet.create({
   },
 
   btn: {
+    marginBottom: 20,
+  },
+
+  gradiend: {
     width: 270,
     height: 70,
     backgroundColor: "orange",
     borderRadius: 15,
-    marginBottom: 20,
     justifyContent: "center",
     alignItems: "center",
   },
