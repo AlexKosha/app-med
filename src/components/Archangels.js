@@ -5,11 +5,13 @@ import {
   Image,
   ImageBackground,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   View,
 } from "react-native";
 import ArchangelsModal from "./Modal";
+import { LinearGradient } from "expo-linear-gradient";
 // import * as TherapyService from "../service/therapyService";
 
 const Archangels = () => {
@@ -45,8 +47,16 @@ const Archangels = () => {
     <View>
       <View style={styles.headerContainer}>
         <Image source={require("../img/logo.png")} style={styles.imageLogo} />
-        <Pressable style={styles.btnGoBack} onPress={handleNavigationToHome}>
-          <Text style={styles.positionPass}>Ангельська терапія</Text>
+        <Pressable onPress={handleNavigationToHome}>
+          <LinearGradient
+            style={styles.btnGoBack}
+            colors={["orange", "white", "orange"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            // style={styles.gradientt}
+          >
+            <Text style={styles.positionPass}>Ангельська терапія</Text>
+          </LinearGradient>
         </Pressable>
       </View>
       <Text style={{ textAlign: "center" }}>
@@ -94,18 +104,37 @@ const Archangels = () => {
           <Pressable onPress={toggleModalSurvey}>
             <Icon style={styles.closeButton} name="closecircleo" />
           </Pressable>
-          <Text style={styles.title}>АРХАНГЕЛ МИХАЇЛ</Text>
-          <Text style={styles.firstParagraph}>
-            Захистить і проведе вас у ситуації, що склалася. Дасть мужність та
-            силу волі, щоби ви відчули впевненість та легко вийшли із ситуації.
-          </Text>
-          <Text style={styles.secondParagraph}>
-            Щоб примножити вашу мужність і упевненість, промовте: «Архангеле
-            Михаїле, я закликаю до тебе. Будь ласка, захисти мене своїм мечем та
-            щитом зі світла, дозволь мені спертися на твою силу і мужність. Дай
-            мені знати і відчувати, що я в безпеці і захищений емоційно,
-            фізично, фінансово, енергетично та духовно. Дякую."
-          </Text>
+          <ScrollView
+            style={styles.scrollBox}
+            // contentContainerStyle={styles.modalTextBoxContent}
+            showsVerticalScrollIndicator={false}
+          >
+            <View style={styles.modalTextBox}>
+              <Text style={styles.title}>АРХАНГЕЛ МИХАЇЛ</Text>
+              <Text style={styles.firstParagraph}>
+                Захистить і проведе вас у ситуації, що склалася. Дасть мужність
+                та силу волі, щоби ви відчули впевненість та легко вийшли із
+                ситуації.
+              </Text>
+              <Text style={styles.secondParagraph}>
+                Щоб примножити вашу мужність і упевненість, промовте: «Архангеле
+                Михаїле, я закликаю до тебе. Будь ласка, захисти мене своїм
+                мечем та щитом зі світла, дозволь мені спертися на твою силу і
+                мужність. Дай мені знати і відчувати, що я в безпеці і захищений
+                емоційно, фізично, фінансово, енергетично та духовно. Дякую."
+                Щоб примножити вашу мужність і упевненість, промовте: «Архангеле
+                Михаїле, я закликаю до тебе. Будь ласка, захисти мене своїм
+                мечем та щитом зі світла, дозволь мені спертися на твою силу і
+                мужність. Дай мені знати і відчувати, що я в безпеці і захищений
+                емоційно, фізично, фінансово, енергетично та духовно. Дякую."
+                Щоб примножити вашу мужність і упевненість, промовте: «Архангеле
+                Михаїле, я закликаю до тебе. Будь ласка, захисти мене своїм
+                мечем та щитом зі світла, дозволь мені спертися на твою силу і
+                мужність. Дай мені знати і відчувати, що я в безпеці і захищений
+                емоційно, фізично, фінансово, енергетично та духовно. Дякую."
+              </Text>
+            </View>
+          </ScrollView>
         </ImageBackground>
       </ArchangelsModal>
     </View>
@@ -127,7 +156,6 @@ const styles = StyleSheet.create({
     width: 170,
     height: 80,
 
-    backgroundColor: "orange",
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
@@ -169,7 +197,17 @@ const styles = StyleSheet.create({
     position: "relative",
     backgroundColor: "grey",
     paddingVertical: 30,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
+  },
+  scrollBox: {
+    borderWidth: 1,
+    borderColor: "#e3cb96",
+    borderRadius: 10,
+  },
+  modalTextBox: {
+    paddingTop: 10,
+    paddingHorizontal: 15,
+    overflow: "scroll",
   },
   title: {
     fontSize: 20,
@@ -192,8 +230,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "black",
     position: "absolute",
-    right: -5,
-    top: -20,
+    right: -10,
+    top: -25,
   },
 });
 

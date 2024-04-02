@@ -2,9 +2,7 @@ import React from "react";
 import {
   View,
   Modal,
-  Text,
   StyleSheet,
-  Pressable,
   TouchableWithoutFeedback,
 } from "react-native";
 
@@ -16,11 +14,6 @@ const ArchangelsModal = ({ isVisible, children, onClose }) => {
           <View style={styles.overlay}></View>
         </TouchableWithoutFeedback>
         <View style={styles.modalContent}>
-          {/* <View style={styles.header}>
-            <Pressable onPress={onClose}>
-              <Icon style={styles.closeButton} name="closecircleo" />
-            </Pressable>
-          </View> */}
           <View style={styles.contentContainer}>{children}</View>
         </View>
       </View>
@@ -44,9 +37,10 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     position: "relative",
-    width: "90%",
+    width: "95%",
+    maxHeight: "70%",
     borderRadius: 10,
-    overflow: "hidden",
+    overflow: "auto",
   },
   header: {
     flexDirection: "row",

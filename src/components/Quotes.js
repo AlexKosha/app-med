@@ -10,6 +10,7 @@ import {
   View,
 } from "react-native";
 import dataCourses from "../dataCourses.json";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Quotes = () => {
   const navigation = useNavigation();
@@ -33,8 +34,16 @@ const Quotes = () => {
     <View>
       <View style={styles.headerContainer}>
         <Image source={require("../img/logo.png")} style={styles.imageLogo} />
-        <Pressable style={styles.btnGoBack} onPress={handleNavigationToHome}>
-          <Text style={styles.positionPass}>Мудрість дня</Text>
+        <Pressable onPress={handleNavigationToHome}>
+          <LinearGradient
+            style={styles.btnGoBack}
+            colors={["orange", "white", "orange"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            // style={styles.gradientt}
+          >
+            <Text style={styles.positionPass}>Ангельська терапія</Text>
+          </LinearGradient>
         </Pressable>
       </View>
       <View style={styles.quotesContainer}>
@@ -49,10 +58,25 @@ const Quotes = () => {
       </View>
       <View style={styles.btnContainer}>
         <Pressable style={styles.btn} onPress={handleNavigationToHome}>
-          <Text style={styles.positionPass}>Ознайомитись</Text>
+          <LinearGradient
+            style={styles.gradient}
+            colors={["orange", "white", "orange"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            // style={styles.gradientt}
+          >
+            <Text style={styles.positionPass}>Ознайомитись</Text>
+          </LinearGradient>
         </Pressable>
         <Pressable style={styles.btn} onPress={handleNavigationToHome}>
-          <Text style={styles.positionPass}>Автоматичне відправлення</Text>
+          <LinearGradient
+            style={styles.gradient}
+            colors={["orange", "white", "orange"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+          >
+            <Text style={styles.positionPass}>Автоматичне відправлення</Text>
+          </LinearGradient>
         </Pressable>
       </View>
     </View>
@@ -74,8 +98,6 @@ const styles = StyleSheet.create({
   btnGoBack: {
     width: 170,
     height: 80,
-
-    backgroundColor: "orange",
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
@@ -103,12 +125,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btn: {
+    marginBottom: 20,
+  },
+  gradient: {
     width: 200,
     height: 60,
-    backgroundColor: "orange",
     borderRadius: 50,
-    marginBottom: 20,
-    paddingVertical: "auto",
     justifyContent: "center",
     alignItems: "center",
   },
