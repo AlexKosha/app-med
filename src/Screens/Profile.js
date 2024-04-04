@@ -98,13 +98,12 @@ styles = StyleSheet.create({
   },
   label: {
     fontWeight: "bold",
-    // marginRight: 10,
   },
   value: {
     marginLeft: 30,
   },
   alignStart: {
-    minWidth: 120, // Мінімальна ширина для початку тексту
+    minWidth: 120,
   },
   btnContainer: {
     flexDirection: "row",

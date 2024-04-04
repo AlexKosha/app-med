@@ -40,7 +40,6 @@ const Quotes = () => {
             colors={["orange", "white", "orange"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            // style={styles.gradientt}
           >
             <Text style={styles.positionPass}>Ангельська терапія</Text>
           </LinearGradient>
@@ -63,7 +62,6 @@ const Quotes = () => {
             colors={["orange", "white", "orange"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
-            // style={styles.gradientt}
           >
             <Text style={styles.positionPass}>Ознайомитись</Text>
           </LinearGradient>

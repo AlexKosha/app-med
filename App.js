@@ -1,8 +1,8 @@
+import { useEffect, useState } from "react";
 import { StyleSheet, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import "react-native-gesture-handler";
 import { createStackNavigator } from "@react-navigation/stack";
-import expo from "expo";
 import * as Font from "expo-font";
 import Registration from "./src/components/Registration";
 import Login from "./src/components/Login";
@@ -11,7 +11,6 @@ import Quotes from "./src/components/Quotes";
 import Home from "./src/Screens/Home";
 import Archangels from "./src/components/Archangels";
 import Meditation from "./src/components/Meditation";
-import { useEffect, useState } from "react";
 import Exercises from "./src/components/Exercises";
 
 const fetchFonts = () => {
@@ -82,7 +81,7 @@ export default function App() {
         <MainStack.Screen
           name="Exercises"
           component={Exercises}
-          options={{ headerShown: false }}
+          // options={}
         />
       </MainStack.Navigator>
     </NavigationContainer>

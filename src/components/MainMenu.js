@@ -90,7 +90,6 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // justifyContent: "center",
     alignItems: "center",
   },
   logOut: {
@@ -99,7 +98,6 @@ const styles = StyleSheet.create({
     right: 10,
   },
   image: {
-    // marginBottom: 20,
     width: 350,
     height: 350,
   },

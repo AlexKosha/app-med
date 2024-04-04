@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import ArchangelsModal from "./Modal";
 import { LinearGradient } from "expo-linear-gradient";
+import Home from "../Screens/Home";
 // import * as TherapyService from "../service/therapyService";
 
 const Archangels = () => {
@@ -88,10 +89,24 @@ const Archangels = () => {
       </View>
       <View style={styles.btnContainer}>
         <Pressable style={styles.btn} onPress={handleNavigationToMeditation}>
-          <Text style={styles.positionPass}>Медитації</Text>
+          <LinearGradient
+            colors={["orange", "white", "orange"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.gradient}
+          >
+            <Text style={styles.positionPass}>Медитації</Text>
+          </LinearGradient>
         </Pressable>
         <Pressable style={styles.btn} onPress={handleNavigationToHome}>
-          <Text style={styles.positionPass}>Навчання</Text>
+          <LinearGradient
+            colors={["orange", "white", "orange"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.gradient}
+          >
+            <Text style={styles.positionPass}>Навчання</Text>
+          </LinearGradient>
         </Pressable>
       </View>
       <ArchangelsModal isVisible={isModalVisible} onClose={toggleModalSurvey}>
@@ -184,11 +199,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btn: {
+    marginBottom: 20,
+  },
+  gradient: {
     width: 200,
     height: 60,
     backgroundColor: "orange",
     borderRadius: 50,
-    marginBottom: 20,
+
     paddingVertical: "auto",
     justifyContent: "center",
     alignItems: "center",
