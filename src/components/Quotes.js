@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useState } from "react";
 import {
   FlatList,
   Image,
@@ -8,19 +8,40 @@ import {
   StyleSheet,
   Text,
   View,
+  Modal,
+  Button,
 } from "react-native";
 import dataCourses from "../dataCourses.json";
 import { LinearGradient } from "expo-linear-gradient";
+import { TouchableOpacity } from "react-native-gesture-handler";
+
+// !! TODO - відкривається модалка - там фото
+// чому на айфоін не вибиває клавіатура
+// додати лоадер у апп 40 рядок
+//  щоб нижнє меню було на всіх скрінах - глобально
 
 const Quotes = () => {
   const navigation = useNavigation();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalImgUrl, setModalImgUrl] = useState(null);
+
+  // const imagesQuotes = [];
+
+  // const getImagesArray = () => {
+  //   for
+  // };
 
   const handleNavigationToHome = () => {
     navigation.navigate("Home");
   };
 
+  const toggleModal = (imgUrl) => {
+    setModalImgUrl(imgUrl);
+    setIsModalVisible(!isModalVisible);
+  };
+
   const renderItem = ({ item }) => (
-    <Pressable>
+    <Pressable onPress={() => toggleModal(item.img)}>
       <View style={styles.imageContainer}>
         <ImageBackground
           style={styles.imagesBack}
@@ -54,6 +75,34 @@ const Quotes = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
         />
+
+        <Modal
+          visible={isModalVisible}
+          animationType="slide"
+          // transparent={true}
+        >
+          <View style={styles.modalContent}>
+            {modalImgUrl && (
+              <Image
+                style={styles.modalImage}
+                source={{ uri: modalImgUrl }}
+                resizeMode="cover"
+              />
+            )}
+            <TouchableOpacity
+              onPress={() => toggleModal(null)}
+              style={styles.closeButton}
+            >
+              <Text style={styles.buttonText}>Закрити</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => toggleModal(null)}
+              style={styles.closeButton}
+            >
+              <Text style={styles.buttonText}>Завантажити в галерею</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
       </View>
       <View style={styles.btnContainer}>
         <Pressable style={styles.btn} onPress={handleNavigationToHome}>
@@ -131,6 +180,28 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
+  },
+  modalContent: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalImage: {
+    width: 300,
+    height: 300,
+  },
+  closeButton: {
+    marginTop: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: "orange",
+    borderRadius: 8,
+  },
+  buttonText: {
+    textAlign: "center",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
 

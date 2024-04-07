@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import ArchangelsModal from "./Modal";
 import { LinearGradient } from "expo-linear-gradient";
-import Home from "../Screens/Home";
+
 // import * as TherapyService from "../service/therapyService";
 
 const Archangels = () => {
