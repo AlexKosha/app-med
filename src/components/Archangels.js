@@ -10,8 +10,8 @@ import {
   Text,
   View,
 } from "react-native";
-import ArchangelsModal from "./Modal";
 import { LinearGradient } from "expo-linear-gradient";
+import MainModal from "./Modal";
 
 // import * as TherapyService from "../service/therapyService";
 
@@ -109,7 +109,7 @@ const Archangels = () => {
           </LinearGradient>
         </Pressable>
       </View>
-      <ArchangelsModal isVisible={isModalVisible} onClose={toggleModalSurvey}>
+      <MainModal isVisible={isModalVisible} onClose={toggleModalSurvey}>
         <ImageBackground
           source={{
             uri: "https://img.freepik.com/free-photo/cute-pastel-purple-marble-background_53876-104400.jpg?size=626&ext=jpg&ga=GA1.1.1695762122.1711480779&semt=ais",
@@ -151,7 +151,7 @@ const Archangels = () => {
             </View>
           </ScrollView>
         </ImageBackground>
-      </ArchangelsModal>
+      </MainModal>
     </View>
   );
 };
@@ -225,6 +225,7 @@ const styles = StyleSheet.create({
   modalTextBox: {
     paddingTop: 10,
     paddingHorizontal: 15,
+    paddingBottom: 15,
     overflow: "scroll",
   },
   title: {

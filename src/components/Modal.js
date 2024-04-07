@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 
-const ArchangelsModal = ({ isVisible, children, onClose }) => {
+const MainModal = ({ isVisible, children, onClose }) => {
   return (
     <Modal animationType="fade" transparent={true} visible={isVisible}>
       <View style={styles.modalContainer}>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   modalContent: {
     position: "relative",
     width: "95%",
-    maxHeight: "70%",
+    maxHeight: "80%",
     borderRadius: 10,
     overflow: "auto",
   },
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ArchangelsModal;
+export default MainModal;

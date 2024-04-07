@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
+
 import {
   FlatList,
   Image,
@@ -9,11 +10,12 @@ import {
   Text,
   View,
   Modal,
-  Button,
+  TouchableOpacity,
 } from "react-native";
-import dataCourses from "../dataCourses.json";
+import { imagesQuotes } from "../helpers/imagesQuotes";
+import Icon from "react-native-vector-icons/AntDesign";
 import { LinearGradient } from "expo-linear-gradient";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import MainModal from "./Modal";
 
 // !! TODO - відкривається модалка - там фото
 // чому на айфоін не вибиває клавіатура
@@ -25,12 +27,6 @@ const Quotes = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalImgUrl, setModalImgUrl] = useState(null);
 
-  // const imagesQuotes = [];
-
-  // const getImagesArray = () => {
-  //   for
-  // };
-
   const handleNavigationToHome = () => {
     navigation.navigate("Home");
   };
@@ -40,17 +36,19 @@ const Quotes = () => {
     setIsModalVisible(!isModalVisible);
   };
 
-  const renderItem = ({ item }) => (
-    <Pressable onPress={() => toggleModal(item.img)}>
-      <View style={styles.imageContainer}>
-        <ImageBackground
-          style={styles.imagesBack}
-          source={{ uri: item.img }}
-          resizeMode="cover"
-        />
-      </View>
-    </Pressable>
-  );
+  const renderItem = ({ index }) => {
+    return (
+      <Pressable onPress={() => toggleModal(imagesQuotes[index])}>
+        <View style={styles.imageContainer}>
+          <ImageBackground
+            style={styles.imagesBack}
+            source={imagesQuotes[index]}
+            resizeMode="cover"
+          />
+        </View>
+      </Pressable>
+    );
+  };
   return (
     <View>
       <View style={styles.headerContainer}>
@@ -62,47 +60,32 @@ const Quotes = () => {
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
           >
-            <Text style={styles.positionPass}>Ангельська терапія</Text>
+            <Text style={styles.positionPass}>Мудрість дня</Text>
           </LinearGradient>
         </Pressable>
       </View>
       <View style={styles.quotesContainer}>
         <Text style={styles.positionPass}>Вибери картинку</Text>
         <FlatList
-          data={dataCourses}
-          keyExtractor={(item) => item.id}
+          data={imagesQuotes}
+          keyExtractor={(item) => item}
           renderItem={renderItem}
           horizontal
           showsHorizontalScrollIndicator={false}
         />
-
-        <Modal
-          visible={isModalVisible}
-          animationType="slide"
-          // transparent={true}
-        >
-          <View style={styles.modalContent}>
-            {modalImgUrl && (
-              <Image
-                style={styles.modalImage}
-                source={{ uri: modalImgUrl }}
-                resizeMode="cover"
-              />
-            )}
-            <TouchableOpacity
-              onPress={() => toggleModal(null)}
-              style={styles.closeButton}
-            >
-              <Text style={styles.buttonText}>Закрити</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => toggleModal(null)}
-              style={styles.closeButton}
-            >
-              <Text style={styles.buttonText}>Завантажити в галерею</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
+        <MainModal isVisible={isModalVisible} onClose={() => toggleModal(null)}>
+          <ImageBackground style={styles.modalContainer} source={modalImgUrl}>
+            <Pressable onPress={() => toggleModal(null)}>
+              <Icon style={styles.closeButton} name="closecircleo" />
+            </Pressable>
+          </ImageBackground>
+          <TouchableOpacity
+            onPress={() => toggleModal(null)}
+            style={styles.closeButtonSave}
+          >
+            <Text style={styles.buttonText}>Завантажити в галерею</Text>
+          </TouchableOpacity>
+        </MainModal>
       </View>
       <View style={styles.btnContainer}>
         <Pressable style={styles.btn} onPress={handleNavigationToHome}>
@@ -166,6 +149,12 @@ const styles = StyleSheet.create({
     width: 150,
     height: 250,
   },
+  modalContainer: {
+    position: "relative",
+    height: "100%",
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+  },
   btnContainer: {
     marginTop: 20,
     justifyContent: "center",
@@ -187,16 +176,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
-  modalImage: {
-    width: 300,
-    height: 300,
-  },
-  closeButton: {
-    marginTop: 10,
+  closeButtonSave: {
     paddingVertical: 10,
     paddingHorizontal: 20,
     backgroundColor: "orange",
     borderRadius: 8,
+  },
+  closeButton: {
+    fontSize: 18,
+    color: "orange",
+    position: "absolute",
+    right: -10,
+    top: -10,
   },
   buttonText: {
     textAlign: "center",
