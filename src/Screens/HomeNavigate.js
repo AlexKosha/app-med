@@ -6,7 +6,7 @@ import Exercises from "../components/Exercises";
 import MainMenu from "../components/MainMenu";
 import News from "../components/News";
 
-const Home = () => {
+const HomeNavigate = () => {
   const MainStack = createStackNavigator();
   return (
     <MainStack.Navigator>
@@ -33,7 +33,7 @@ const Home = () => {
       <MainStack.Screen
         name="News"
         component={News}
-        options={{ title: "Новини" }}
+        options={{ title: "Новини", headerTitleAlign: "center" }}
       />
       <MainStack.Screen
         name="Exercises"
@@ -44,4 +44,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeNavigate;

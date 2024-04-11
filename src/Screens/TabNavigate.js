@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import IconForProfile from "react-native-vector-icons/Ionicons";
 import Profile from "./Profile";
 import Favorite from "./Favorite";
-import Home from "./Home";
+import HomeNavigate from "./HomeNavigate";
 
 const Tab = createBottomTabNavigator();
 const TabNavigate = () => {
@@ -21,8 +21,8 @@ const TabNavigate = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="HomeNavigate"
+        component={HomeNavigate}
         options={({ navigation }) => ({
           headerShown: false,
           title: null,
