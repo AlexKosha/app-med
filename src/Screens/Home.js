@@ -1,119 +1,46 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { TouchableOpacity, View } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import IconForProfile from "react-native-vector-icons/Ionicons";
-import Profile from "./Profile";
-import Favorite from "./Favorite";
+import { createStackNavigator } from "@react-navigation/stack";
+import Quotes from "../components/Quotes";
+import Archangels from "../components/Archangels";
+import Meditation from "../components/Meditation";
+import Exercises from "../components/Exercises";
 import MainMenu from "../components/MainMenu";
+import News from "../components/News";
 
-const Tab = createBottomTabNavigator();
 const Home = () => {
+  const MainStack = createStackNavigator();
   return (
-    <Tab.Navigator
-      screenOptions={{
-        tabBarActiveTintColor: "tomato",
-        tabBarInactiveTintColor: "gray",
-        tabBarStyle: {
-          display: "flex",
-          paddingHorizontal: 40,
-          paddingTop: 5,
-        },
-      }}
-    >
-      <Tab.Screen
+    <MainStack.Navigator>
+      <MainStack.Screen
         name="MainMenu"
         component={MainMenu}
-        options={({ navigation }) => ({
-          headerShown: false,
-          title: null,
-          headerLeft: null,
-          tabBarLabel: "",
-          headerTitleAlign: "center",
-          tabBarIcon: ({ size, focused }) => (
-            <View
-              style={{
-                alignItems: "center",
-                marginTop: focused ? -7 : 0,
-              }}
-            >
-              <Icon
-                name="th-large"
-                size={focused ? size + 5 : size + 3}
-                color={focused ? "tomato" : "gray"}
-              />
-            </View>
-          ),
-          headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-              <Icon
-                name="sign-out"
-                size={30}
-                color="black"
-                style={{ marginRight: 10 }}
-              />
-            </TouchableOpacity>
-          ),
-        })}
+        options={{ headerShown: false }}
       />
-      <Tab.Screen
-        name="Favorite"
-        component={Favorite}
-        options={({ navigation }) => ({
-          headerShown: false,
-          title: "Обрані",
-          headerTitleAlign: "center",
-          tabBarLabel: "",
-          tabBarIcon: ({ size, focused }) => (
-            <View style={{ alignItems: "center", marginTop: focused ? -7 : 0 }}>
-              <Icon
-                name="heart-o"
-                size={focused ? size + 5 : size + 3}
-                color={focused ? "tomato" : "gray"}
-              />
-            </View>
-          ),
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Icon
-                name="arrow-left"
-                size={30}
-                color="black"
-                style={{ marginLeft: 10 }}
-              />
-            </TouchableOpacity>
-          ),
-        })}
+      <MainStack.Screen
+        name="Quotes"
+        component={Quotes}
+        options={{ headerShown: false }}
       />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={({ navigation }) => ({
-          headerShown: false,
-          title: "Профіль",
-          headerTitleAlign: "center",
-          tabBarLabel: "",
-          tabBarIcon: ({ size, focused }) => (
-            <View style={{ alignItems: "center", marginTop: focused ? -7 : 0 }}>
-              <Icon
-                name="user-o"
-                size={focused ? size + 5 : size + 3}
-                color={focused ? "tomato" : "gray"}
-              />
-            </View>
-          ),
-          headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-              <IconForProfile
-                name="settings-outline"
-                size={30}
-                color="black"
-                style={{ marginRight: 10 }}
-              />
-            </TouchableOpacity>
-          ),
-        })}
+      <MainStack.Screen
+        name="Archangels"
+        component={Archangels}
+        options={{ headerShown: false }}
       />
-    </Tab.Navigator>
+      <MainStack.Screen
+        name="Meditation"
+        component={Meditation}
+        options={{ headerShown: false }}
+      />
+      <MainStack.Screen
+        name="News"
+        component={News}
+        options={{ title: "Новини" }}
+      />
+      <MainStack.Screen
+        name="Exercises"
+        component={Exercises}
+        options={({ route }) => ({ title: route.params.item.text })}
+      />
+    </MainStack.Navigator>
   );
 };
 

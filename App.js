@@ -8,10 +8,11 @@ import Registration from "./src/components/Registration";
 import Login from "./src/components/Login";
 import IntroScreen from "./src/Screens/IntroScreen";
 import Quotes from "./src/components/Quotes";
-import Home from "./src/Screens/Home";
+import Home from "./src/Screens/TabNavigate";
 import Archangels from "./src/components/Archangels";
 import Meditation from "./src/components/Meditation";
 import Exercises from "./src/components/Exercises";
+import TabNavigate from "./src/Screens/TabNavigate";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -20,7 +21,6 @@ const fetchFonts = () => {
     "Montserrat-Black": require("./assets/fonts/Montserrat-Black.ttf"),
     "Montserrat-ExtraBold": require("./assets/fonts/Montserrat-ExtraBold.ttf"),
     "Montserrat-Medium": require("./assets/fonts/Montserrat-Medium.ttf"),
-    // Додайте інші стилі шрифту, якщо вони потрібні
   });
 };
 
@@ -60,28 +60,8 @@ export default function App() {
         />
         <MainStack.Screen
           name="Home"
-          component={Home}
+          component={TabNavigate}
           options={{ headerShown: false }}
-        />
-        <MainStack.Screen
-          name="Quotes"
-          component={Quotes}
-          options={{ headerShown: false }}
-        />
-        <MainStack.Screen
-          name="Archangels"
-          component={Archangels}
-          options={{ headerShown: false }}
-        />
-        <MainStack.Screen
-          name="Meditation"
-          component={Meditation}
-          options={{ headerShown: false }}
-        />
-        <MainStack.Screen
-          name="Exercises"
-          component={Exercises}
-          // options={}
         />
       </MainStack.Navigator>
     </NavigationContainer>

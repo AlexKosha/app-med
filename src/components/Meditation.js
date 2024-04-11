@@ -15,7 +15,7 @@ const Meditation = () => {
   const navigation = useNavigation();
 
   const handleNavigationToHome = () => {
-    navigation.navigate("Home");
+    navigation.navigate("MainMenu");
   };
 
   const handleNavigationToExercises = (item) => {
@@ -51,7 +51,7 @@ const Meditation = () => {
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
           >
-            <Text style={styles.positionPass}>Ангельська терапія</Text>
+            <Text style={styles.positionPass}>Медитації</Text>
           </LinearGradient>
         </Pressable>
       </View>

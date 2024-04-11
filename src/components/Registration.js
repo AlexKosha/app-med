@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
 
   positionPass: {
     position: "absolute",
-    bottom: 16,
+    bottom: 11,
     right: 16,
   },
 

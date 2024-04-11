@@ -1,6 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-
 import {
   FlatList,
   Image,
@@ -9,7 +8,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Modal,
   TouchableOpacity,
 } from "react-native";
 import { imagesQuotes } from "../helpers/imagesQuotes";
@@ -28,7 +26,7 @@ const Quotes = () => {
   const [modalImgUrl, setModalImgUrl] = useState(null);
 
   const handleNavigationToHome = () => {
-    navigation.navigate("Home");
+    navigation.navigate("MainMenu");
   };
 
   const toggleModal = (imgUrl) => {

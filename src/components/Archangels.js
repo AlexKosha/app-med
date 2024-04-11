@@ -37,7 +37,7 @@ const Archangels = () => {
   };
 
   const handleNavigationToHome = () => {
-    navigation.navigate("Home");
+    navigation.navigate("MainMenu");
   };
 
   const handleNavigationToMeditation = () => {

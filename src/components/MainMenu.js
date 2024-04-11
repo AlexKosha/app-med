@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
-const Home = () => {
+const MainMenu = () => {
   const navigation = useNavigation();
 
   const handleLogOut = () => {
@@ -27,6 +27,10 @@ const Home = () => {
 
   const handleNavigateToMeditation = () => {
     navigation.navigate("Meditation");
+  };
+
+  const handleNavigateToNews = () => {
+    navigation.navigate("News");
   };
   return (
     <ImageBackground
@@ -73,14 +77,14 @@ const Home = () => {
           <Text style={styles.positionPass}>Медитації</Text>
         </LinearGradient>
       </Pressable>
-      <Pressable style={styles.btn} onPress={handleNavigateToMeditation}>
+      <Pressable style={styles.btn} onPress={handleNavigateToNews}>
         <LinearGradient
           style={styles.gradiend}
           colors={["orange", "white", "orange"]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
         >
-          <Text style={styles.positionPass}>??????</Text>
+          <Text style={styles.positionPass}>Новини</Text>
         </LinearGradient>
       </Pressable>
     </ImageBackground>
@@ -121,4 +125,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default MainMenu;
