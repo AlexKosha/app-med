@@ -48,7 +48,7 @@ const Quotes = () => {
     );
   };
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Image source={require("../img/logo.png")} style={styles.imageLogo} />
         <Pressable onPress={handleNavigationToHome}>
@@ -93,16 +93,6 @@ const Quotes = () => {
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
           >
-            <Text style={styles.positionPass}>Ознайомитись</Text>
-          </LinearGradient>
-        </Pressable>
-        <Pressable style={styles.btn} onPress={handleNavigationToHome}>
-          <LinearGradient
-            style={styles.gradient}
-            colors={["orange", "white", "orange"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-          >
             <Text style={styles.positionPass}>Автоматичне відправлення</Text>
           </LinearGradient>
         </Pressable>
@@ -112,7 +102,9 @@ const Quotes = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+  },
   headerContainer: {
     flexDirection: "row",
     paddingHorizontal: 20,
@@ -135,6 +127,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   quotesContainer: {
+    flex: 2,
     padding: 10,
   },
   imageContainer: {
@@ -144,8 +137,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   imagesBack: {
-    width: 150,
-    height: 250,
+    width: 200,
+    height: "100%",
   },
   modalContainer: {
     position: "relative",

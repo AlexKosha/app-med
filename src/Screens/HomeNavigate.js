@@ -1,10 +1,12 @@
 import { createStackNavigator } from "@react-navigation/stack";
+import Icon from "react-native-vector-icons/AntDesign";
 import Quotes from "../components/Quotes";
 import Archangels from "../components/Archangels";
 import Meditation from "../components/Meditation";
 import Exercises from "../components/Exercises";
 import MainMenu from "../components/MainMenu";
 import News from "../components/News";
+import { TouchableOpacity } from "react-native";
 
 const HomeNavigate = () => {
   const MainStack = createStackNavigator();
@@ -38,7 +40,20 @@ const HomeNavigate = () => {
       <MainStack.Screen
         name="Exercises"
         component={Exercises}
-        options={({ route }) => ({ title: route.params.item.text })}
+        options={({ route, navigation }) => ({
+          title: route.params.item.text,
+          headerTitleAlign: "center",
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Icon
+                name="arrowleft"
+                size={30}
+                color="black"
+                style={{ marginLeft: 10 }}
+              />
+            </TouchableOpacity>
+          ),
+        })}
       />
     </MainStack.Navigator>
   );

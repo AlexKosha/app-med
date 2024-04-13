@@ -58,8 +58,7 @@ const TabNavigate = () => {
       <Tab.Screen
         name="Favorite"
         component={Favorite}
-        options={({ navigation }) => ({
-          headerShown: false,
+        options={() => ({
           title: "Обрані",
           headerTitleAlign: "center",
           tabBarLabel: "",
@@ -71,16 +70,6 @@ const TabNavigate = () => {
                 color={focused ? "tomato" : "gray"}
               />
             </View>
-          ),
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Icon
-                name="arrow-left"
-                size={30}
-                color="black"
-                style={{ marginLeft: 10 }}
-              />
-            </TouchableOpacity>
           ),
         })}
       />
