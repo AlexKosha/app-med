@@ -3,6 +3,7 @@ import { instance, setToken } from "./authService";
 export const fetchDiary = async (token) => {
   setToken(`Bearer ${token}`);
   const { data } = await instance.get("/diary");
+  return data
 };
 
 export const addDiary = async (body) => {
