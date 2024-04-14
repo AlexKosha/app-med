@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FlatList,
   Text,
@@ -11,6 +11,8 @@ import IconHeart from "react-native-vector-icons/AntDesign";
 import exercise from "../exercise.json";
 
 const Favorite = () => {
+  const [selectedTab, setSelectedTab] = useState("Meditations");
+
   const renderItem = ({ item }) => {
     return (
       <View>
@@ -33,18 +35,53 @@ const Favorite = () => {
     );
   };
 
+  const renderTabButton = (tabName) => (
+    <Pressable
+      style={[
+        styles.tabButton,
+        tabName === selectedTab && styles.selectedTabButton,
+      ]}
+      onPress={() => setSelectedTab(tabName)}
+    >
+      <Text style={styles.tabButtonText}>{tabName}</Text>
+    </Pressable>
+  );
+
   return (
     <View>
-      <FlatList
+      <View style={styles.tabContainer}>
+        {renderTabButton("Meditations")}
+        {renderTabButton("Therapies")}
+      </View>
+      {/* <FlatList
         data={exercise}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
-      />
+      /> */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  tabContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    paddingVertical: 10,
+  },
+  tabButton: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 10,
+    backgroundColor: "lightgray",
+  },
+  selectedTabButton: {
+    backgroundColor: "orange",
+  },
+  tabButtonText: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
   itemContainer: {
     paddingLeft: 10,
     flexDirection: "row",
@@ -78,7 +115,6 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     paddingTop: 5,
   },
-
   heartIcon: {
     fontSize: 24,
     color: "red",

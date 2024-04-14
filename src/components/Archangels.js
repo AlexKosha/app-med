@@ -1,39 +1,49 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import Icon from "react-native-vector-icons/AntDesign";
 import {
   Image,
   ImageBackground,
   Pressable,
-  ScrollView,
   StyleSheet,
   Text,
   View,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MainModal from "./Modal";
+import TherapyModal from "./TherapyModal";
+import * as TherapyService from "../service/therapyService";
+import { getTwoRandomTherapies } from "../helpers/randomTherapy";
 
-// import * as TherapyService from "../service/therapyService";
+const FIRST_THERAPY = 0;
+const SECOND_THERAPY = 1;
 
 const Archangels = () => {
   const navigation = useNavigation();
   const [isModalVisible, setModalVisible] = useState(false);
-  // const [therapy, setTheraphy] = useState("");
 
-  // useEffect(() => {
-  //   const getTherapy = async () => {
-  //     try {
-  //       const data = await TherapyService.getTherapy();
-  //       setTheraphy(data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   getTherapy();
-  // }, []);
+  const [therapy, setTherapy] = useState(null);
+  const [selectedTherapyIndex, setSelectedTherapyIndex] = useState(null);
+
+  useEffect(() => {
+    const fetchTherapy = async () => {
+      try {
+        const data = await TherapyService.getTherapy();
+        setTherapy(getTwoRandomTherapies(data));
+        console.log(1);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchTherapy();
+  }, []);
 
   const toggleModalSurvey = () => {
     setModalVisible(!isModalVisible);
+  };
+
+  const handleTherapySelection = (therapyIndex) => {
+    setSelectedTherapyIndex(therapyIndex);
+    toggleModalSurvey();
   };
 
   const handleNavigationToHome = () => {
@@ -64,7 +74,7 @@ const Archangels = () => {
         ...............Text...............
       </Text>
       <View style={styles.imageContainer}>
-        <Pressable onPress={toggleModalSurvey}>
+        <Pressable onPress={() => handleTherapySelection(FIRST_THERAPY)}>
           <View style={{ borderRadius: 16, overflow: "hidden" }}>
             <ImageBackground
               style={styles.imageBtn}
@@ -75,7 +85,7 @@ const Archangels = () => {
             />
           </View>
         </Pressable>
-        <Pressable onPress={toggleModalSurvey}>
+        <Pressable onPress={() => handleTherapySelection(SECOND_THERAPY)}>
           <View style={{ borderRadius: 16, overflow: "hidden" }}>
             <ImageBackground
               style={styles.imageBtn}
@@ -110,47 +120,12 @@ const Archangels = () => {
         </Pressable>
       </View>
       <MainModal isVisible={isModalVisible} onClose={toggleModalSurvey}>
-        <ImageBackground
-          source={{
-            uri: "https://img.freepik.com/free-photo/cute-pastel-purple-marble-background_53876-104400.jpg?size=626&ext=jpg&ga=GA1.1.1695762122.1711480779&semt=ais",
-          }}
-          style={styles.modalContainer}
-        >
-          <Pressable onPress={toggleModalSurvey}>
-            <Icon style={styles.closeButton} name="closecircleo" />
-          </Pressable>
-          <ScrollView
-            style={styles.scrollBox}
-            // contentContainerStyle={styles.modalTextBoxContent}
-            showsVerticalScrollIndicator={false}
-          >
-            <View style={styles.modalTextBox}>
-              <Text style={styles.title}>АРХАНГЕЛ МИХАЇЛ</Text>
-              <Text style={styles.firstParagraph}>
-                Захистить і проведе вас у ситуації, що склалася. Дасть мужність
-                та силу волі, щоби ви відчули впевненість та легко вийшли із
-                ситуації.
-              </Text>
-              <Text style={styles.secondParagraph}>
-                Щоб примножити вашу мужність і упевненість, промовте: «Архангеле
-                Михаїле, я закликаю до тебе. Будь ласка, захисти мене своїм
-                мечем та щитом зі світла, дозволь мені спертися на твою силу і
-                мужність. Дай мені знати і відчувати, що я в безпеці і захищений
-                емоційно, фізично, фінансово, енергетично та духовно. Дякую."
-                Щоб примножити вашу мужність і упевненість, промовте: «Архангеле
-                Михаїле, я закликаю до тебе. Будь ласка, захисти мене своїм
-                мечем та щитом зі світла, дозволь мені спертися на твою силу і
-                мужність. Дай мені знати і відчувати, що я в безпеці і захищений
-                емоційно, фізично, фінансово, енергетично та духовно. Дякую."
-                Щоб примножити вашу мужність і упевненість, промовте: «Архангеле
-                Михаїле, я закликаю до тебе. Будь ласка, захисти мене своїм
-                мечем та щитом зі світла, дозволь мені спертися на твою силу і
-                мужність. Дай мені знати і відчувати, що я в безпеці і захищений
-                емоційно, фізично, фінансово, енергетично та духовно. Дякую."
-              </Text>
-            </View>
-          </ScrollView>
-        </ImageBackground>
+        {therapy && selectedTherapyIndex !== null && (
+          <TherapyModal
+            therapy={therapy[selectedTherapyIndex]}
+            closeModal={toggleModalSurvey}
+          />
+        )}
       </MainModal>
     </View>
   );
@@ -210,47 +185,6 @@ const styles = StyleSheet.create({
     paddingVertical: "auto",
     justifyContent: "center",
     alignItems: "center",
-  },
-  modalContainer: {
-    position: "relative",
-    backgroundColor: "grey",
-    paddingVertical: 30,
-    paddingHorizontal: 15,
-  },
-  scrollBox: {
-    borderWidth: 1,
-    borderColor: "#e3cb96",
-    borderRadius: 10,
-  },
-  modalTextBox: {
-    paddingTop: 10,
-    paddingHorizontal: 15,
-    paddingBottom: 15,
-    overflow: "scroll",
-  },
-  title: {
-    fontSize: 20,
-    marginBottom: 15,
-    color: "black",
-    fontFamily: "Montserrat-Bold",
-  },
-  firstParagraph: {
-    fontSize: 16,
-    marginBottom: 5,
-    color: "black",
-    fontFamily: "Montserrat-Regular",
-  },
-  secondParagraph: {
-    fontSize: 16,
-    color: "black",
-    fontFamily: "Montserrat-Regular",
-  },
-  closeButton: {
-    fontSize: 18,
-    color: "black",
-    position: "absolute",
-    right: -10,
-    top: -25,
   },
 });
 
