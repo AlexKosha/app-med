@@ -190,11 +190,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginBottom: 16,
   },
-
   lastInput: {
     marginBottom: 0,
   },
-
   errorTextEmail: {
     position: "absolute",
     top: -18,
@@ -223,7 +221,6 @@ const styles = StyleSheet.create({
     height: 51,
     marginBottom: 10,
   },
-
   buttonText: {
     color: "white",
     fontWeight: "bold",

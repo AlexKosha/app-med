@@ -296,7 +296,6 @@ const styles = StyleSheet.create({
     color: "red",
     fontSize: 12,
   },
-
   errorTextPassword: {
     color: "red",
     fontSize: 12,
@@ -304,13 +303,11 @@ const styles = StyleSheet.create({
     bottom: 40,
     left: 0,
   },
-
   positionPass: {
     position: "absolute",
     bottom: 11,
     right: 16,
   },
-
   button: {
     backgroundColor: "#FF6C00",
     borderRadius: 100,
@@ -319,7 +316,6 @@ const styles = StyleSheet.create({
     width: 343,
     height: 51,
   },
-
   buttonText: {
     color: "white",
     fontWeight: "bold",

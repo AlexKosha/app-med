@@ -1,8 +1,8 @@
 import axios from "axios";
 
-// axios.defaults.baseURL = "http://localhost:2025";
+axios.defaults.baseURL = "https://med-app-back.onrender.com";
 
-// export const getTherapy = async () => {
-//   const therapy = await axios.get("/therapy");
-//   return therapy.data;
-// };
+export const getTherapy = async () => {
+  const therapy = await axios.get("/therapy");
+  return therapy.data;
+};
