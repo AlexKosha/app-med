@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
   btnGoBack: {
     width: 170,
     height: 80,
-
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
@@ -117,7 +116,6 @@ const styles = StyleSheet.create({
     width: 250,
     borderRadius: 8,
     padding: 10,
-
     alignItems: "center",
   },
 });

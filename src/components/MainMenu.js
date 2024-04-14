@@ -106,11 +106,9 @@ const styles = StyleSheet.create({
     width: 350,
     height: 350,
   },
-
   btn: {
     marginBottom: 20,
   },
-
   gradiend: {
     width: 270,
     height: 70,
