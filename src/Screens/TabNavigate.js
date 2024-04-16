@@ -1,10 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import IconDiary from "react-native-vector-icons/SimpleLineIcons";
 import IconForProfile from "react-native-vector-icons/Ionicons";
 import Profile from "./Profile";
 import Favorite from "./Favorite";
 import HomeNavigate from "./HomeNavigate";
+import Diary from "./Diary";
 
 const Tab = createBottomTabNavigator();
 const TabNavigate = () => {
@@ -73,6 +75,26 @@ const TabNavigate = () => {
           ),
         })}
       />
+
+      <Tab.Screen
+        name="Diary"
+        component={Diary}
+        options={() => ({
+          title: "Щоденник власних думок",
+          headerTitleAlign: "center",
+          tabBarLabel: "",
+          tabBarIcon: ({ size, focused }) => (
+            <View style={{ alignItems: "center", marginTop: focused ? -7 : 0 }}>
+              <IconDiary
+                name="book-open"
+                size={focused ? size + 5 : size + 3}
+                color={focused ? "tomato" : "gray"}
+              />
+            </View>
+          ),
+        })}
+      />
+
       <Tab.Screen
         name="Profile"
         component={Profile}
