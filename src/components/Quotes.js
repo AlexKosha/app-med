@@ -15,10 +15,8 @@ import Icon from "react-native-vector-icons/AntDesign";
 import { LinearGradient } from "expo-linear-gradient";
 import MainModal from "./Modal";
 
-// !! TODO - відкривається модалка - там фото
 // чому на айфоін не вибиває клавіатура
 // додати лоадер у апп 40 рядок
-//  щоб нижнє меню було на всіх скрінах - глобально
 
 const Quotes = () => {
   const navigation = useNavigation();
