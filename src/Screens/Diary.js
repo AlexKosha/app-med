@@ -2,70 +2,79 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   StyleSheet,
   FlatList,
-  Modal,
 } from "react-native";
-
 import Icon from "react-native-vector-icons/AntDesign";
 import MainModal from "../components/Modal";
+import NotesModalForm from "../components/NotesModalForm";
 
 const Diary = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isUpdateModalVisible, setIsUpdateModalVisible] = useState(false);
+  const [isVisibleCreateNoteModal, setIsVisibleCreateNoteModal] =
+    useState(false);
+  const [isVisibleUpdateNoteModal, setIsVisibleUpdateNoteModal] =
+    useState(false);
   const [notes, setNotes] = useState([]);
-  const [infoNote, setInfoNote] = useState({
-    id: "",
-    title: "",
-    description: "",
-  });
+  const [currentNote, setCurrentNote] = useState({});
 
-  const handleAddNote = () => {
-    if (infoNote.title.trim() === "" || infoNote.description.trim() === "") {
+  const openUpdateModal = (note) => {
+    setIsVisibleUpdateNoteModal(true);
+    setCurrentNote(note);
+  };
+
+  const addNote = (newNote) => {
+    if (newNote.title.trim() === "" || newNote.description.trim() === "") {
       // alert
       return;
     }
-    setIsModalVisible(false);
-    setNotes((prevNotes) => [
-      ...prevNotes,
-      {
-        id: Math.random().toString(),
-        title: infoNote.title,
-        description: infoNote.description,
-      },
-    ]);
-    setInfoNote({ id: "", title: "", description: "" });
+    setNotes((prevNotes) => [...prevNotes, newNote]);
+    setIsVisibleCreateNoteModal(false);
   };
 
   const handleDeleteNote = (id) => {
     setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
   };
 
-  const handleAddUpdatedNote = () => {
-    setIsUpdateModalVisible(false);
-
-    const currentNote = notes.find((note) => note.id === infoNote.id);
-    console.log(notes);
-
-    setNotes((prevNotes) => [
-      ...prevNotes,
-      {
-        currentNote,
-      },
-    ]);
-
-    // setNotes([currentNote);
-
-    // setInputValueTitle("");
-    // setInputValueDescription("");
+  const renderAddNoteModalComponent = (note) => {
+    return (
+      <MainModal
+        isVisible={isVisibleCreateNoteModal}
+        onClose={() => setIsVisibleCreateNoteModal(false)}
+      >
+        <NotesModalForm
+          leftButtonTitle={"Додати"}
+          onCreateNote={addNote}
+          note={note}
+          onClose={() => setIsVisibleCreateNoteModal(false)}
+        />
+      </MainModal>
+    );
   };
 
-  const openUpdateInfoModal = (id, title, description) => {
-    setIsUpdateModalVisible(true);
-    setInfoNote({ id, title, description });
+  const renderUpdateNoteModalComponent = (note) => {
+    return (
+      <MainModal
+        isVisible={isVisibleUpdateNoteModal}
+        onClose={() => setIsVisibleUpdateNoteModal(false)}
+      >
+        <NotesModalForm
+          leftButtonTitle={"Оновити"}
+          onCreateNote={updateNote}
+          note={note}
+          onClose={() => setIsVisibleUpdateNoteModal(false)}
+        />
+      </MainModal>
+    );
   };
+
+  const updateNote = (updatedNote) => {
+    const filteredNotes = notes.filter((note) => note.id !== updatedNote.id);
+
+    setNotes([...filteredNotes, updatedNote]);
+    setIsVisibleUpdateNoteModal(false);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.text}>
@@ -77,85 +86,68 @@ const Diary = () => {
         style={styles.list}
         data={notes}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={[styles.inputContainer, styles.noteItem]}>
-            <View style={styles.groupNote}>
-              <Text style={[styles.input, { fontFamily: "Montserrat-Bold" }]}>
-                {item.title}
-              </Text>
-              <Text style={[styles.input, styles.inputDescr]}>
-                {item.description}
-              </Text>
+        renderItem={({ item }) => {
+          return (
+            <View style={[styles.inputContainer, styles.noteItem]}>
+              <View style={styles.groupNote}>
+                <Text style={[styles.input, { fontFamily: "Montserrat-Bold" }]}>
+                  {item.title}
+                </Text>
+                <Text style={[styles.input, styles.inputDescr]}>
+                  {item.description}
+                </Text>
+              </View>
+              <TouchableOpacity onPress={() => handleDeleteNote(item.id)}>
+                <Text style={styles.deleteButton}>
+                  <Icon name="delete" size={20} color={"black"} />
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => openUpdateModal(item)}>
+                <Text style={styles.editButton}>
+                  <Icon name="edit" size={20} color={"black"} />
+                </Text>
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={() => handleDeleteNote(item.id)}>
-              <Text style={styles.deleteButton}>
-                <Icon name="delete" size={20} color={"black"} />
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() =>
-                openUpdateInfoModal(item.id, item.title, item.description)
-              }
-            >
-              <Text style={styles.editButton}>
-                <Icon name="edit" size={20} color={"black"} />
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )}
+          );
+        }}
       />
       <TouchableOpacity
         style={styles.addButton}
-        onPress={() => setIsModalVisible(true)}
+        onPress={() => setIsVisibleCreateNoteModal(true)}
       >
         <Text style={styles.buttonText}>
           <Icon name="pluscircleo" size={20} color={"black"} />
         </Text>
       </TouchableOpacity>
-      <MainModal
+      {isVisibleCreateNoteModal &&
+        renderAddNoteModalComponent({
+          id: Math.random().toString(),
+          title: "",
+          description: "",
+        })}
+      {isVisibleUpdateNoteModal !== 0 &&
+        renderUpdateNoteModalComponent(currentNote)}
+      {/* <MainModal
         isVisible={isModalVisible}
-        onClose={() => setIsModalVisible(false)}
+        onClose={() => setIsVisibleCreateNoteModal(false)}
       >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <TextInput
-              style={styles.titleInput}
-              placeholder="Тема"
-              value={infoNote.title}
-              onChangeText={(text) =>
-                setInfoNote((prevInfoNote) => ({
-                  ...prevInfoNote,
-                  title: text,
-                }))
-              }
-            />
-            <TextInput
-              style={styles.descriptionInput}
-              multiline={true}
-              placeholder="Ваші роздуми"
-              value={infoNote.description}
-              onChangeText={(text) =>
-                setInfoNote((prevInfoNote) => ({
-                  ...prevInfoNote,
-                  description: text,
-                }))
-              }
-            />
-            <TouchableOpacity style={styles.saveButton} onPress={handleAddNote}>
-              <Text style={{ color: "#fff" }}>Додати</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.closeButton}
-              onPress={() => setIsModalVisible(false)}
-            >
-              <Text style={{ color: "#fff" }}>Закрити</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </MainModal>
+        {isAddModal ? (
+          <AddNote
+            onCreateNote={addNote}
+            note={{ id: Math.random().toString(), title: "", description: "" }}
+            onClose={() => setIsVisibleCreateNoteModal(false)}
+          />
+        ) : (
+          <AddNote
+            onCreateNote={addNote}
+            note={{ id: Math.random().toString(), title: "", description: "" }}
+            onClose={() => setIsVisibleCreateNoteModal(false)}
+          />
+        )}
+      </MainModal> */}
 
       {/* !2 */}
-      {isUpdateModalVisible && (
+      {/* {isUpdateModalVisible && (
         <MainModal
           isVisible={isUpdateModalVisible}
           onClose={() => setIsUpdateModalVisible(false)}
@@ -203,7 +195,7 @@ const Diary = () => {
             </View>
           </View>
         </MainModal>
-      )}
+      )} */}
     </View>
   );
 };
