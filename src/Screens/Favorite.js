@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   FlatList,
   Text,
@@ -11,8 +11,6 @@ import IconHeart from "react-native-vector-icons/AntDesign";
 import exercise from "../exercise.json";
 
 const Favorite = () => {
-  const [selectedTab, setSelectedTab] = useState("Meditations");
-
   const renderItem = ({ item }) => {
     return (
       <View>
@@ -35,29 +33,13 @@ const Favorite = () => {
     );
   };
 
-  const renderTabButton = (tabName) => (
-    <Pressable
-      style={[
-        styles.tabButton,
-        tabName === selectedTab && styles.selectedTabButton,
-      ]}
-      onPress={() => setSelectedTab(tabName)}
-    >
-      <Text style={styles.tabButtonText}>{tabName}</Text>
-    </Pressable>
-  );
-
   return (
     <View>
-      <View style={styles.tabContainer}>
-        {renderTabButton("Meditations")}
-        {renderTabButton("Therapies")}
-      </View>
-      {/* <FlatList
+      <FlatList
         data={exercise}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
-      /> */}
+      />
     </View>
   );
 };

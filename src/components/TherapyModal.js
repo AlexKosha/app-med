@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Text,
   View,
@@ -8,24 +8,8 @@ import {
   StyleSheet,
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
-import { getTwoRandomTherapies } from "../helpers/randomTherapy";
-// import * as TherapyService from "../service/therapyService";
 
 const TherapyModal = ({ closeModal, therapy }) => {
-  //   const [therapy, setTheraphy] = useState(null);
-
-  //   useEffect(() => {
-  //     const getTherapy = async () => {
-  //       try {
-  //         const data = await TherapyService.getTherapy();
-  //         setTheraphy(getTwoRandomTherapies(data));
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-  //     getTherapy();
-  //   }, []);
-
   return (
     <ImageBackground
       source={{
@@ -36,11 +20,7 @@ const TherapyModal = ({ closeModal, therapy }) => {
       <Pressable onPress={closeModal}>
         <Icon style={styles.closeButton} name="closecircleo" />
       </Pressable>
-      <ScrollView
-        style={styles.scrollBox}
-        // contentContainerStyle={styles.modalTextBoxContent}
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView style={styles.scrollBox} showsVerticalScrollIndicator={false}>
         <View style={styles.modalTextBox}>
           <Text style={styles.title}>{therapy.title}</Text>
           <Text style={styles.firstParagraph}>{therapy.description}</Text>

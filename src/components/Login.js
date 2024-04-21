@@ -12,43 +12,42 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
-import * as Validate from "../helpers/validationInput";
+import { logIn } from "../service/authService";
 
 const LoginScreen = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [keyboardVisible, setKeyboardVisible] = useState(false);
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
+  // const [emailError, setEmailError] = useState("");
+  // const [passwordError, setPasswordError] = useState("");
   const navigation = useNavigation();
+
+  const validateForm = () => {
+    // console.log(password);
+    setIsFormValid(email.trim().length > 0 && password.trim().length > 0);
+  };
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      "keyboardDidShow",
-      () => {
-        setKeyboardVisible(true);
-      }
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
-      () => {
-        setKeyboardVisible(false);
-      }
-    );
-
-    return () => {
-      keyboardDidShowListener.remove();
-      keyboardDidHideListener.remove();
-    };
-  }, []);
-
   const handleRegister = () => {
-    navigation.navigate("Home", { email: email, password: password });
+    const dataUser = { email, password };
+
+    const login = async () => {
+      try {
+        const data = await logIn(dataUser);
+        console.log(data);
+        navigation.navigate("Home");
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    login();
+    return;
   };
 
   const dismissKeyboard = () => {
@@ -56,26 +55,32 @@ const LoginScreen = () => {
   };
 
   const handleEmailChange = (text) => {
-    setEmail(text);
-    if (!Validate.validateEmail(text)) {
-      setEmailError("Введіть коректну електронну пошту");
+    setEmail(text.trim());
+    if (text.trim().length === 0) {
+      setIsFormValid(false);
     } else {
-      setEmailError("");
+      validateForm();
     }
+    // if (!Validate.validateEmail(text)) {
+    //   setEmailError("Введіть коректну електронну пошту");
+    // } else {
+    //   setEmailError("");
+    // }
   };
 
   const handlePasswordChange = (text) => {
-    setPassword(text);
-    if (!Validate.validatePassword(text)) {
-      setPasswordError("Пароль повинен містити щонайменше 6 символів");
+    console.log(text);
+    setPassword(text.trim());
+    if (text.trim().length === 0) {
+      setIsFormValid(false);
     } else {
-      setPasswordError("");
+      validateForm();
     }
   };
 
-  const renderError = (error, errorMessage) => {
-    return error ? <Text style={errorMessage}>{error}</Text> : null;
-  };
+  // const renderError = (error, errorMessage) => {
+  //   return error ? <Text style={errorMessage}>{error}</Text> : null;
+  // };
   return (
     <ImageBackground
       source={{
@@ -102,7 +107,7 @@ const LoginScreen = () => {
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handleEmailChange}
               />
-              {renderError(emailError, styles.errorTextEmail)}
+              {/* {renderError(emailError, styles.errorTextEmail)} */}
               <TextInput
                 style={[styles.input, styles.lastInput]}
                 placeholder="Password"
@@ -111,7 +116,7 @@ const LoginScreen = () => {
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handlePasswordChange}
               />
-              {renderError(passwordError, styles.errorTextPassword)}
+              {/* {renderError(passwordError, styles.errorTextPassword)} */}
               <Pressable
                 style={styles.positionPass}
                 onPress={toggleShowPassword}
@@ -121,27 +126,26 @@ const LoginScreen = () => {
                 </Text>
               </Pressable>
             </View>
-            {!keyboardVisible && (
-              <View>
-                <Pressable
-                  style={styles.button}
-                  title="Увійти"
-                  onPress={handleRegister}
-                >
-                  <Text style={styles.buttonText}>Увійти</Text>
-                </Pressable>
-                <View style={styles.textContainer}>
-                  <Text style={styles.question}>Немає акаунту?</Text>
+            <View>
+              <Pressable
+                style={[styles.button, !isFormValid && styles.buttonDisabled]}
+                title="Register"
+                onPress={handleRegister}
+                disabled={!isFormValid}
+              >
+                <Text style={styles.buttonText}>Увійти</Text>
+              </Pressable>
+              <View style={styles.textContainer}>
+                <Text style={styles.question}>Немає акаунту?</Text>
 
-                  <Text
-                    onPress={() => navigation.navigate("Registration")}
-                    style={styles.logIn}
-                  >
-                    Зареєструватися
-                  </Text>
-                </View>
+                <Text
+                  onPress={() => navigation.navigate("Registration")}
+                  style={styles.logIn}
+                >
+                  Зареєструватися
+                </Text>
               </View>
-            )}
+            </View>
           </View>
         </KeyboardAvoidingView>
       </TouchableOpacity>
@@ -220,6 +224,15 @@ const styles = StyleSheet.create({
     width: 343,
     height: 51,
     marginBottom: 10,
+  },
+  buttonDisabled: {
+    backgroundColor: "#CCCCCC", // Якийсь блідий колір
+    borderRadius: 100,
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+    width: 343,
+    height: 51,
+    pointerEvents: "none", // Вимикаємо можливість курсора
   },
   buttonText: {
     color: "white",

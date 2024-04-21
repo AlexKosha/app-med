@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const instance = axios.create({
-  baseURL: "https://task-pro-7x3t.onrender.com",
+  baseURL: "https://med-app-back.onrender.com",
 });
 
 export const setToken = (token) => {
@@ -39,5 +39,10 @@ export const getProfile = async () => {
 
 export const updateUser = async (body) => {
   const { data } = await instance.patch("/users/update", body);
+  return data;
+};
+
+export const verify = async () => {
+  const data = await instance.post("/users/verify");
   return data;
 };

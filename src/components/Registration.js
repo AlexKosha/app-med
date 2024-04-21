@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
+import * as SecureStore from "expo-secure-store";
 import {
   TextInput,
   StyleSheet,
@@ -16,38 +17,40 @@ import {
 import * as imagePicker from "expo-image-picker";
 import Svg, { Path } from "react-native-svg";
 import * as Validate from "../helpers/validationInput";
+import { singUp } from "../service/authService";
 
 const RegistrationScreen = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [keyboardVisible, setKeyboardVisible] = useState(false);
   const [avatarSource, setAvatarSource] = useState(null);
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
   const navigation = useNavigation();
 
-  useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener(
-      "keyboardDidShow",
-      () => {
-        setKeyboardVisible(true);
-      }
-    );
-    const keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
-      () => {
-        setKeyboardVisible(false);
-      }
-    );
+  // const checkToken = async () => {
+  //   const token = await SecureStore.getItemAsync("token");
+  //   console.log("Token from SecureStore:", token);
+  //   if (token) {
+  //     navigation.navigate("Home");
+  //   }
+  //   return;
+  // };
 
-    return () => {
-      keyboardDidShowListener.remove();
-      keyboardDidHideListener.remove();
-    };
-  }, []);
+  const validateForm = () => {
+    if (nameError || emailError || passwordError) {
+      setIsFormValid(false);
+    } else {
+      setIsFormValid(true);
+    }
+  };
+
+  // useEffect(() => {
+  //   checkToken();
+  // }, []);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -69,8 +72,21 @@ const RegistrationScreen = () => {
     setAvatarSource(null);
   };
 
-  const handleRegister = () => {
-    navigation.navigate("Home");
+  const handleRegister = async () => {
+    const newUser = { name, email, password };
+    const register = async () => {
+      console.log(newUser);
+      try {
+        const data = await singUp(newUser);
+        navigation.navigate("Home");
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    register();
+    return;
   };
 
   const dismissKeyboard = () => {
@@ -83,6 +99,7 @@ const RegistrationScreen = () => {
       setNameError("Починатися з великої літери і мінімум 3 букви");
     } else {
       setNameError("");
+      validateForm();
     }
   };
 
@@ -92,6 +109,7 @@ const RegistrationScreen = () => {
       setEmailError("Введіть коректну електронну пошту");
     } else {
       setEmailError("");
+      validateForm();
     }
   };
 
@@ -101,6 +119,7 @@ const RegistrationScreen = () => {
       setPasswordError("Пароль повинен містити щонайменше 6 символів");
     } else {
       setPasswordError("");
+      validateForm();
     }
   };
 
@@ -179,7 +198,7 @@ const RegistrationScreen = () => {
               <TextInput
                 style={styles.input}
                 placeholder="Name"
-                value={name}
+                // value={name}
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handleNameChange}
               />
@@ -187,7 +206,7 @@ const RegistrationScreen = () => {
               <TextInput
                 style={styles.input}
                 placeholder="Email"
-                value={email}
+                // value={email}
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handleEmailChange}
               />
@@ -196,7 +215,7 @@ const RegistrationScreen = () => {
                 style={[styles.input, styles.lastInput]}
                 placeholder="Password"
                 secureTextEntry={!showPassword}
-                value={password}
+                // value={password}
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handlePasswordChange}
               />
@@ -210,27 +229,26 @@ const RegistrationScreen = () => {
                 </Text>
               </Pressable>
             </View>
-            {!keyboardVisible && (
-              <View>
-                <Pressable
-                  style={styles.button}
-                  title="Register"
-                  onPress={handleRegister}
-                >
-                  <Text style={styles.buttonText}>Зареєстуватися</Text>
-                </Pressable>
-                <View style={styles.textContainer}>
-                  <Text style={styles.question}>Вже є акаунт?</Text>
+            <View>
+              <Pressable
+                style={[styles.button, !isFormValid && styles.buttonDisabled]}
+                title="Register"
+                onPress={handleRegister}
+                disabled={!isFormValid}
+              >
+                <Text style={styles.buttonText}>Зареєстуватися</Text>
+              </Pressable>
+              <View style={styles.textContainer}>
+                <Text style={styles.question}>Вже є акаунт?</Text>
 
-                  <Text
-                    onPress={() => navigation.navigate("Login")}
-                    style={styles.logIn}
-                  >
-                    Увійти
-                  </Text>
-                </View>
+                <Text
+                  onPress={() => navigation.navigate("Login")}
+                  style={styles.logIn}
+                >
+                  Увійти
+                </Text>
               </View>
-            )}
+            </View>
           </View>
         </KeyboardAvoidingView>
       </TouchableOpacity>
@@ -315,6 +333,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     width: 343,
     height: 51,
+  },
+  buttonDisabled: {
+    backgroundColor: "#CCCCCC", // Якийсь блідий колір
+    borderRadius: 100,
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+    width: 343,
+    height: 51,
+    pointerEvents: "none", // Вимикаємо можливість курсора
   },
   buttonText: {
     color: "white",
