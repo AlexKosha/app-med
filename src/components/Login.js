@@ -19,12 +19,9 @@ const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isFormValid, setIsFormValid] = useState(false);
-  // const [emailError, setEmailError] = useState("");
-  // const [passwordError, setPasswordError] = useState("");
   const navigation = useNavigation();
 
   const validateForm = () => {
-    // console.log(password);
     setIsFormValid(email.trim().length > 0 && password.trim().length > 0);
   };
 
@@ -32,20 +29,19 @@ const LoginScreen = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleRegister = () => {
+  const login = async () => {
     const dataUser = { email, password };
+    try {
+      const data = await logIn(dataUser);
+      console.log(data);
+      navigation.navigate("Home");
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    const login = async () => {
-      try {
-        const data = await logIn(dataUser);
-        console.log(data);
-        navigation.navigate("Home");
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
+  const handleRegister = () => {
     login();
     return;
   };
@@ -61,11 +57,6 @@ const LoginScreen = () => {
     } else {
       validateForm();
     }
-    // if (!Validate.validateEmail(text)) {
-    //   setEmailError("Введіть коректну електронну пошту");
-    // } else {
-    //   setEmailError("");
-    // }
   };
 
   const handlePasswordChange = (text) => {
@@ -78,9 +69,6 @@ const LoginScreen = () => {
     }
   };
 
-  // const renderError = (error, errorMessage) => {
-  //   return error ? <Text style={errorMessage}>{error}</Text> : null;
-  // };
   return (
     <ImageBackground
       source={{
@@ -107,7 +95,6 @@ const LoginScreen = () => {
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handleEmailChange}
               />
-              {/* {renderError(emailError, styles.errorTextEmail)} */}
               <TextInput
                 style={[styles.input, styles.lastInput]}
                 placeholder="Password"
@@ -116,7 +103,6 @@ const LoginScreen = () => {
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handlePasswordChange}
               />
-              {/* {renderError(passwordError, styles.errorTextPassword)} */}
               <Pressable
                 style={styles.positionPass}
                 onPress={toggleShowPassword}

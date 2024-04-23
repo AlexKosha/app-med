@@ -13,7 +13,12 @@ export const deleteToken = () => {
 };
 
 export const singUp = async (body) => {
-  const { data } = await instance.post("/users/register", body);
+  const { data } = await instance.post("/users/register", body, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "multipart/form-data",
+    },
+  });
   setToken(`Bearer ${data.token}`);
   return data;
 };

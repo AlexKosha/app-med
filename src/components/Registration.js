@@ -15,42 +15,27 @@ import {
   TouchableOpacity,
 } from "react-native";
 import * as imagePicker from "expo-image-picker";
-import Svg, { Path } from "react-native-svg";
+import Icon from "react-native-vector-icons/Octicons";
+import IconClose from "react-native-vector-icons/AntDesign";
 import * as Validate from "../helpers/validationInput";
 import { singUp } from "../service/authService";
+import { createFormDataRegister } from "../helpers/createFormDataRegister";
 
 const RegistrationScreen = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [avatarSource, setAvatarSource] = useState(null);
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [avatarSource, setAvatarSource] = useState(null);
   const [isFormValid, setIsFormValid] = useState(false);
   const navigation = useNavigation();
 
-  // const checkToken = async () => {
-  //   const token = await SecureStore.getItemAsync("token");
-  //   console.log("Token from SecureStore:", token);
-  //   if (token) {
-  //     navigation.navigate("Home");
-  //   }
-  //   return;
-  // };
-
-  const validateForm = () => {
-    if (nameError || emailError || passwordError) {
-      setIsFormValid(false);
-    } else {
-      setIsFormValid(true);
-    }
-  };
-
-  // useEffect(() => {
-  //   checkToken();
-  // }, []);
+  useEffect(() => {
+    validateForm();
+  }, [name, email, password, nameError, emailError, passwordError]);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -64,7 +49,8 @@ const RegistrationScreen = () => {
       quality: 1,
     });
     if (!result.canceled) {
-      setAvatarSource(result.assets[0].uri);
+      console.log(result);
+      setAvatarSource(result.assets[0]);
     }
   };
 
@@ -72,19 +58,26 @@ const RegistrationScreen = () => {
     setAvatarSource(null);
   };
 
-  const handleRegister = async () => {
-    const newUser = { name, email, password };
-    const register = async () => {
-      console.log(newUser);
-      try {
-        const data = await singUp(newUser);
-        navigation.navigate("Home");
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
+  const register = async () => {
+    newUser = {
+      name,
+      email,
+      avatarSource,
+      password,
     };
+    try {
+      setIsFormValid(false);
+      const data = await singUp(createFormDataRegister(newUser));
+      await SecureStore.setItemAsync("token", data.token);
+      setIsFormValid(true);
+      navigation.navigate("Home");
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  const handleRegister = async () => {
     register();
     return;
   };
@@ -94,33 +87,41 @@ const RegistrationScreen = () => {
   };
 
   const handleNameChange = (text) => {
-    setName(text);
-    if (!Validate.validateName(text)) {
+    const trimmedText = text.trim();
+    setName(trimmedText);
+    if (!Validate.validateName(trimmedText)) {
       setNameError("Починатися з великої літери і мінімум 3 букви");
     } else {
       setNameError("");
-      validateForm();
     }
   };
 
   const handleEmailChange = (text) => {
-    setEmail(text);
-    if (!Validate.validateEmail(text)) {
+    const trimmedText = text.trim();
+    setEmail(trimmedText);
+    if (!Validate.validateEmail(trimmedText)) {
       setEmailError("Введіть коректну електронну пошту");
     } else {
       setEmailError("");
-      validateForm();
     }
   };
 
   const handlePasswordChange = (text) => {
-    setPassword(text);
-    if (!Validate.validatePassword(text)) {
+    const trimmedText = text.trim();
+    setPassword(trimmedText);
+    if (!Validate.validatePassword(trimmedText)) {
       setPasswordError("Пароль повинен містити щонайменше 6 символів");
     } else {
       setPasswordError("");
-      validateForm();
     }
+  };
+
+  const validateForm = () => {
+    const isNameValid = name && !nameError;
+    const isEmailValid = email && !emailError;
+    const isPasswordValid = password && !passwordError;
+
+    setIsFormValid(isNameValid && isEmailValid && isPasswordValid);
   };
 
   const renderError = (error, errorMessage) => {
@@ -148,7 +149,7 @@ const RegistrationScreen = () => {
               <Image
                 source={
                   avatarSource
-                    ? { uri: avatarSource }
+                    ? { uri: avatarSource.uri }
                     : { uri: "https://via.placeholder.com/120" }
                 }
                 style={styles.image}
@@ -158,38 +159,14 @@ const RegistrationScreen = () => {
                   onPress={() => selectImage()}
                   style={styles.addButton}
                 >
-                  <Svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill=""
-                    stroke="#FF6C00"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <Path d="M12 5v14M5 12h14" />
-                  </Svg>
+                  <Icon name="plus" size={24} color="black" />
                 </Pressable>
               ) : (
                 <Pressable
                   onPress={() => deleteImage()}
                   style={styles.addButton}
                 >
-                  <Svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill=""
-                    stroke="#FF6C00"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <Path d="M18 6L6 18M6 6l12 12" />
-                  </Svg>
+                  <IconClose name="close" size={24} color="black" />
                 </Pressable>
               )}
             </View>
@@ -198,7 +175,6 @@ const RegistrationScreen = () => {
               <TextInput
                 style={styles.input}
                 placeholder="Name"
-                // value={name}
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handleNameChange}
               />
@@ -206,7 +182,6 @@ const RegistrationScreen = () => {
               <TextInput
                 style={styles.input}
                 placeholder="Email"
-                // value={email}
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handleEmailChange}
               />
@@ -215,7 +190,6 @@ const RegistrationScreen = () => {
                 style={[styles.input, styles.lastInput]}
                 placeholder="Password"
                 secureTextEntry={!showPassword}
-                // value={password}
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handlePasswordChange}
               />
@@ -335,13 +309,13 @@ const styles = StyleSheet.create({
     height: 51,
   },
   buttonDisabled: {
-    backgroundColor: "#CCCCCC", // Якийсь блідий колір
+    backgroundColor: "#CCCCCC",
     borderRadius: 100,
     paddingVertical: 16,
     paddingHorizontal: 32,
     width: 343,
     height: 51,
-    pointerEvents: "none", // Вимикаємо можливість курсора
+    pointerEvents: "none",
   },
   buttonText: {
     color: "white",
@@ -368,7 +342,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     position: "absolute",
-    top: -70,
+    top: -90,
     left: "50%",
     transform: [{ translateX: -50 }],
     alignItems: "center",

@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import * as SecureStore from "expo-secure-store";
 import {
   Image,
   ImageBackground,
@@ -8,12 +9,33 @@ import {
   Text,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useEffect } from "react";
 
 const MainMenu = () => {
   const navigation = useNavigation();
 
-  const handleLogOut = () => {
-    navigation.navigate("Login");
+  const checkToken = async () => {
+    try {
+      const token = await SecureStore.getItemAsync("token");
+      console.log("Token from SecureStore:", token);
+    } catch (error) {
+      console.log(error);
+    }
+    return;
+  };
+
+  useEffect(() => {
+    checkToken();
+  }, []);
+
+  const handleLogOut = async () => {
+    try {
+      await SecureStore.deleteItemAsync("token");
+      console.log("Токен успішно видалено");
+      navigation.navigate("Login");
+    } catch (error) {
+      console.log("Помилка при видаленні токену:", error);
+    }
   };
 
   const handleNavigateToQuotes = () => {
