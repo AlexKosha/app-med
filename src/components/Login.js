@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import * as SecureStore from "expo-secure-store";
 import { useEffect, useState } from "react";
 import {
   TextInput,
@@ -33,7 +34,7 @@ const LoginScreen = () => {
     const dataUser = { email, password };
     try {
       const data = await logIn(dataUser);
-      console.log(data);
+      await SecureStore.setItemAsync("token", data.token);
       navigation.navigate("Home");
       return data;
     } catch (error) {

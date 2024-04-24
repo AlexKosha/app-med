@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   FlatList,
+  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import MainModal from "../components/Modal";
@@ -25,7 +26,9 @@ const Diary = () => {
 
   const addNote = (newNote) => {
     if (newNote.title.trim() === "" || newNote.description.trim() === "") {
-      // alert
+      Alert.alert("Ой лишенько!", "Тема та вміст нотатки є обов'язковими", [
+        { text: "Закрити" },
+      ]);
       return;
     }
     setNotes((prevNotes) => [...prevNotes, newNote]);
@@ -69,6 +72,16 @@ const Diary = () => {
   };
 
   const updateNote = (updatedNote) => {
+    if (
+      updatedNote.title.trim() === "" ||
+      updatedNote.description.trim() === ""
+    ) {
+      Alert.alert("Ой лишенько!", "Тема та вміст нотатки є обов'язковими", [
+        { text: "Закрити" },
+      ]);
+      return;
+    }
+
     const filteredNotes = notes.filter((note) => note.id !== updatedNote.id);
 
     setNotes([...filteredNotes, updatedNote]);
@@ -127,75 +140,6 @@ const Diary = () => {
         })}
       {isVisibleUpdateNoteModal !== 0 &&
         renderUpdateNoteModalComponent(currentNote)}
-      {/* <MainModal
-        isVisible={isModalVisible}
-        onClose={() => setIsVisibleCreateNoteModal(false)}
-      >
-        {isAddModal ? (
-          <AddNote
-            onCreateNote={addNote}
-            note={{ id: Math.random().toString(), title: "", description: "" }}
-            onClose={() => setIsVisibleCreateNoteModal(false)}
-          />
-        ) : (
-          <AddNote
-            onCreateNote={addNote}
-            note={{ id: Math.random().toString(), title: "", description: "" }}
-            onClose={() => setIsVisibleCreateNoteModal(false)}
-          />
-        )}
-      </MainModal> */}
-
-      {/* !2 */}
-      {/* {isUpdateModalVisible && (
-        <MainModal
-          isVisible={isUpdateModalVisible}
-          onClose={() => setIsUpdateModalVisible(false)}
-        >
-          <View style={styles.modalContainer}>
-            <View style={styles.modalContent}>
-              <TextInput
-                style={styles.titleInput}
-                placeholder="Тема"
-                value={infoNote.title}
-                onChangeText={(text) =>
-                  setInfoNote((prevInfoNote) => ({
-                    ...prevInfoNote,
-                    title: text,
-                  }))
-                }
-              />
-              <TextInput
-                style={styles.descriptionInput}
-                multiline={true}
-                placeholder="Ваші роздуми"
-                value={infoNote.description}
-                onChangeText={(text) =>
-                  setInfoNote((prevInfoNote) => ({
-                    ...prevInfoNote,
-                    description: text,
-                  }))
-                }
-              />
-              <TouchableOpacity
-                style={styles.saveButton}
-                onPress={handleAddUpdatedNote(
-                  infoNote.title,
-                  infoNote.description
-                )}
-              >
-                <Text style={{ color: "#fff" }}>Оновити</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.closeButton}
-                onPress={handleAddUpdatedNote}
-              >
-                <Text style={{ color: "#fff" }}>Закрити</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </MainModal>
-      )} */}
     </View>
   );
 };

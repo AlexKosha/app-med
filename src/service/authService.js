@@ -25,6 +25,7 @@ export const singUp = async (body) => {
 
 export const logIn = async (body) => {
   const { data } = await instance.post("/users/login", body);
+
   setToken(`Bearer ${data.token}`);
   return data;
 };

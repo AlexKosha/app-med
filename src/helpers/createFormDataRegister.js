@@ -5,7 +5,8 @@ export const createFormDataRegister = (newUser) => {
   formData.append("password", newUser.password);
 
   if (newUser.avatarSource) {
-    formData.append("avatarURL", newUser.avatarSource.uri);
+    formData.append("avatar_url", newUser.avatarSource.uri);
+    // avatarURL
   }
 
   return formData;
