@@ -34,7 +34,10 @@ const LoginScreen = () => {
     const dataUser = { email, password };
     try {
       const data = await logIn(dataUser);
+      console.log(data);
       await SecureStore.setItemAsync("token", data.token);
+      const userString = JSON.stringify(data.user);
+      await SecureStore.setItemAsync("user", userString);
       navigation.navigate("Home");
       return data;
     } catch (error) {

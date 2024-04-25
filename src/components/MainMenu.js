@@ -31,6 +31,7 @@ const MainMenu = () => {
   const handleLogOut = async () => {
     try {
       await SecureStore.deleteItemAsync("token");
+      await SecureStore.deleteItemAsync("user");
       console.log("Токен успішно видалено");
       navigation.navigate("Login");
     } catch (error) {

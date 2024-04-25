@@ -69,6 +69,8 @@ const RegistrationScreen = () => {
       setIsFormValid(false);
       const data = await singUp(createFormDataRegister(newUser));
       await SecureStore.setItemAsync("token", data.token);
+      const userString = JSON.stringify(data.user);
+      await SecureStore.setItemAsync("user", userString);
       setIsFormValid(true);
       navigation.navigate("Home");
       return data;

@@ -1,23 +1,52 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import IconSetting from "react-native-vector-icons/Ionicons";
+import * as SecureStore from "expo-secure-store";
 import {
   Image,
   ImageBackground,
   Pressable,
   StyleSheet,
   Text,
+  TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import Options from "../components/Options";
 import MainModal from "../components/Modal";
+import PasswordForm from "../components/PasswordForm";
+import UserInfoForm from "../components/UserInfoForm";
 
 const Profile = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+  });
+  const [isChangePasswordModalVisible, setIsChangePasswordModalVisible] =
+    useState(false);
+
+  const toggleChangePasswordModal = () => {
+    setIsChangePasswordModalVisible(!isChangePasswordModalVisible);
+  };
+
+  const getUserInfo = async () => {
+    const user = await SecureStore.getItemAsync("user");
+    const storedUser = JSON.parse(user);
+    setUser((prevNote) => ({
+      ...prevNote,
+      name: storedUser.name,
+      email: storedUser.email,
+    }));
+    return;
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
 
   const toggleModal = () => {
     setIsModalVisible(!isModalVisible);
   };
+
   return (
     <ImageBackground
       source={{
@@ -31,34 +60,136 @@ const Profile = () => {
       <View style={styles.container}>
         <View style={styles.centeredContent}>
           <Image
-            source={{ uri: "https://via.placeholder.com/120" }}
+            source={
+              user.avatarURL
+                ? { uri: user.avatarURL }
+                : { uri: "https://via.placeholder.com/120" }
+            }
             style={styles.avatar}
           />
-          <Text style={styles.textName}>Ім'я користувача</Text>
-        </View>
-      </View>
-      <View style={styles.infoBox}>
-        <View style={styles.infoContainer}>
-          <View style={styles.row}>
-            <Text style={[styles.label, styles.alignStart]}>Телефон:</Text>
-            <Text style={styles.value}>+123456789</Text>
-          </View>
-          <View style={styles.row}>
-            <Text style={[styles.label, styles.alignStart]}>email:</Text>
-            <Text style={styles.value}>example@example.com</Text>
-          </View>
-          <View style={styles.btnContainer}>
-            <Pressable style={[styles.btnAvatar, styles.btnMargin]}>
-              <Text>Змінити Аватар</Text>
-            </Pressable>
-            <Pressable style={styles.btnAvatar}>
-              <Text>Змінити дані</Text>
-            </Pressable>
-          </View>
+          <Text style={styles.textName}>{user.name}</Text>
         </View>
       </View>
       <MainModal isVisible={isModalVisible} onClose={toggleModal}>
-        <Options />
+        <UserInfoForm
+          toggleModal={toggleModal}
+          user={user}
+          togglePasswordModal={toggleChangePasswordModal}
+          getUserInfoStorega={getUserInfo}
+        />
+        {/* <View style={styles.infoContainer}>
+          {isChangeInfo ? (
+            <View>
+              <TextInput
+                style={styles.alignStart}
+                placeholder="Ім'я"
+                value={userInfo.name}
+                onChangeText={(text) =>
+                  setUserInfo((prevNote) => ({ ...prevNote, name: text }))
+                }
+              />
+
+              <TextInput
+                style={styles.alignStart}
+                placeholder="Email"
+                value={userInfo.email}
+                onChangeText={(text) =>
+                  setUserInfo((prevNote) => ({ ...prevNote, email: text }))
+                }
+              />
+
+              <Pressable onPress={updateUserInfo} style={styles.changeInfoBtn}>
+                <IconSetting
+                  name="checkbox-outline"
+                  size={30}
+                  color="black"
+                  style={styles.changeInfoBtn}
+                />
+              </Pressable>
+            </View>
+          ) : (
+            <View>
+              <View style={styles.row}>
+                <Text style={[styles.label, styles.alignStart]}>Ім'я:</Text>
+                <Text style={styles.value}>{userInfo.name}</Text>
+              </View>
+              <View style={styles.row}>
+                <Text style={[styles.label, styles.alignStart]}>email:</Text>
+                <Text style={styles.value}>{userInfo.email}</Text>
+              </View>
+              <Pressable
+                onPress={() => setIsChangeInfo(true)}
+                style={styles.changeInfoBtn}
+              >
+                <IconSetting
+                  name="settings-outline"
+                  size={30}
+                  color="black"
+                  style={styles.changeInfoBtn}
+                />
+              </Pressable>
+            </View>
+          )}
+
+          <View style={styles.btnContainer}>
+            <Pressable
+              style={[styles.btnAvatar, styles.btnMargin]}
+              onPress={toggleChangePasswordModal}
+            >
+              <Text>Змінити пароль</Text>
+            </Pressable>
+          </View>
+        </View> */}
+      </MainModal>
+      <MainModal
+        isVisible={isChangePasswordModalVisible}
+        onClose={toggleChangePasswordModal}
+      >
+        <PasswordForm
+          toggleModal={toggleChangePasswordModal}
+          togglePasswordModal={toggleChangePasswordModal}
+        />
+        {/* <View style={styles.infoContainer}>
+          <View>
+            <TextInput
+              style={styles.alignStart}
+              placeholder="Старий пароль"
+              value={userPass.password}
+              onChangeText={(text) =>
+                setUserPass((prevNote) => ({ ...prevNote, password: text }))
+              }
+            />
+
+            <TextInput
+              style={styles.alignStart}
+              placeholder="Новий пароль"
+              value={userPass.newPassword}
+              onChangeText={(text) =>
+                setUserPass((prevNote) => ({ ...prevNote, newPassword: text }))
+              }
+            />
+
+            <Pressable onPress={updateUserPass} style={styles.changeInfoBtn}>
+              <IconSetting
+                name="checkbox-outline"
+                size={30}
+                color="black"
+                style={styles.submitBtn}
+              />
+            </Pressable>
+            <Pressable
+              onPress={toggleChangePasswordModal}
+              style={styles.changeInfoBtn}
+            >
+              <IconSetting
+                name="close"
+                size={30}
+                color="black"
+                style={styles.closeBtn}
+              />
+            </Pressable>
+          </View>
+        </View> */}
       </MainModal>
     </ImageBackground>
   );
@@ -80,8 +211,8 @@ styles = StyleSheet.create({
     alignItems: "center",
   },
   avatar: {
-    width: 200,
-    height: 200,
+    width: 120,
+    height: 120,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
   },
@@ -89,19 +220,13 @@ styles = StyleSheet.create({
     fontSize: 30,
     marginTop: 10,
   },
-  infoBox: {
-    width: "100%",
-    height: "100%",
-    paddingLeft: 40,
-    paddingRight: 40,
-    marginTop: 40,
-  },
   infoContainer: {
+    justifyContent: "center",
+    alignContent: "center",
     paddingTop: 20,
     paddingBottom: 20,
     paddingLeft: 20,
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
+    borderRadius: 16,
     backgroundColor: "#FFFFFF",
   },
   row: {
@@ -109,13 +234,28 @@ styles = StyleSheet.create({
     marginBottom: 10,
   },
   label: {
-    fontWeight: "bold",
+    fontFamily: "Montserrat-Bold",
   },
   value: {
-    marginLeft: 30,
+    // marginLeft: 10,
   },
   alignStart: {
-    minWidth: 120,
+    minWidth: 80,
+  },
+  changeInfoBtn: {
+    position: "absolute",
+    right: 20,
+    top: 5,
+  },
+  submitBtn: {
+    position: "absolute",
+    right: 20,
+    top: -5,
+  },
+  closeBtn: {
+    position: "absolute",
+    right: 20,
+    top: 25,
   },
   btnContainer: {
     flexDirection: "row",
