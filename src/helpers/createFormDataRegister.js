@@ -1,12 +1,17 @@
-export const createFormDataRegister = (newUser) => {
+export const createFormDataRegister = (body) => {
   const formData = new FormData();
-  formData.append("name", newUser.name);
-  formData.append("email", newUser.email);
-  formData.append("password", newUser.password);
+  formData.append("name", body.name);
+  formData.append("email", body.email);
+  formData.append("password", body.password);
 
-  if (newUser.avatarSource) {
-    formData.append("avatar_url", newUser.avatarSource.uri);
-    // avatarURL
+  // Assuming avatarURL is a file URI
+  if (body.avatarURL) {
+    const avatarFile = {
+      uri: body.avatarURL.uri,
+      name: "avatar.jpg",
+      type: "image/jpeg",
+    };
+    formData.append("avatarURL", avatarFile);
   }
 
   return formData;
