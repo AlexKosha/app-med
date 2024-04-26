@@ -74,6 +74,8 @@ const Profile = () => {
 
   useEffect(() => {
     getUserInfo();
+    setIsModalVisible(false);
+    setIsChangePasswordModalVisible(false);
   }, []);
 
   // const toggleModal = () => {
@@ -87,6 +89,8 @@ const Profile = () => {
       }}
       style={styles.backImage}
     >
+
+
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         // style={styles.inner}
@@ -108,29 +112,14 @@ const Profile = () => {
             <Text style={styles.textName}>{user.name}</Text>
           </View>
         </View>
-        {/* <MainModal isVisible={isModalVisible} onClose={toggleModal}>
-        <UserInfoForm
-          toggleModal={toggleModal}
-          user={user}
-          togglePasswordModal={toggleChangePasswordModal}
-          getUserInfoStorega={getUserInfo}
-        />
-      </MainModal> */}
+       
         {user.name && (
           <UserInfoForm user={user} getUserInfoStorega={getUserInfo} />
         )}
         <Pressable onPress={selectImage} style={styles.btnAvatar}>
           <Text style={{ textAlign: "center" }}>Змінити аватар</Text>
         </Pressable>
-        {/* <MainModal
-        isVisible={isChangePasswordModalVisible}
-        onClose={toggleChangePasswordModal}
-      >
-        <PasswordForm
-          toggleModal={toggleChangePasswordModal}
-          togglePasswordModal={toggleChangePasswordModal}
-        />
-      </MainModal> */}
+        
         <PasswordForm />
       </KeyboardAvoidingView>
     </ImageBackground>
@@ -145,8 +134,8 @@ styles = StyleSheet.create({
   },
   setting: {
     position: "absolute",
-    top: 30,
-    right: 10,
+    top: 50,
+    right: 20,
   },
   container: {
     paddingTop: 40,
