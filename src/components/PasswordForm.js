@@ -42,10 +42,6 @@ const PasswordForm = () => {
         <Pressable onPress={updateUserPass} style={styles.submitBtn}>
           <IconSetting name="checkbox-outline" size={30} color="black" />
         </Pressable>
-
-        <Pressable onPress={togglePasswordModal} style={styles.closeBtn}>
-          <IconSetting name="close" size={30} color="black" />
-        </Pressable>
       </View>
     </View>
   );

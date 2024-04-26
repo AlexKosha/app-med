@@ -12,22 +12,30 @@ import {
   Keyboard,
 } from "react-native";
 
-const NotesModalForm = ({ leftButtonTitle, note, onCreateNote, onClose }) => {
+const NotesModalForm = ({ route }) => {
+  const { leftButtonTitle, onCreateNote, note } = route.params;
   const [newNote, setNewNote] = useState({
     id: note.id,
     title: note.title || "",
     description: note.description || "",
   });
 
-  const { height } = useWindowDimensions();
+  const func = () => {
+    const noteNote = { ...newNote };
+    setNewNote({
+      id: note.id,
+      title: note.title || "",
+      description: note.description || "",
+    });
+    onCreateNote(noteNote);
+  };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      // style={{ justifyContent: "center" }}
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.modalContent}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.modalContent}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+        >
           <TextInput
             style={styles.titleInput}
             placeholder="Тема"
@@ -48,22 +56,30 @@ const NotesModalForm = ({ leftButtonTitle, note, onCreateNote, onClose }) => {
               setNewNote((prevNote) => ({ ...prevNote, description: text }))
             }
           />
-
-          <TouchableOpacity
-            style={styles.saveButton}
-            onPress={() => onCreateNote(newNote)}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              paddingHorizontal: 5,
+            }}
           >
-            <Text style={{ color: "#fff" }}>{leftButtonTitle}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.closeButton}
-            onPress={() => onClose()}
-          >
-            <Text style={{ color: "#fff" }}>Закрити</Text>
-          </TouchableOpacity>
-        </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+            <TouchableOpacity style={styles.saveButton} onPress={() => func()}>
+              <Text style={{ color: "#fff", textAlign: "center" }}>
+                {leftButtonTitle}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => onClose()}
+            >
+              <Text style={{ color: "#fff", textAlign: "center" }}>
+                Закрити
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -74,11 +90,10 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: "#fff",
+    padding: 15,
     borderRadius: 10,
-    paddingHorizontal: 20,
-    paddingTop: 20,
-    paddingBottom: 10,
-    position: "relative",
+    flex: 1,
+    // width: "100%",
   },
 
   titleInput: {
@@ -91,30 +106,26 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   descriptionInput: {
-    height: "75%",
+    height: "80%",
     borderWidth: 1,
     borderColor: "#ccc",
     padding: 10,
-    marginBottom: 20,
     borderRadius: 5,
+    marginBottom: 10,
   },
   saveButton: {
     padding: 7,
     borderRadius: 5,
     fontSize: 18,
-    position: "absolute",
-    left: 20,
-    bottom: 20,
-    marginTop: 30,
     backgroundColor: "green",
+    width: 70,
   },
   closeButton: {
     padding: 7,
     borderRadius: 5,
     fontSize: 18,
-    position: "absolute",
-    right: 20,
-    bottom: 20,
+
+    width: 70,
     backgroundColor: "red",
   },
 });

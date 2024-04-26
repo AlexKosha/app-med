@@ -67,8 +67,3 @@ export const verify = async () => {
   const data = await instance.post("/users/verify");
   return data;
 };
-
-export const updatePassword = async (body) => {
-  await instance.patch("/users/updatePass", body);
-  return;
-};

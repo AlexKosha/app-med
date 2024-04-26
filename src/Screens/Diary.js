@@ -6,10 +6,14 @@ import {
   StyleSheet,
   FlatList,
   Alert,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
-import MainModal from "../components/Modal";
+// import MainModal from "../components/Modal";
+import DiaryModal from "../components/DiaryModal";
 import NotesModalForm from "../components/NotesModalForm";
+import { useNavigation } from "@react-navigation/native";
 
 const Diary = () => {
   const [isVisibleCreateNoteModal, setIsVisibleCreateNoteModal] =
@@ -18,12 +22,23 @@ const Diary = () => {
     useState(false);
   const [notes, setNotes] = useState([]);
   const [currentNote, setCurrentNote] = useState({});
+  const navigation = useNavigation();
 
   const openUpdateModal = (note) => {
     setIsVisibleUpdateNoteModal(true);
     setCurrentNote(note);
   };
-
+  const openModal = () => {
+    navigation.navigate("NotesModalForm", {
+      leftButtonTitle: "Додати",
+      onCreateNote: addNote,
+      note: {
+        id: Math.random().toString(),
+        title: "",
+        description: "",
+      },
+    });
+  };
   const addNote = (newNote) => {
     if (newNote.title.trim() === "" || newNote.description.trim() === "") {
       Alert.alert("Ой лишенько!", "Тема та вміст нотатки є обов'язковими", [
@@ -32,7 +47,8 @@ const Diary = () => {
       return;
     }
     setNotes((prevNotes) => [...prevNotes, newNote]);
-    setIsVisibleCreateNoteModal(false);
+    // setIsVisibleCreateNoteModal(false);
+    navigation.navigate("Diary");
   };
 
   const handleDeleteNote = (id) => {
@@ -41,33 +57,33 @@ const Diary = () => {
 
   const renderAddNoteModalComponent = (note) => {
     return (
-      <MainModal
-        isVisible={isVisibleCreateNoteModal}
-        onClose={() => setIsVisibleCreateNoteModal(false)}
-      >
-        <NotesModalForm
-          leftButtonTitle={"Додати"}
-          onCreateNote={addNote}
-          note={note}
-          onClose={() => setIsVisibleCreateNoteModal(false)}
-        />
-      </MainModal>
+      // <DiaryModal
+      //   isVisible={isVisibleCreateNoteModal}
+      //   onClose={() => setIsVisibleCreateNoteModal(false)}
+      // >
+      <NotesModalForm
+        leftButtonTitle={"Додати"}
+        onCreateNote={addNote}
+        note={note}
+        onClose={() => navigation.navigate("Diary")}
+      />
+      // </DiaryModal>
     );
   };
 
   const renderUpdateNoteModalComponent = (note) => {
     return (
-      <MainModal
-        isVisible={isVisibleUpdateNoteModal}
-        onClose={() => setIsVisibleUpdateNoteModal(false)}
-      >
-        <NotesModalForm
-          leftButtonTitle={"Оновити"}
-          onCreateNote={updateNote}
-          note={note}
-          onClose={() => setIsVisibleUpdateNoteModal(false)}
-        />
-      </MainModal>
+      // <DiaryModal
+      //   isVisible={isVisibleUpdateNoteModal}
+      //   onClose={() => setIsVisibleUpdateNoteModal(false)}
+      // >
+      <NotesModalForm
+        leftButtonTitle={"Оновити"}
+        onCreateNote={updateNote}
+        note={note}
+        onClose={() => navigation.navigate("Diary")}
+      />
+      // </DiaryModal>
     );
   };
 
@@ -85,7 +101,8 @@ const Diary = () => {
     const filteredNotes = notes.filter((note) => note.id !== updatedNote.id);
 
     setNotes([...filteredNotes, updatedNote]);
-    setIsVisibleUpdateNoteModal(false);
+    navigation.navigate("Diary");
+    // setIsVisibleUpdateNoteModal(false);
   };
 
   return (
@@ -124,22 +141,19 @@ const Diary = () => {
           );
         }}
       />
-      <TouchableOpacity
-        style={styles.addButton}
-        onPress={() => setIsVisibleCreateNoteModal(true)}
-      >
+      <TouchableOpacity style={styles.addButton} onPress={openModal}>
         <Text style={styles.buttonText}>
           <Icon name="pluscircleo" size={20} color={"black"} />
         </Text>
       </TouchableOpacity>
-      {isVisibleCreateNoteModal &&
+      {/* {isVisibleCreateNoteModal &&
         renderAddNoteModalComponent({
           id: Math.random().toString(),
           title: "",
           description: "",
         })}
       {isVisibleUpdateNoteModal !== 0 &&
-        renderUpdateNoteModalComponent(currentNote)}
+        renderUpdateNoteModalComponent(currentNote)} */}
     </View>
   );
 };

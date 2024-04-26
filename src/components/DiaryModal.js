@@ -8,16 +8,14 @@ import {
   Platform,
 } from "react-native";
 
-const MainModal = ({ isVisible, children, onClose }) => {
+const DiaryModal = ({ isVisible, children, onClose }) => {
   return (
     <Modal animationType="fade" transparent={true} visible={isVisible}>
       <View style={styles.modalContainer}>
         <TouchableWithoutFeedback onPress={onClose}>
           <View style={styles.overlay}></View>
         </TouchableWithoutFeedback>
-        <View style={styles.modalContent}>
-          <View style={styles.contentContainer}>{children}</View>
-        </View>
+        <View style={styles.modalContent}>{children}</View>
       </View>
     </Modal>
   );
@@ -39,19 +37,18 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     position: "relative",
-    width: "95%",
-    maxHeight: "80%",
+    width: "85%",
+    maxHeight: "70%",
     borderRadius: 10,
     overflow: "auto",
+    padding: 15,
+    flex: 1,
   },
-  header: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    padding: 10,
-  },
-  contentContainer: {
-    padding: 10,
-  },
+  //   header: {
+  //     flexDirection: "row",
+  //     justifyContent: "flex-end",
+  //     padding: 10,
+  //   },
 });
 
-export default MainModal;
+export default DiaryModal;

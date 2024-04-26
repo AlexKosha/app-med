@@ -13,17 +13,13 @@ import {
   View,
 } from "react-native";
 import * as imagePicker from "expo-image-picker";
-import MainModal from "../components/Modal";
 import PasswordForm from "../components/PasswordForm";
 import UserInfoForm from "../components/UserInfoForm";
 import { updateAvatar } from "../service/authService";
 
 const Profile = () => {
-  // const [isModalVisible, setIsModalVisible] = useState(false);
   const [user, setUser] = useState({ name: "", email: "", avatarURL: "" });
   const [avatarSource, setAvatarSource] = useState(null);
-  // const [isChangePasswordModalVisible, setIsChangePasswordModalVisible] =
-  //   useState(false);
 
   const changeAvatar = async (avatarURL) => {
     const formData = new FormData();
@@ -56,10 +52,6 @@ const Profile = () => {
     }
   };
 
-  // const toggleChangePasswordModal = () => {
-  //   setIsChangePasswordModalVisible(!isChangePasswordModalVisible);
-  // };
-
   const getUserInfo = async () => {
     const user = await SecureStore.getItemAsync("user");
     const storedUser = JSON.parse(user);
@@ -74,13 +66,7 @@ const Profile = () => {
 
   useEffect(() => {
     getUserInfo();
-    setIsModalVisible(false);
-    setIsChangePasswordModalVisible(false);
   }, []);
-
-  // const toggleModal = () => {
-  //   setIsModalVisible(!isModalVisible);
-  // };
 
   return (
     <ImageBackground
@@ -89,15 +75,10 @@ const Profile = () => {
       }}
       style={styles.backImage}
     >
-
-
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         // style={styles.inner}
       >
-        {/* <TouchableOpacity style={styles.setting} onPress={() => toggleModal()}>
-          <IconSetting name="settings-outline" size={30} color="black" />
-        </TouchableOpacity> */}
         <View style={styles.container}>
           <View style={styles.centeredContent}>
             <Image
@@ -112,14 +93,14 @@ const Profile = () => {
             <Text style={styles.textName}>{user.name}</Text>
           </View>
         </View>
-       
+
         {user.name && (
           <UserInfoForm user={user} getUserInfoStorega={getUserInfo} />
         )}
         <Pressable onPress={selectImage} style={styles.btnAvatar}>
           <Text style={{ textAlign: "center" }}>Змінити аватар</Text>
         </Pressable>
-        
+
         <PasswordForm />
       </KeyboardAvoidingView>
     </ImageBackground>

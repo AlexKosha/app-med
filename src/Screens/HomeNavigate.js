@@ -7,6 +7,8 @@ import Exercises from "../components/Exercises";
 import MainMenu from "../components/MainMenu";
 import News from "../components/News";
 import { TouchableOpacity } from "react-native";
+import NotesModalForm from "../components/NotesModalForm";
+import Diary from "./Diary";
 
 const HomeNavigate = () => {
   const MainStack = createStackNavigator();
@@ -37,6 +39,19 @@ const HomeNavigate = () => {
         component={News}
         options={{ title: "Новини", headerTitleAlign: "center" }}
       />
+      <MainStack.Screen
+        name="NotesModalForm"
+        component={NotesModalForm}
+        options={{ title: "Занотувати думку", headerTitleAlign: "center" }}
+      />
+      {/* <MainStack.Screen
+        name="Diary"
+        component={Diary}
+        options={{
+          title: "Щоденник власних думок",
+          headerTitleAlign: "center",
+        }}
+      /> */}
       <MainStack.Screen
         name="Exercises"
         component={Exercises}
