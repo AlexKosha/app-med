@@ -45,7 +45,7 @@ export const getProfile = async () => {
 };
 
 export const updateUser = async (body) => {
-  const { data } = await instance.patch("/users/update", body);
+  const { data } = await instance.put("/users/update", body);
   return data;
 };
 

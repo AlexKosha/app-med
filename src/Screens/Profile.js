@@ -4,6 +4,8 @@ import * as SecureStore from "expo-secure-store";
 import {
   Image,
   ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
   Pressable,
   StyleSheet,
   Text,
@@ -17,14 +19,11 @@ import UserInfoForm from "../components/UserInfoForm";
 import { updateAvatar } from "../service/authService";
 
 const Profile = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-  });
+  // const [isModalVisible, setIsModalVisible] = useState(false);
+  const [user, setUser] = useState({ name: "", email: "", avatarURL: "" });
   const [avatarSource, setAvatarSource] = useState(null);
-  const [isChangePasswordModalVisible, setIsChangePasswordModalVisible] =
-    useState(false);
+  // const [isChangePasswordModalVisible, setIsChangePasswordModalVisible] =
+  //   useState(false);
 
   const changeAvatar = async (avatarURL) => {
     const formData = new FormData();
@@ -57,9 +56,9 @@ const Profile = () => {
     }
   };
 
-  const toggleChangePasswordModal = () => {
-    setIsChangePasswordModalVisible(!isChangePasswordModalVisible);
-  };
+  // const toggleChangePasswordModal = () => {
+  //   setIsChangePasswordModalVisible(!isChangePasswordModalVisible);
+  // };
 
   const getUserInfo = async () => {
     const user = await SecureStore.getItemAsync("user");
@@ -75,13 +74,11 @@ const Profile = () => {
 
   useEffect(() => {
     getUserInfo();
-    setIsModalVisible(false);
-    setIsChangePasswordModalVisible(false);
   }, []);
 
-  const toggleModal = () => {
-    setIsModalVisible(!isModalVisible);
-  };
+  // const toggleModal = () => {
+  //   setIsModalVisible(!isModalVisible);
+  // };
 
   return (
     <ImageBackground
@@ -90,35 +87,42 @@ const Profile = () => {
       }}
       style={styles.backImage}
     >
-      <TouchableOpacity style={styles.setting} onPress={() => toggleModal()}>
-        <IconSetting name="settings-outline" size={30} color="black" />
-      </TouchableOpacity>
-      <View style={styles.container}>
-        <View style={styles.centeredContent}>
-          <Image
-            source={
-              avatarSource || user.avatarURL
-                ? { uri: avatarSource ? avatarSource.uri : user.avatarURL }
-                : { uri: "https://via.placeholder.com/120" }
-            }
-            style={styles.avatar}
-          />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        // style={styles.inner}
+      >
+        {/* <TouchableOpacity style={styles.setting} onPress={() => toggleModal()}>
+          <IconSetting name="settings-outline" size={30} color="black" />
+        </TouchableOpacity> */}
+        <View style={styles.container}>
+          <View style={styles.centeredContent}>
+            <Image
+              source={
+                avatarSource || user.avatarURL
+                  ? { uri: avatarSource ? avatarSource.uri : user.avatarURL }
+                  : { uri: "https://via.placeholder.com/120" }
+              }
+              style={styles.avatar}
+            />
 
-          <Text style={styles.textName}>{user.name}</Text>
-          <Pressable onPress={selectImage} style={styles.btnAvatar}>
-            <Text>Змінити аватар</Text>
-          </Pressable>
+            <Text style={styles.textName}>{user.name}</Text>
+          </View>
         </View>
-      </View>
-      <MainModal isVisible={isModalVisible} onClose={toggleModal}>
+        {/* <MainModal isVisible={isModalVisible} onClose={toggleModal}>
         <UserInfoForm
           toggleModal={toggleModal}
           user={user}
           togglePasswordModal={toggleChangePasswordModal}
           getUserInfoStorega={getUserInfo}
         />
-      </MainModal>
-      <MainModal
+      </MainModal> */}
+        {user.name && (
+          <UserInfoForm user={user} getUserInfoStorega={getUserInfo} />
+        )}
+        <Pressable onPress={selectImage} style={styles.btnAvatar}>
+          <Text style={{ textAlign: "center" }}>Змінити аватар</Text>
+        </Pressable>
+        {/* <MainModal
         isVisible={isChangePasswordModalVisible}
         onClose={toggleChangePasswordModal}
       >
@@ -126,7 +130,9 @@ const Profile = () => {
           toggleModal={toggleChangePasswordModal}
           togglePasswordModal={toggleChangePasswordModal}
         />
-      </MainModal>
+      </MainModal> */}
+        <PasswordForm />
+      </KeyboardAvoidingView>
     </ImageBackground>
   );
 };
@@ -134,6 +140,8 @@ const Profile = () => {
 styles = StyleSheet.create({
   backImage: {
     flex: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   setting: {
     position: "absolute",
@@ -141,7 +149,7 @@ styles = StyleSheet.create({
     right: 10,
   },
   container: {
-    paddingTop: 50,
+    paddingTop: 40,
   },
   centeredContent: {
     alignItems: "center",
@@ -168,7 +176,7 @@ styles = StyleSheet.create({
   },
   textName: {
     fontSize: 30,
-    marginTop: 10,
+    marginVertical: 10,
   },
   infoContainer: {
     justifyContent: "center",
@@ -217,6 +225,7 @@ styles = StyleSheet.create({
     borderRadius: 100,
     paddingVertical: 5,
     paddingHorizontal: 10,
+    marginVertical: 10,
   },
   btnMargin: {
     marginRight: 30,

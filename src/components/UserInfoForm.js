@@ -4,12 +4,7 @@ import * as SecureStore from "expo-secure-store";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { updateUser } from "../service/authService";
 
-const UserInfoForm = ({
-  toggleModal,
-  user,
-  togglePasswordModal,
-  getUserInfoStorega,
-}) => {
+const UserInfoForm = ({ user, getUserInfoStorega }) => {
   const [userInfo, setUserInfo] = useState({
     name: user.name || "",
     email: user.email || "",
@@ -82,14 +77,14 @@ const UserInfoForm = ({
           </Pressable>
         </View>
       )}
-      <View style={styles.btnContainer}>
+      {/* <View style={styles.btnContainer}>
         <Pressable
           style={[styles.btnAvatar, styles.btnMargin]}
           onPress={togglePasswordModal}
         >
           <Text>Змінити пароль</Text>
         </Pressable>
-      </View>
+      </View> */}
     </View>
   );
 };
