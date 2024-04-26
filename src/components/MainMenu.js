@@ -61,14 +61,14 @@ const MainMenu = () => {
       }}
       style={styles.container}
     >
-      <Pressable style={styles.logOut} onPress={handleLogOut}>
-        <Icon name="sign-out" size={30} color="black" />
-      </Pressable>
       <Image
         source={require("../img/logo.png")}
         style={styles.image}
         resizeMode="contain"
       />
+      <Pressable style={styles.logOut} onPress={handleLogOut}>
+        <Icon name="sign-out" size={30} color="black" />
+      </Pressable>
       <Pressable style={styles.btn} onPress={handleNavigateToQuotes}>
         <LinearGradient
           style={styles.gradiend}
@@ -121,8 +121,8 @@ const styles = StyleSheet.create({
   },
   logOut: {
     position: "absolute",
-    top: 30,
-    right: 10,
+    top: 50,
+    right: 20,
   },
   image: {
     width: 350,

@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import IconSetting from "react-native-vector-icons/Ionicons";
 import * as SecureStore from "expo-secure-store";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { updateUser } from "../service/authService";
 
 const UserInfoForm = ({
@@ -27,70 +34,74 @@ const UserInfoForm = ({
       console.log(error);
     }
   };
-
+  const toggleTest = () => {
+    toggleModal();
+    togglePasswordModal();
+  };
   return (
-    <View style={styles.infoContainer}>
-      {isChangeInfo ? (
-        <View>
-          <TextInput
-            style={styles.alignStart}
-            placeholder="Ім'я"
-            value={userInfo.name}
-            onChangeText={(text) =>
-              setUserInfo((prevNote) => ({ ...prevNote, name: text }))
-            }
-          />
-
-          <TextInput
-            style={styles.alignStart}
-            placeholder="Email"
-            value={userInfo.email}
-            onChangeText={(text) =>
-              setUserInfo((prevNote) => ({ ...prevNote, email: text }))
-            }
-          />
-
-          <Pressable onPress={updateUserInfo} style={styles.changeInfoBtn}>
-            <IconSetting
-              name="checkbox-outline"
-              size={30}
-              color="black"
-              style={styles.changeInfoBtn}
+    <TouchableWithoutFeedback onPress={toggleModal}>
+      <View style={styles.infoContainer}>
+        {isChangeInfo ? (
+          <View>
+            <TextInput
+              style={styles.alignStart}
+              placeholder="Ім'я"
+              value={userInfo.name}
+              onChangeText={(text) =>
+                setUserInfo((prevNote) => ({ ...prevNote, name: text }))
+              }
             />
-          </Pressable>
-        </View>
-      ) : (
-        <View>
-          <View style={styles.row}>
-            <Text style={[styles.label, styles.alignStart]}>Ім'я:</Text>
-            <Text style={styles.value}>{userInfo.name}</Text>
+
+            <TextInput
+              style={styles.alignStart}
+              placeholder="Email"
+              value={userInfo.email}
+              onChangeText={(text) =>
+                setUserInfo((prevNote) => ({ ...prevNote, email: text }))
+              }
+            />
+            <Pressable onPress={updateUserInfo} style={styles.changeInfoBtn}>
+              <IconSetting
+                name="checkbox-outline"
+                size={30}
+                color="black"
+                style={styles.changeInfoBtn}
+              />
+            </Pressable>
           </View>
-          <View style={styles.row}>
-            <Text style={[styles.label, styles.alignStart]}>email:</Text>
-            <Text style={styles.value}>{userInfo.email}</Text>
+        ) : (
+          <View>
+            <View style={styles.row}>
+              <Text style={[styles.label, styles.alignStart]}>Ім'я:</Text>
+              <Text style={styles.value}>{userInfo.name}</Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={[styles.label, styles.alignStart]}>email:</Text>
+              <Text style={styles.value}>{userInfo.email}</Text>
+            </View>
+            <Pressable
+              onPress={() => setIsChangeInfo(true)}
+              style={styles.changeInfoBtn}
+            >
+              <IconSetting
+                name="settings-outline"
+                size={30}
+                color="black"
+                style={styles.changeInfoBtn}
+              />
+            </Pressable>
           </View>
+        )}
+        <View style={styles.btnContainer}>
           <Pressable
-            onPress={() => setIsChangeInfo(true)}
-            style={styles.changeInfoBtn}
+            style={[styles.btnAvatar, styles.btnMargin]}
+            onPress={toggleTest}
           >
-            <IconSetting
-              name="settings-outline"
-              size={30}
-              color="black"
-              style={styles.changeInfoBtn}
-            />
+            <Text>Змінити пароль</Text>
           </Pressable>
         </View>
-      )}
-      <View style={styles.btnContainer}>
-        <Pressable
-          style={[styles.btnAvatar, styles.btnMargin]}
-          onPress={togglePasswordModal}
-        >
-          <Text>Змінити пароль</Text>
-        </Pressable>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

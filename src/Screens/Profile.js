@@ -41,6 +41,8 @@ const Profile = () => {
 
   useEffect(() => {
     getUserInfo();
+    setIsModalVisible(false);
+    setIsChangePasswordModalVisible(false);
   }, []);
 
   const toggleModal = () => {
@@ -54,9 +56,6 @@ const Profile = () => {
       }}
       style={styles.backImage}
     >
-      <TouchableOpacity style={styles.setting} onPress={() => toggleModal()}>
-        <IconSetting name="settings-outline" size={30} color="black" />
-      </TouchableOpacity>
       <View style={styles.container}>
         <View style={styles.centeredContent}>
           <Image
@@ -70,6 +69,9 @@ const Profile = () => {
           <Text style={styles.textName}>{user.name}</Text>
         </View>
       </View>
+      <Pressable style={styles.setting} onPress={() => toggleModal()}>
+        <IconSetting name="settings-outline" size={30} color="black" />
+      </Pressable>
       <MainModal isVisible={isModalVisible} onClose={toggleModal}>
         <UserInfoForm
           toggleModal={toggleModal}
@@ -77,69 +79,6 @@ const Profile = () => {
           togglePasswordModal={toggleChangePasswordModal}
           getUserInfoStorega={getUserInfo}
         />
-        {/* <View style={styles.infoContainer}>
-          {isChangeInfo ? (
-            <View>
-              <TextInput
-                style={styles.alignStart}
-                placeholder="Ім'я"
-                value={userInfo.name}
-                onChangeText={(text) =>
-                  setUserInfo((prevNote) => ({ ...prevNote, name: text }))
-                }
-              />
-
-              <TextInput
-                style={styles.alignStart}
-                placeholder="Email"
-                value={userInfo.email}
-                onChangeText={(text) =>
-                  setUserInfo((prevNote) => ({ ...prevNote, email: text }))
-                }
-              />
-
-              <Pressable onPress={updateUserInfo} style={styles.changeInfoBtn}>
-                <IconSetting
-                  name="checkbox-outline"
-                  size={30}
-                  color="black"
-                  style={styles.changeInfoBtn}
-                />
-              </Pressable>
-            </View>
-          ) : (
-            <View>
-              <View style={styles.row}>
-                <Text style={[styles.label, styles.alignStart]}>Ім'я:</Text>
-                <Text style={styles.value}>{userInfo.name}</Text>
-              </View>
-              <View style={styles.row}>
-                <Text style={[styles.label, styles.alignStart]}>email:</Text>
-                <Text style={styles.value}>{userInfo.email}</Text>
-              </View>
-              <Pressable
-                onPress={() => setIsChangeInfo(true)}
-                style={styles.changeInfoBtn}
-              >
-                <IconSetting
-                  name="settings-outline"
-                  size={30}
-                  color="black"
-                  style={styles.changeInfoBtn}
-                />
-              </Pressable>
-            </View>
-          )}
-
-          <View style={styles.btnContainer}>
-            <Pressable
-              style={[styles.btnAvatar, styles.btnMargin]}
-              onPress={toggleChangePasswordModal}
-            >
-              <Text>Змінити пароль</Text>
-            </Pressable>
-          </View>
-        </View> */}
       </MainModal>
       <MainModal
         isVisible={isChangePasswordModalVisible}
@@ -149,47 +88,6 @@ const Profile = () => {
           toggleModal={toggleChangePasswordModal}
           togglePasswordModal={toggleChangePasswordModal}
         />
-        {/* <View style={styles.infoContainer}>
-          <View>
-            <TextInput
-              style={styles.alignStart}
-              placeholder="Старий пароль"
-              value={userPass.password}
-              onChangeText={(text) =>
-                setUserPass((prevNote) => ({ ...prevNote, password: text }))
-              }
-            />
-
-            <TextInput
-              style={styles.alignStart}
-              placeholder="Новий пароль"
-              value={userPass.newPassword}
-              onChangeText={(text) =>
-                setUserPass((prevNote) => ({ ...prevNote, newPassword: text }))
-              }
-            />
-
-            <Pressable onPress={updateUserPass} style={styles.changeInfoBtn}>
-              <IconSetting
-                name="checkbox-outline"
-                size={30}
-                color="black"
-                style={styles.submitBtn}
-              />
-            </Pressable>
-            <Pressable
-              onPress={toggleChangePasswordModal}
-              style={styles.changeInfoBtn}
-            >
-              <IconSetting
-                name="close"
-                size={30}
-                color="black"
-                style={styles.closeBtn}
-              />
-            </Pressable>
-          </View>
-        </View> */}
       </MainModal>
     </ImageBackground>
   );
@@ -201,8 +99,8 @@ styles = StyleSheet.create({
   },
   setting: {
     position: "absolute",
-    top: 30,
-    right: 10,
+    top: 50,
+    right: 20,
   },
   container: {
     paddingTop: 50,

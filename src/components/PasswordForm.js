@@ -18,6 +18,7 @@ const PasswordForm = ({ toggleModal, togglePasswordModal }) => {
       console.log(error);
     }
   };
+
   return (
     <View style={styles.infoContainer}>
       <View>
@@ -42,7 +43,7 @@ const PasswordForm = ({ toggleModal, togglePasswordModal }) => {
         <Pressable onPress={updateUserPass} style={styles.submitBtn}>
           <IconSetting name="checkbox-outline" size={30} color="black" />
         </Pressable>
-        <Pressable onPress={() => toggleModal()} style={styles.closeBtn}>
+        <Pressable onPress={togglePasswordModal} style={styles.closeBtn}>
           <IconSetting name="close" size={30} color="black" />
         </Pressable>
       </View>

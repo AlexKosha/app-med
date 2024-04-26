@@ -5,7 +5,7 @@ export const instance = axios.create({
 });
 
 export const setToken = (token) => {
-  instance.defaults.headers.common["Authorization"];
+  instance.defaults.headers.common["Authorization"] = token;
 };
 
 export const deleteToken = () => {
@@ -44,11 +44,16 @@ export const getProfile = async () => {
 };
 
 export const updateUser = async (body) => {
-  const { data } = await instance.patch("/users/update", body);
+  const { data } = await instance.put("/users/update", body);
   return data;
 };
 
 export const verify = async () => {
   const data = await instance.post("/users/verify");
   return data;
+};
+
+export const updatePassword = async (body) => {
+  await instance.patch("/users/updatePass", body);
+  return;
 };
