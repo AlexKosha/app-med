@@ -11,12 +11,7 @@ import {
 } from "react-native";
 import { updateUser } from "../service/authService";
 
-const UserInfoForm = ({
-  toggleModal,
-  user,
-  togglePasswordModal,
-  getUserInfoStorega,
-}) => {
+const UserInfoForm = ({ user, getUserInfoStorega }) => {
   const [userInfo, setUserInfo] = useState({
     name: user.name || "",
     email: user.email || "",
@@ -102,6 +97,7 @@ const UserInfoForm = ({
         </View>
       </View>
     </TouchableWithoutFeedback>
+
   );
 };
 

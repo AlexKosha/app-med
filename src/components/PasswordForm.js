@@ -3,7 +3,7 @@ import IconSetting from "react-native-vector-icons/Ionicons";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { updatePassword } from "../service/authService";
 
-const PasswordForm = ({ toggleModal, togglePasswordModal }) => {
+const PasswordForm = () => {
   const [userPass, setUserPass] = useState({
     password: "",
     newPassword: "",
@@ -13,7 +13,6 @@ const PasswordForm = ({ toggleModal, togglePasswordModal }) => {
     try {
       await updatePassword(userPass);
       console.log("пароль обновлено");
-      togglePasswordModal();
     } catch (error) {
       console.log(error);
     }
@@ -43,6 +42,7 @@ const PasswordForm = ({ toggleModal, togglePasswordModal }) => {
         <Pressable onPress={updateUserPass} style={styles.submitBtn}>
           <IconSetting name="checkbox-outline" size={30} color="black" />
         </Pressable>
+
         <Pressable onPress={togglePasswordModal} style={styles.closeBtn}>
           <IconSetting name="close" size={30} color="black" />
         </Pressable>
@@ -53,6 +53,7 @@ const PasswordForm = ({ toggleModal, togglePasswordModal }) => {
 
 styles = StyleSheet.create({
   infoContainer: {
+    position: "relative",
     justifyContent: "center",
     alignContent: "center",
     paddingTop: 20,
@@ -71,13 +72,8 @@ styles = StyleSheet.create({
   },
   submitBtn: {
     position: "absolute",
-    right: 20,
-    top: -5,
-  },
-  closeBtn: {
-    position: "absolute",
-    right: 20,
-    top: 25,
+    right: 40,
+    top: 10,
   },
 });
 
