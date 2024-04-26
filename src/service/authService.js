@@ -1,24 +1,26 @@
 import axios from "axios";
 
 export const instance = axios.create({
-  baseURL: "https://med-app-back.onrender.com",
+  // baseURL: "https://med-app-back.onrender.com",
+  baseURL: "http://172.20.10.2:2025",
 });
 
 export const setToken = (token) => {
-  instance.defaults.headers.common["Authorization"];
+  instance.defaults.headers.common["Authorization"] = token;
 };
 
 export const deleteToken = () => {
   instance.defaults.headers.common.Authorization = "";
 };
 
-export const singUp = async (body) => {
-  const { data } = await instance.post("/users/register", body, {
+export const singUp = async (formData) => {
+  const { data } = await instance.post("/users/register", formData, {
     headers: {
       Accept: "application/json",
       "Content-Type": "multipart/form-data",
     },
   });
+
   setToken(`Bearer ${data.token}`);
   return data;
 };
@@ -46,6 +48,16 @@ export const getProfile = async () => {
 export const updateUser = async (body) => {
   const { data } = await instance.patch("/users/update", body);
   return data;
+};
+
+export const updateAvatar = async (avatar) => {
+  const res = await instance.patch("/users/updateAvatar", avatar, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return res;
 };
 
 export const verify = async () => {

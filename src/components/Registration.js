@@ -62,7 +62,7 @@ const RegistrationScreen = () => {
     newUser = {
       name,
       email,
-      avatarSource,
+      avatarURL: avatarSource,
       password,
     };
     try {
