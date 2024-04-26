@@ -1,8 +1,7 @@
 import axios from "axios";
 
 export const instance = axios.create({
-  // baseURL: "https://med-app-back.onrender.com",
-  baseURL: "http://172.20.10.2:2025",
+  baseURL: "https://med-app-back.onrender.com",
 });
 
 export const setToken = (token) => {
@@ -58,6 +57,10 @@ export const updateAvatar = async (avatar) => {
     },
   });
   return res;
+};
+export const updatePassword = async (body) => {
+  await instance.patch("/users/updatePassword", body);
+  return;
 };
 
 export const verify = async () => {

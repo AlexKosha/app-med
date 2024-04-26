@@ -52,7 +52,6 @@ const Profile = () => {
       quality: 1,
     });
     if (!result.canceled) {
-      console.log(result.assets[0], "1");
       setAvatarSource(result.assets[0]);
       changeAvatar(result.assets[0]);
     }
