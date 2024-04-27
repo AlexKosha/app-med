@@ -25,8 +25,12 @@ const Diary = () => {
   const navigation = useNavigation();
 
   const openUpdateModal = (note) => {
-    setIsVisibleUpdateNoteModal(true);
-    setCurrentNote(note);
+    console.log(note);
+    navigation.navigate("NotesModalForm", {
+      leftButtonTitle: "Змінити",
+      onCreateNote: updateNote,
+      note,
+    });
   };
   const openModal = () => {
     navigation.navigate("NotesModalForm", {
@@ -39,6 +43,7 @@ const Diary = () => {
       },
     });
   };
+
   const addNote = (newNote) => {
     if (newNote.title.trim() === "" || newNote.description.trim() === "") {
       Alert.alert("Ой лишенько!", "Тема та вміст нотатки є обов'язковими", [
@@ -102,7 +107,6 @@ const Diary = () => {
 
     setNotes([...filteredNotes, updatedNote]);
     navigation.navigate("Diary");
-    // setIsVisibleUpdateNoteModal(false);
   };
 
   return (
@@ -146,14 +150,6 @@ const Diary = () => {
           <Icon name="pluscircleo" size={20} color={"black"} />
         </Text>
       </TouchableOpacity>
-      {/* {isVisibleCreateNoteModal &&
-        renderAddNoteModalComponent({
-          id: Math.random().toString(),
-          title: "",
-          description: "",
-        })}
-      {isVisibleUpdateNoteModal !== 0 &&
-        renderUpdateNoteModalComponent(currentNote)} */}
     </View>
   );
 };
