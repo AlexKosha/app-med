@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useWindowDimensions } from "react-native";
+import React, { useEffect, useState } from "react";
 import {
   TextInput,
   View,
@@ -15,26 +14,50 @@ import {
 const NotesModalForm = ({ route }) => {
   const { leftButtonTitle, onCreateNote, note } = route.params;
   const [newNote, setNewNote] = useState({
-    id: note.id,
-    title: note.title || "",
-    description: note.description || "",
+    id: "",
+    title: "",
+    description: "",
   });
+
+  useEffect(() => {
+    console.log(1);
+    setNewNote({
+      id: note.id || "",
+      title: note.title || "",
+      description: note.description || "",
+    });
+  }, [note]);
 
   const func = () => {
     const noteNote = { ...newNote };
     setNewNote({
-      id: note.id,
-      title: note.title || "",
-      description: note.description || "",
-    });
+      id: "",
+      title: "",
+      description: "",
+    }); // Очистити форму
     onCreateNote(noteNote);
   };
+  // let noteObject = { ...note };
+  // console.log(noteObject);
+
+  // const func = () => {
+  //   const noteNote = { ...newNote };
+  //   noteObject = { id: "", title: "", description: "" };
+  //   setNewNote({
+  //     id: noteObject.id || "",
+  //     title: noteObject.title || "",
+  //     description: noteObject.description || "",
+  //   });
+  //   onCreateNote(noteNote);
+  // };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.modalContent}>
         <KeyboardAvoidingView
           behavior={Platform.OS == "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.OS === "android" ? 100 : 0}
+          style={styles.inner}
         >
           <TextInput
             style={styles.titleInput}
@@ -95,7 +118,10 @@ const styles = StyleSheet.create({
     flex: 1,
     // width: "100%",
   },
-
+  inner: {
+    flex: 1,
+    // justifyContent: "flex-end",
+  },
   titleInput: {
     fontSize: 20,
     fontFamily: "Montserrat-Bold",
@@ -112,6 +138,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginBottom: 10,
+    textAlignVertical: "top",
   },
   saveButton: {
     padding: 7,

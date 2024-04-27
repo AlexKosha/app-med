@@ -7,6 +7,7 @@ import Profile from "./Profile";
 import Favorite from "./Favorite";
 import HomeNavigate from "./HomeNavigate";
 import Diary from "./Diary";
+import DiaryNavigate from "./DiaryNavigate";
 
 const Tab = createBottomTabNavigator();
 const TabNavigate = () => {
@@ -77,11 +78,10 @@ const TabNavigate = () => {
       />
 
       <Tab.Screen
-        name="Diary"
-        component={Diary}
+        name="DiaryNavigate"
+        component={DiaryNavigate}
         options={() => ({
-          title: "Щоденник власних думок",
-          headerTitleAlign: "center",
+          headerShown: false,
           tabBarLabel: "",
           tabBarIcon: ({ size, focused }) => (
             <View style={{ alignItems: "center", marginTop: focused ? -7 : 0 }}>
