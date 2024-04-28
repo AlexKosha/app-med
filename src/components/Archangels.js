@@ -58,7 +58,7 @@ const Archangels = () => {
     <View>
       <View style={styles.headerContainer}>
         <Image source={require("../img/logo.png")} style={styles.imageLogo} />
-        <Pressable onPress={handleNavigationToHome}>
+        <Pressable onPress={handleNavigationToHome} style={{ marginTop: 20 }}>
           <LinearGradient
             style={styles.btnGoBack}
             colors={["orange", "white", "orange"]}
@@ -68,8 +68,14 @@ const Archangels = () => {
             <Text style={styles.positionPass}>Ангельська терапія</Text>
           </LinearGradient>
         </Pressable>
-      </View>
-      <Text style={styles.TextBtn}>...............Text...............</Text>
+
+      <Text style={styles.TextBtn}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
+        sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+        ut labore et dolore magna aliqua.
+      </Text>
+
       <View style={styles.imageContainer}>
         <Pressable onPress={() => handleTherapySelection(FIRST_THERAPY)}>
           <View style={{ borderRadius: 16, overflow: "hidden" }}>
@@ -138,6 +144,7 @@ const styles = StyleSheet.create({
   imageLogo: {
     width: 150,
     height: 170,
+    marginTop: 20,
   },
   btnGoBack: {
     width: 170,

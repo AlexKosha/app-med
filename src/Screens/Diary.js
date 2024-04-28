@@ -6,90 +6,21 @@ import {
   StyleSheet,
   FlatList,
   Alert,
-  KeyboardAvoidingView,
-  Platform,
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
-// import MainModal from "../components/Modal";
-import DiaryModal from "../components/DiaryModal";
-import NotesModalForm from "../components/NotesModalForm";
 import { useNavigation } from "@react-navigation/native";
 
 const Diary = () => {
-  const [isVisibleCreateNoteModal, setIsVisibleCreateNoteModal] =
-    useState(false);
-  const [isVisibleUpdateNoteModal, setIsVisibleUpdateNoteModal] =
-    useState(false);
   const [notes, setNotes] = useState([]);
-  const [currentNote, setCurrentNote] = useState({});
   const navigation = useNavigation();
 
-  const openUpdateModal = (note) => {
-    console.log(note);
-    navigation.navigate("NotesModalForm", {
-      leftButtonTitle: "Змінити",
-      onCreateNote: updateNote,
-      note,
-    });
-  };
-  const openModal = () => {
-    navigation.navigate("NotesModalForm", {
-      leftButtonTitle: "Додати",
-      onCreateNote: addNote,
-      note: {
-        id: Math.random().toString(),
-        title: "",
-        description: "",
-      },
-    });
-  };
-
   const addNote = (newNote) => {
-    if (newNote.title.trim() === "" || newNote.description.trim() === "") {
-      Alert.alert("Ой лишенько!", "Тема та вміст нотатки є обов'язковими", [
-        { text: "Закрити" },
-      ]);
-      return;
-    }
     setNotes((prevNotes) => [...prevNotes, newNote]);
-    // setIsVisibleCreateNoteModal(false);
     navigation.navigate("Diary");
   };
 
-  const handleDeleteNote = (id) => {
+  const deleteNote = (id) => {
     setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
-  };
-
-  const renderAddNoteModalComponent = (note) => {
-    return (
-      // <DiaryModal
-      //   isVisible={isVisibleCreateNoteModal}
-      //   onClose={() => setIsVisibleCreateNoteModal(false)}
-      // >
-      <NotesModalForm
-        leftButtonTitle={"Додати"}
-        onCreateNote={addNote}
-        note={note}
-        onClose={() => navigation.navigate("Diary")}
-      />
-      // </DiaryModal>
-    );
-  };
-
-  const renderUpdateNoteModalComponent = (note) => {
-    return (
-      // <DiaryModal
-      //   isVisible={isVisibleUpdateNoteModal}
-      //   onClose={() => setIsVisibleUpdateNoteModal(false)}
-      // >
-      <NotesModalForm
-        leftButtonTitle={"Оновити"}
-        onCreateNote={updateNote}
-        note={note}
-        onClose={() => navigation.navigate("Diary")}
-      />
-      // </DiaryModal>
-    );
   };
 
   const updateNote = (updatedNote) => {
@@ -107,6 +38,26 @@ const Diary = () => {
 
     setNotes([...filteredNotes, updatedNote]);
     navigation.navigate("Diary");
+  };
+
+  const openModal = () => {
+    navigation.navigate("NotesModalForm", {
+      leftButtonTitle: "Додати",
+      onCreateNote: addNote,
+      note: {
+        id: Math.random().toString(),
+        title: "",
+        description: "",
+      },
+    });
+  };
+
+  const openUpdateModal = (note) => {
+    navigation.navigate("NotesModalForm", {
+      leftButtonTitle: "Змінити",
+      onCreateNote: updateNote,
+      note,
+    });
   };
 
   return (
@@ -131,7 +82,7 @@ const Diary = () => {
                   {item.description}
                 </Text>
               </View>
-              <TouchableOpacity onPress={() => handleDeleteNote(item.id)}>
+              <TouchableOpacity onPress={() => deleteNote(item.id)}>
                 <Text style={styles.deleteButton}>
                   <Icon name="delete" size={20} color={"black"} />
                 </Text>
