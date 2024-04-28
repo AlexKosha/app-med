@@ -69,9 +69,7 @@ const Archangels = () => {
           </LinearGradient>
         </Pressable>
       </View>
-      <Text style={{ textAlign: "center" }}>
-        ...............Text...............
-      </Text>
+      <Text style={styles.TextBtn}>...............Text...............</Text>
       <View style={styles.imageContainer}>
         <Pressable onPress={() => handleTherapySelection(FIRST_THERAPY)}>
           <View style={{ borderRadius: 16, overflow: "hidden" }}>
@@ -104,7 +102,7 @@ const Archangels = () => {
             end={{ x: 1, y: 0 }}
             style={styles.gradient}
           >
-            <Text style={styles.positionPass}>Медитації</Text>
+            <Text style={styles.TextBtn}>Медитації</Text>
           </LinearGradient>
         </Pressable>
         <Pressable style={styles.btn} onPress={handleNavigationToHome}>
@@ -114,7 +112,7 @@ const Archangels = () => {
             end={{ x: 1, y: 0 }}
             style={styles.gradient}
           >
-            <Text style={styles.positionPass}>Навчання</Text>
+            <Text style={styles.TextBtn}>Навчання</Text>
           </LinearGradient>
         </Pressable>
       </View>
@@ -152,6 +150,12 @@ const styles = StyleSheet.create({
   positionPass: {
     textAlign: "center",
     fontSize: 20,
+    fontFamily: "Montserrat-Bold",
+  },
+  TextBtn: {
+    textAlign: "center",
+    fontSize: 20,
+    fontFamily: "Montserrat-Medium",
   },
   imageContainer: {
     flexDirection: "row",

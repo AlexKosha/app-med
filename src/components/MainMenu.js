@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
   positionPass: {
     textAlign: "center",
     fontSize: 24,
+    fontFamily: "Montserrat-Medium",
   },
 });
 

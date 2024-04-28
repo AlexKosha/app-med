@@ -7,11 +7,6 @@ import * as Font from "expo-font";
 import Registration from "./src/components/Registration";
 import Login from "./src/components/Login";
 import IntroScreen from "./src/Screens/IntroScreen";
-import Quotes from "./src/components/Quotes";
-import Home from "./src/Screens/TabNavigate";
-import Archangels from "./src/components/Archangels";
-import Meditation from "./src/components/Meditation";
-import Exercises from "./src/components/Exercises";
 import TabNavigate from "./src/Screens/TabNavigate";
 
 const fetchFonts = () => {

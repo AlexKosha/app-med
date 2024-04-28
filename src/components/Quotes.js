@@ -10,13 +10,10 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import { imagesQuotes } from "../helpers/imagesQuotes";
 import Icon from "react-native-vector-icons/AntDesign";
 import { LinearGradient } from "expo-linear-gradient";
+import { imagesQuotes } from "../helpers/imagesQuotes";
 import MainModal from "./Modal";
-
-// чому на айфоін не вибиває клавіатура
-// додати лоадер у апп 40 рядок
 
 const Quotes = () => {
   const navigation = useNavigation();
@@ -61,7 +58,7 @@ const Quotes = () => {
         </Pressable>
       </View>
       <View style={styles.quotesContainer}>
-        <Text style={styles.positionPass}>Вибери картинку</Text>
+        <Text style={styles.headerText}>Вибери картинку</Text>
         <FlatList
           data={imagesQuotes}
           keyExtractor={(item) => item}
@@ -91,7 +88,7 @@ const Quotes = () => {
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
           >
-            <Text style={styles.positionPass}>Автоматичне відправлення</Text>
+            <Text style={styles.headerText}>Автоматичне відправлення</Text>
           </LinearGradient>
         </Pressable>
       </View>
@@ -123,6 +120,12 @@ const styles = StyleSheet.create({
   positionPass: {
     textAlign: "center",
     fontSize: 20,
+    fontFamily: "Montserrat-Bold",
+  },
+  headerText: {
+    textAlign: "center",
+    fontSize: 20,
+    fontFamily: "Montserrat-Medium",
   },
   quotesContainer: {
     flex: 2,
@@ -181,7 +184,7 @@ const styles = StyleSheet.create({
   buttonText: {
     textAlign: "center",
     fontSize: 16,
-    fontWeight: "bold",
+    fontFamily: "Montserrat-Bold",
   },
 });
 

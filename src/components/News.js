@@ -84,12 +84,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontFamily: "Montserrat-Bold",
     marginBottom: 5,
   },
   description: {
     fontSize: 16,
     color: "#666",
+    fontFamily: "Montserrat-Bold",
   },
   modalContainer: {
     position: "relative",
