@@ -29,7 +29,6 @@ const Archangels = () => {
       try {
         const data = await TherapyService.getTherapy();
         setTherapy(getTwoRandomTherapies(data));
-        console.log(1);
       } catch (error) {
         console.log(error);
       }
@@ -55,7 +54,7 @@ const Archangels = () => {
   };
 
   return (
-    <View>
+    <View style={{ paddingHorizontal: 15 }}>
       <View style={styles.headerContainer}>
         <Image source={require("../img/logo.png")} style={styles.imageLogo} />
         <Pressable onPress={handleNavigationToHome} style={{ marginTop: 20 }}>
@@ -68,8 +67,8 @@ const Archangels = () => {
             <Text style={styles.positionPass}>Ангельська терапія</Text>
           </LinearGradient>
         </Pressable>
-
-      <Text style={styles.TextBtn}>
+      </View>
+      <Text style={styles.textBtn}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
         sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
@@ -108,7 +107,7 @@ const Archangels = () => {
             end={{ x: 1, y: 0 }}
             style={styles.gradient}
           >
-            <Text style={styles.TextBtn}>Медитації</Text>
+            <Text style={styles.textBtn}>Медитації</Text>
           </LinearGradient>
         </Pressable>
         <Pressable style={styles.btn} onPress={handleNavigationToHome}>
@@ -118,7 +117,7 @@ const Archangels = () => {
             end={{ x: 1, y: 0 }}
             style={styles.gradient}
           >
-            <Text style={styles.TextBtn}>Навчання</Text>
+            <Text style={styles.textBtn}>Навчання</Text>
           </LinearGradient>
         </Pressable>
       </View>
@@ -137,7 +136,7 @@ const Archangels = () => {
 const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: "row",
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
     justifyContent: "space-evenly",
     alignItems: "center",
   },
@@ -159,7 +158,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: "Montserrat-Bold",
   },
-  TextBtn: {
+  textBtn: {
     textAlign: "center",
     fontSize: 20,
     fontFamily: "Montserrat-Medium",
@@ -169,7 +168,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 40,
+    paddingHorizontal: 20,
   },
   imageBtn: {
     width: 150,
