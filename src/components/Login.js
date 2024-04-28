@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
+    fontFamily: "Montserrat-Medium",
   },
   container: {
     position: "relative",
@@ -175,6 +176,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "#F6F6F6",
+    fontFamily: "Montserrat-Regular",
     height: 40,
     width: "100%",
     height: 50,
@@ -193,6 +195,7 @@ const styles = StyleSheet.create({
     left: 0,
     color: "red",
     fontSize: 12,
+    fontFamily: "Montserrat-Regular",
   },
   errorTextPassword: {
     color: "red",
@@ -200,11 +203,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 50,
     left: 0,
+    fontFamily: "Montserrat-Regular",
   },
-  positionPass: {
+  showPasswordText: {
     position: "absolute",
     bottom: 16,
     right: 16,
+    fontFamily: "Montserrat-Regular",
   },
   button: {
     backgroundColor: "#FF6C00",
@@ -228,6 +233,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
+    fontFamily: "Montserrat-Bold",
   },
   textContainer: {
     flexDirection: "row",
@@ -240,12 +246,14 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 16,
     lineHeight: 16,
+    fontFamily: "Montserrat-Regular",
   },
   logIn: {
     fontSize: 16,
     color: "blue",
     textDecorationLine: "underline",
     lineHeight: 16,
+    fontFamily: "Montserrat-Bold",
   },
 });
 

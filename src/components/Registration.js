@@ -247,6 +247,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
+    fontFamily: "Montserrat-Medium",
   },
   container: {
     position: "relative",
@@ -272,6 +273,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
     marginBottom: 16,
+    fontFamily: "Montserrat-Regular",
   },
   lastInput: {
     marginBottom: 0,
@@ -282,6 +284,7 @@ const styles = StyleSheet.create({
     left: 0,
     fontSize: 12,
     color: "red",
+    fontFamily: "Montserrat-Regular",
   },
   errorTextEmail: {
     position: "absolute",
@@ -289,6 +292,7 @@ const styles = StyleSheet.create({
     left: 0,
     color: "red",
     fontSize: 12,
+    fontFamily: "Montserrat-Regular",
   },
   errorTextPassword: {
     color: "red",
@@ -296,11 +300,13 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 40,
     left: 0,
+    fontFamily: "Montserrat-Regular",
   },
   positionPass: {
     position: "absolute",
     bottom: 11,
     right: 16,
+    fontFamily: "Montserrat-Regular",
   },
   button: {
     backgroundColor: "#FF6C00",
@@ -323,6 +329,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
+    fontFamily: "Montserrat-Regular",
   },
   textContainer: {
     flexDirection: "row",
@@ -331,7 +338,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   question: {
-    fontFamily: "Roboto",
+    fontFamily: "Montserrat-Regular",
     fontWeight: "400",
     fontSize: 16,
     lineHeight: 16,
@@ -341,6 +348,7 @@ const styles = StyleSheet.create({
     color: "blue",
     textDecorationLine: "underline",
     lineHeight: 16,
+    fontFamily: "Montserrat-Bold",
   },
   imageContainer: {
     position: "absolute",

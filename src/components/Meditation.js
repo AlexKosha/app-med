@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
   positionPass: {
     textAlign: "center",
     fontSize: 20,
+    fontFamily: "Montserrat-Bold",
   },
   scrollContainer: {
     paddingBottom: 30,

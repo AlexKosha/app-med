@@ -22,7 +22,7 @@ const PasswordForm = () => {
     <View style={styles.infoContainer}>
       <View>
         <TextInput
-          style={styles.alignStart}
+          style={styles.input}
           placeholder="Старий пароль"
           value={userPass.password}
           onChangeText={(text) =>
@@ -31,7 +31,7 @@ const PasswordForm = () => {
         />
 
         <TextInput
-          style={styles.alignStart}
+          style={styles.input}
           placeholder="Новий пароль"
           value={userPass.newPassword}
           onChangeText={(text) =>
@@ -58,8 +58,16 @@ styles = StyleSheet.create({
     borderRadius: 16,
     backgroundColor: "#FFFFFF",
   },
-  alignStart: {
-    minWidth: 80,
+  input: {
+    position: "relative",
+    width: "60%",
+    backgroundColor: "#F6F6F6",
+    borderColor: "#E8E8E8",
+    borderWidth: 1,
+    borderRadius: 20,
+    marginBottom: 5,
+    paddingHorizontal: 5,
+    fontFamily: "Montserrat-Regular",
   },
   changeInfoBtn: {
     position: "absolute",
@@ -69,7 +77,7 @@ styles = StyleSheet.create({
   submitBtn: {
     position: "absolute",
     right: 40,
-    top: 10,
+    top: 15,
   },
 });
 

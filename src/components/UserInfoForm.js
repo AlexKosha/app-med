@@ -35,7 +35,7 @@ const UserInfoForm = ({ user, getUserInfoStorega }) => {
       {isChangeInfo ? (
         <View>
           <TextInput
-            style={styles.alignStart}
+            style={styles.input}
             placeholder="Ім'я"
             value={userInfo.name}
             onChangeText={(text) =>
@@ -44,7 +44,7 @@ const UserInfoForm = ({ user, getUserInfoStorega }) => {
           />
 
           <TextInput
-            style={styles.alignStart}
+            style={styles.input}
             placeholder="Email"
             value={userInfo.email}
             onChangeText={(text) =>
@@ -104,37 +104,27 @@ styles = StyleSheet.create({
   label: {
     fontFamily: "Montserrat-Bold",
   },
+  value: {
+    fontFamily: "Montserrat-Regular",
+  },
   alignStart: {
     minWidth: 80,
+  },
+  input: {
+    position: "relative",
+    width: "60%",
+    backgroundColor: "#F6F6F6",
+    borderColor: "#E8E8E8",
+    borderWidth: 1,
+    borderRadius: 20,
+    marginBottom: 5,
+    paddingHorizontal: 5,
+    fontFamily: "Montserrat-Regular",
   },
   changeInfoBtn: {
     position: "absolute",
     right: 20,
     top: 5,
-  },
-  submitBtn: {
-    position: "absolute",
-    right: 20,
-    top: -5,
-  },
-  closeBtn: {
-    position: "absolute",
-    right: 20,
-    top: 25,
-  },
-  btnContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 20,
-  },
-  btnAvatar: {
-    backgroundColor: "#FF6C00",
-    borderRadius: 100,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-  },
-  btnMargin: {
-    marginRight: 30,
   },
 });
 

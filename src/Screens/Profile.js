@@ -98,7 +98,9 @@ const Profile = () => {
           <UserInfoForm user={user} getUserInfoStorega={getUserInfo} />
         )}
         <Pressable onPress={selectImage} style={styles.btnAvatar}>
-          <Text style={{ textAlign: "center" }}>Змінити аватар</Text>
+          <Text style={{ textAlign: "center", fontFamily: "Montserrat-Bold" }}>
+            Змінити аватар
+          </Text>
         </Pressable>
 
         <PasswordForm />
@@ -147,6 +149,7 @@ styles = StyleSheet.create({
   textName: {
     fontSize: 30,
     marginVertical: 10,
+    fontFamily: "Montserrat-Black",
   },
   infoContainer: {
     justifyContent: "center",
