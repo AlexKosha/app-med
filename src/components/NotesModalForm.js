@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import {
   TextInput,
@@ -9,10 +10,12 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native";
 
 const NotesModalForm = ({ route }) => {
   const { leftButtonTitle, onCreateNote, note } = route.params;
+  const navigation = useNavigation();
   const [newNote, setNewNote] = useState({
     id: "",
     title: "",
@@ -20,7 +23,6 @@ const NotesModalForm = ({ route }) => {
   });
 
   useEffect(() => {
-    console.log(1);
     setNewNote({
       id: note.id || "",
       title: note.title || "",
@@ -29,34 +31,33 @@ const NotesModalForm = ({ route }) => {
   }, [note]);
 
   const func = () => {
+    if (newNote.title.trim() === "" || newNote.description.trim() === "") {
+      Alert.alert("Ой лишенько!", "Тема та вміст нотатки є обов'язковими", [
+        { text: "Закрити" },
+      ]);
+      return;
+    }
     const noteNote = { ...newNote };
     setNewNote({
       id: "",
       title: "",
       description: "",
-    }); // Очистити форму
+    });
     onCreateNote(noteNote);
   };
-  // let noteObject = { ...note };
-  // console.log(noteObject);
 
-  // const func = () => {
-  //   const noteNote = { ...newNote };
-  //   noteObject = { id: "", title: "", description: "" };
-  //   setNewNote({
-  //     id: noteObject.id || "",
-  //     title: noteObject.title || "",
-  //     description: noteObject.description || "",
-  //   });
-  //   onCreateNote(noteNote);
-  // };
+  const onClose = () => {
+    navigation.navigate("Diary");
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.modalContent}>
         <KeyboardAvoidingView
           behavior={Platform.OS == "ios" ? "padding" : "height"}
-          keyboardVerticalOffset={Platform.OS === "android" ? 100 : 0}
+          keyboardVerticalOffset={
+            Platform.OS === "android" ? 100 : Platform.OS === "ios" ? 100 : 0
+          }
           style={styles.inner}
         >
           <TextInput
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
   },
   inner: {
     flex: 1,
-    // justifyContent: "flex-end",
+    paddingBottom: 10,
   },
   titleInput: {
     fontSize: 20,
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   descriptionInput: {
-    height: "80%",
+    height: "85%",
     borderWidth: 1,
     borderColor: "#ccc",
     padding: 10,
@@ -151,7 +152,6 @@ const styles = StyleSheet.create({
     padding: 7,
     borderRadius: 5,
     fontSize: 18,
-
     width: 70,
     backgroundColor: "red",
   },
