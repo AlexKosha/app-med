@@ -49,7 +49,7 @@ const Quotes = () => {
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Image source={require("../img/logo.png")} style={styles.imageLogo} />
-        <Pressable onPress={handleNavigationToHome}>
+        <Pressable onPress={handleNavigationToHome} style={{ marginTop: 20 }}>
           <LinearGradient
             style={styles.btnGoBack}
             colors={["orange", "white", "orange"]}
@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
   imageLogo: {
     width: 150,
     height: 170,
+    marginTop: 20,
   },
   btnGoBack: {
     width: 170,
