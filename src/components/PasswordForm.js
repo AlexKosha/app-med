@@ -12,6 +12,7 @@ const PasswordForm = () => {
   const updateUserPass = async () => {
     try {
       await updatePassword(userPass);
+      setUserPass({ password: "", newPassword: "" });
       console.log("пароль обновлено");
     } catch (error) {
       console.log(error);
@@ -20,63 +21,57 @@ const PasswordForm = () => {
 
   return (
     <View style={styles.infoContainer}>
-      <View>
-        <TextInput
-          style={styles.input}
-          placeholder="Старий пароль"
-          value={userPass.password}
-          onChangeText={(text) =>
-            setUserPass((prevNote) => ({ ...prevNote, password: text }))
-          }
-        />
+      <TextInput
+        style={styles.passInput}
+        placeholder="Старий пароль"
+        value={userPass.password}
+        onChangeText={(text) =>
+          setUserPass((prevNote) => ({ ...prevNote, password: text }))
+        }
+      />
 
-        <TextInput
-          style={styles.input}
-          placeholder="Новий пароль"
-          value={userPass.newPassword}
-          onChangeText={(text) =>
-            setUserPass((prevNote) => ({ ...prevNote, newPassword: text }))
-          }
-        />
+      <TextInput
+        style={styles.passInput}
+        placeholder="Новий пароль"
+        value={userPass.newPassword}
+        onChangeText={(text) =>
+          setUserPass((prevNote) => ({ ...prevNote, newPassword: text }))
+        }
+      />
 
-        <Pressable onPress={updateUserPass} style={styles.submitBtn}>
-          <IconSetting name="checkbox-outline" size={30} color="black" />
-        </Pressable>
-      </View>
+      <Pressable onPress={updateUserPass} style={styles.submitBtn}>
+        <IconSetting
+          name="checkbox-outline"
+          size={30}
+          color="black"
+          style={styles.submitBtn}
+        />
+      </Pressable>
     </View>
   );
 };
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
   infoContainer: {
-    position: "relative",
     justifyContent: "center",
     alignContent: "center",
-    paddingTop: 20,
-    paddingBottom: 20,
-    paddingLeft: 20,
+    padding: 12,
     borderRadius: 16,
     backgroundColor: "#FFFFFF",
   },
-  input: {
-    position: "relative",
+  passInput: {
+    fontFamily: "Montserrat-Regular",
     width: "60%",
     backgroundColor: "#F6F6F6",
     borderColor: "#E8E8E8",
     borderWidth: 1,
     borderRadius: 20,
     marginBottom: 5,
-    paddingHorizontal: 5,
-    fontFamily: "Montserrat-Regular",
-  },
-  changeInfoBtn: {
-    position: "absolute",
-    right: 20,
-    top: 5,
+    padding: 7,
   },
   submitBtn: {
     position: "absolute",
-    right: 40,
+    right: 25,
     top: 15,
   },
 });

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import IconSetting from "react-native-vector-icons/Ionicons";
+// import IconSetting from "react-native-vector-icons/Ionicons";
 import * as SecureStore from "expo-secure-store";
 import {
   Image,
@@ -11,6 +11,8 @@ import {
   Text,
   TouchableOpacity,
   View,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import * as imagePicker from "expo-image-picker";
 import PasswordForm from "../components/PasswordForm";
@@ -75,12 +77,15 @@ const Profile = () => {
       }}
       style={styles.backImage}
     >
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        // style={styles.inner}
-      >
-        <View style={styles.container}>
-          <View style={styles.centeredContent}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={
+            Platform.OS === "android" ? 35 : Platform.OS === "ios" ? 35 : 0
+          }
+          style={{ flex: 1 }}
+        >
+          <View style={styles.container}>
             <Image
               source={
                 avatarSource || user.avatarURL
@@ -89,119 +94,57 @@ const Profile = () => {
               }
               style={styles.avatar}
             />
-
+            <TouchableOpacity onPress={selectImage} style={styles.btnAvatar}>
+              <Text
+                style={{ textAlign: "center", fontFamily: "Montserrat-Bold" }}
+              >
+                Змінити аватар
+              </Text>
+            </TouchableOpacity>
             <Text style={styles.textName}>{user.name}</Text>
           </View>
-        </View>
 
-        {user.name && (
-          <UserInfoForm user={user} getUserInfoStorega={getUserInfo} />
-        )}
-        <Pressable onPress={selectImage} style={styles.btnAvatar}>
-          <Text style={{ textAlign: "center", fontFamily: "Montserrat-Bold" }}>
-            Змінити аватар
-          </Text>
-        </Pressable>
-
-        <PasswordForm />
-      </KeyboardAvoidingView>
+          {user.name && (
+            <UserInfoForm user={user} getUserInfoStorega={getUserInfo} />
+          )}
+          <PasswordForm />
+        </KeyboardAvoidingView>
+      </TouchableWithoutFeedback>
     </ImageBackground>
   );
 };
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
   backImage: {
     flex: 1,
-    paddingVertical: 10,
+    paddingVertical: 50,
     paddingHorizontal: 20,
   },
-  setting: {
-    position: "absolute",
-    top: 50,
-    right: 20,
-  },
+
   container: {
-    paddingTop: 40,
-  },
-  centeredContent: {
+    flex: 1,
+    paddingTop: 20,
     alignItems: "center",
     position: "relative",
   },
+
   avatar: {
     width: 120,
     height: 120,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
   },
-  addButton: {
-    position: "absolute",
-    right: 135,
-    bottom: 55,
-    backgroundColor: "#F6F6F6",
-    borderRadius: 50,
-    width: 25,
-    height: 25,
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#FF6C00",
-  },
   textName: {
     fontSize: 30,
     marginVertical: 10,
-    fontFamily: "Montserrat-Black",
   },
-  infoContainer: {
-    justifyContent: "center",
-    alignContent: "center",
-    paddingTop: 20,
-    paddingBottom: 20,
-    paddingLeft: 20,
-    borderRadius: 16,
-    backgroundColor: "#FFFFFF",
-  },
-  row: {
-    flexDirection: "row",
-    marginBottom: 10,
-  },
-  label: {
-    fontFamily: "Montserrat-Bold",
-  },
-  value: {
-    // marginLeft: 10,
-  },
-  alignStart: {
-    minWidth: 80,
-  },
-  changeInfoBtn: {
-    position: "absolute",
-    right: 20,
-    top: 5,
-  },
-  submitBtn: {
-    position: "absolute",
-    right: 20,
-    top: -5,
-  },
-  closeBtn: {
-    position: "absolute",
-    right: 20,
-    top: 25,
-  },
-  btnContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 20,
-  },
+
   btnAvatar: {
     backgroundColor: "#FF6C00",
     borderRadius: 100,
     paddingVertical: 5,
     paddingHorizontal: 10,
     marginVertical: 10,
-  },
-  btnMargin: {
-    marginRight: 30,
   },
 });
 

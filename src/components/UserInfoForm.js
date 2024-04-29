@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import IconSetting from "react-native-vector-icons/Ionicons";
 import * as SecureStore from "expo-secure-store";
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { updateUser } from "../service/authService";
 
 const UserInfoForm = ({ user, getUserInfoStorega }) => {
@@ -35,39 +28,46 @@ const UserInfoForm = ({ user, getUserInfoStorega }) => {
       {isChangeInfo ? (
         <View>
           <TextInput
-            style={styles.input}
+            style={styles.nameInput}
             placeholder="Ім'я"
             value={userInfo.name}
             onChangeText={(text) =>
               setUserInfo((prevNote) => ({ ...prevNote, name: text }))
             }
           />
-
           <TextInput
-            style={styles.input}
+            style={styles.nameInput}
             placeholder="Email"
             value={userInfo.email}
             onChangeText={(text) =>
               setUserInfo((prevNote) => ({ ...prevNote, email: text }))
             }
           />
-          <Pressable onPress={updateUserInfo} style={styles.changeInfoBtn}>
+          <Pressable onPress={updateUserInfo} style={styles.submitBtn}>
             <IconSetting
               name="checkbox-outline"
               size={30}
               color="black"
-              style={styles.changeInfoBtn}
+              style={styles.submitBtn}
             />
           </Pressable>
         </View>
       ) : (
         <View>
           <View style={styles.row}>
-            <Text style={[styles.label, styles.alignStart]}>Ім'я:</Text>
+            <Text
+              style={[styles.alignStart, { fontFamily: "Montserrat-Bold" }]}
+            >
+              Ім'я:
+            </Text>
             <Text style={styles.value}>{userInfo.name}</Text>
           </View>
           <View style={styles.row}>
-            <Text style={[styles.label, styles.alignStart]}>email:</Text>
+            <Text
+              style={[styles.alignStart, { fontFamily: "Montserrat-Bold" }]}
+            >
+              email:
+            </Text>
             <Text style={styles.value}>{userInfo.email}</Text>
           </View>
           <Pressable
@@ -87,44 +87,41 @@ const UserInfoForm = ({ user, getUserInfoStorega }) => {
   );
 };
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
   infoContainer: {
     justifyContent: "center",
     alignContent: "center",
-    paddingTop: 20,
-    paddingBottom: 20,
-    paddingLeft: 20,
-    borderRadius: 16,
     backgroundColor: "#FFFFFF",
+    padding: 12,
+    borderRadius: 16,
+    marginBottom: 20,
   },
   row: {
     flexDirection: "row",
     marginBottom: 10,
   },
-  label: {
-    fontFamily: "Montserrat-Bold",
-  },
-  value: {
-    fontFamily: "Montserrat-Regular",
-  },
   alignStart: {
     minWidth: 80,
   },
-  input: {
-    position: "relative",
+  nameInput: {
+    fontFamily: "Montserrat-Regular",
     width: "60%",
     backgroundColor: "#F6F6F6",
     borderColor: "#E8E8E8",
     borderWidth: 1,
     borderRadius: 20,
     marginBottom: 5,
-    paddingHorizontal: 5,
-    fontFamily: "Montserrat-Regular",
+    padding: 7,
   },
   changeInfoBtn: {
     position: "absolute",
     right: 20,
     top: 5,
+  },
+  submitBtn: {
+    position: "absolute",
+    right: 20,
+    top: 10,
   },
 });
 
