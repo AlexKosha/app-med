@@ -22,11 +22,11 @@ const Meditation = () => {
     navigation.navigate("Exercises", { item });
   };
 
-  const renderSeparator = () => <View style={styles.separator} />;
+  const renderSeparator = () => <View style={{ marginBottom: 20 }} />;
 
   const renderItem = ({ item }) => (
     <Pressable
-      style={styles.btnList}
+      // style={styles.btnList}
       onPress={() => handleNavigationToExercises(item)}
     >
       <LinearGradient
@@ -58,11 +58,11 @@ const Meditation = () => {
 
       <View style={styles.containerList}>
         <FlatList
-          style={styles.list}
+          style={{ width: "100%" }}
           data={data}
           keyExtractor={(item) => item.id}
           renderItem={renderItem}
-          contentContainerStyle={styles.listContent}
+          contentContainerStyle={{ alignItems: "center" }}
           ItemSeparatorComponent={renderSeparator}
         />
       </View>
@@ -71,6 +71,12 @@ const Meditation = () => {
 };
 
 const styles = StyleSheet.create({
+  listItem: {
+    width: 250,
+    borderRadius: 8,
+    padding: 10,
+    alignItems: "center",
+  },
   headerContainer: {
     flexDirection: "row",
     paddingHorizontal: 20,
@@ -90,12 +96,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   positionPass: {
+    fontFamily: "Montserrat-Bold",
     textAlign: "center",
     fontSize: 20,
-    fontFamily: "Montserrat-Bold",
-  },
-  scrollContainer: {
-    paddingBottom: 30,
   },
   containerList: {
     flex: 1,
@@ -104,21 +107,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 20,
     backgroundColor: "grey",
-  },
-  list: {
-    width: "100%",
-  },
-  listContent: {
-    alignItems: "center",
-  },
-  separator: {
-    marginBottom: 20,
-  },
-  listItem: {
-    width: 250,
-    borderRadius: 8,
-    padding: 10,
-    alignItems: "center",
   },
 });
 

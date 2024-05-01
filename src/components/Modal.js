@@ -16,7 +16,7 @@ const MainModal = ({ isVisible, children, onClose }) => {
           <View style={styles.overlay}></View>
         </TouchableWithoutFeedback>
         <View style={styles.modalContent}>
-          <View style={styles.contentContainer}>{children}</View>
+          <View style={{ padding: 10 }}>{children}</View>
         </View>
       </View>
     </Modal>
@@ -43,14 +43,6 @@ const styles = StyleSheet.create({
     maxHeight: "80%",
     borderRadius: 10,
     overflow: "auto",
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    padding: 10,
-  },
-  contentContainer: {
-    padding: 10,
   },
 });
 

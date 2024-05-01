@@ -68,18 +68,18 @@ const Archangels = () => {
           </LinearGradient>
         </Pressable>
       </View>
-      <Text style={styles.textBtn}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
-        sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua.
+      <Text style={styles.text}>
+        Друзі, перед вами дві карти. Заплющте очі та подумайте про ситуацію, в
+        якій потребуєте підтримки вищих сил. Тепер відкрийте очі. Натисніть на
+        карту, яка вам відгукується і прочитайте підказку від Архангелів, що
+        допоможе вирішити ваш запит самим легким та благісним чином.
       </Text>
 
       <View style={styles.imageContainer}>
         <Pressable onPress={() => handleTherapySelection(FIRST_THERAPY)}>
           <View style={{ borderRadius: 16, overflow: "hidden" }}>
             <ImageBackground
-              style={styles.imageBtn}
+              style={{ width: 150, height: 200 }}
               source={{
                 uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLUThBvMeLWZI_CHHlDlntaAjYpC8e7Uk8Bw&usqp=CAU",
               }}
@@ -90,7 +90,7 @@ const Archangels = () => {
         <Pressable onPress={() => handleTherapySelection(SECOND_THERAPY)}>
           <View style={{ borderRadius: 16, overflow: "hidden" }}>
             <ImageBackground
-              style={styles.imageBtn}
+              style={{ width: 150, height: 200 }}
               source={{
                 uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaWLHGHL13JmM4wDa_DIZQbBcYMMai2uK6AA&usqp=CAU",
               }}
@@ -100,24 +100,30 @@ const Archangels = () => {
         </Pressable>
       </View>
       <View style={styles.btnContainer}>
-        <Pressable style={styles.btn} onPress={handleNavigationToMeditation}>
+        <Pressable
+          style={{ marginBottom: 20 }}
+          onPress={handleNavigationToMeditation}
+        >
           <LinearGradient
             colors={["orange", "white", "orange"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={styles.gradient}
           >
-            <Text style={styles.textBtn}>Медитації</Text>
+            <Text style={styles.text}>Медитації</Text>
           </LinearGradient>
         </Pressable>
-        <Pressable style={styles.btn} onPress={handleNavigationToHome}>
+        <Pressable
+          style={{ marginBottom: 20 }}
+          onPress={handleNavigationToHome}
+        >
           <LinearGradient
             colors={["orange", "white", "orange"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={styles.gradient}
           >
-            <Text style={styles.textBtn}>Навчання</Text>
+            <Text style={styles.text}>Навчання</Text>
           </LinearGradient>
         </Pressable>
       </View>
@@ -136,7 +142,6 @@ const Archangels = () => {
 const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: "row",
-    // paddingHorizontal: 20,
     justifyContent: "space-evenly",
     alignItems: "center",
   },
@@ -148,20 +153,19 @@ const styles = StyleSheet.create({
   btnGoBack: {
     width: 170,
     height: 80,
-
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
   },
   positionPass: {
-    textAlign: "center",
-    fontSize: 20,
     fontFamily: "Montserrat-Bold",
-  },
-  textBtn: {
     textAlign: "center",
     fontSize: 20,
+  },
+  text: {
     fontFamily: "Montserrat-Medium",
+    textAlign: "center",
+    fontSize: 17,
   },
   imageContainer: {
     flexDirection: "row",
@@ -170,27 +174,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 20,
   },
-  imageBtn: {
-    width: 150,
-    height: 200,
-  },
-  imageBtnLast: {
-    margin: 0,
-  },
   btnContainer: {
     marginTop: 20,
     justifyContent: "center",
     alignItems: "center",
-  },
-  btn: {
-    marginBottom: 20,
   },
   gradient: {
     width: 200,
     height: 60,
     backgroundColor: "orange",
     borderRadius: 50,
-
     paddingVertical: "auto",
     justifyContent: "center",
     alignItems: "center",

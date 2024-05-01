@@ -138,13 +138,13 @@ const RegistrationScreen = () => {
       style={styles.backgroundImage}
     >
       <TouchableOpacity
-        style={styles.TouchableOpacity}
+        style={{ flex: 1 }}
         onPress={dismissKeyboard}
         activeOpacity={1}
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.inner}
+          style={{ flex: 1, justifyContent: "flex-end" }}
         >
           <View style={styles.container}>
             <View style={styles.imageContainer}>
@@ -172,32 +172,37 @@ const RegistrationScreen = () => {
                 </Pressable>
               )}
             </View>
-            <Text style={styles.title}>Реєстрація</Text>
-            <View style={styles.inputContainer}>
+            <Text style={{ fontSize: 30, fontFamily: "Montserrat-Medium" }}>
+              Реєстрація
+            </Text>
+            <View style={{ position: "relative", width: "100%" }}>
               <TextInput
                 style={styles.input}
                 placeholder="Name"
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handleNameChange}
               />
-              {renderError(nameError, styles.errorTextName)}
+              {renderError(nameError, [styles.errorMessage, { top: -20 }])}
               <TextInput
                 style={styles.input}
                 placeholder="Email"
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handleEmailChange}
               />
-              {renderError(emailError, styles.errorTextEmail)}
+              {renderError(emailError, [styles.errorMessage, { top: 38 }])}
               <TextInput
-                style={[styles.input, styles.lastInput]}
+                style={[styles.input, { marginBottom: 0 }]}
                 placeholder="Password"
                 secureTextEntry={!showPassword}
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handlePasswordChange}
               />
-              {renderError(passwordError, styles.errorTextPassword)}
+              {renderError(passwordError, [
+                styles.errorMessage,
+                { bottom: 40 },
+              ])}
               <Pressable
-                style={styles.positionBtn}
+                // style={styles.positionBtn}
                 onPress={toggleShowPassword}
               >
                 <Text style={styles.positionPass}>
@@ -233,21 +238,10 @@ const RegistrationScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  TouchableOpacity: {
-    flex: 1,
-  },
   backgroundImage: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
-  },
-  inner: {
-    flex: 1,
-    justifyContent: "flex-end",
-  },
-  title: {
-    fontSize: 30,
-    fontFamily: "Montserrat-Medium",
   },
   container: {
     position: "relative",
@@ -258,97 +252,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     alignItems: "center",
     paddingHorizontal: 16,
-  },
-  inputContainer: {
-    position: "relative",
-    width: "100%",
-  },
-  input: {
-    position: "relative",
-    height: 40,
-    width: "100%",
-    backgroundColor: "#F6F6F6",
-    borderColor: "#E8E8E8",
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    marginBottom: 16,
-    fontFamily: "Montserrat-Regular",
-  },
-  lastInput: {
-    marginBottom: 0,
-  },
-  errorTextName: {
-    position: "absolute",
-    top: -20,
-    left: 0,
-    fontSize: 12,
-    color: "red",
-    fontFamily: "Montserrat-Regular",
-  },
-  errorTextEmail: {
-    position: "absolute",
-    top: 38,
-    left: 0,
-    color: "red",
-    fontSize: 12,
-    fontFamily: "Montserrat-Regular",
-  },
-  errorTextPassword: {
-    color: "red",
-    fontSize: 12,
-    position: "absolute",
-    bottom: 40,
-    left: 0,
-    fontFamily: "Montserrat-Regular",
-  },
-  positionPass: {
-    position: "absolute",
-    bottom: 11,
-    right: 16,
-    fontFamily: "Montserrat-Regular",
-  },
-  button: {
-    backgroundColor: "#FF6C00",
-    borderRadius: 100,
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    width: 343,
-    height: 51,
-  },
-  buttonDisabled: {
-    backgroundColor: "#CCCCCC",
-    borderRadius: 100,
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    width: 343,
-    height: 51,
-    pointerEvents: "none",
-  },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-    fontFamily: "Montserrat-Regular",
-  },
-  textContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 15,
-  },
-  question: {
-    fontFamily: "Montserrat-Regular",
-    fontWeight: "400",
-    fontSize: 16,
-    lineHeight: 16,
-  },
-  logIn: {
-    fontSize: 16,
-    color: "blue",
-    textDecorationLine: "underline",
-    lineHeight: 16,
-    fontFamily: "Montserrat-Bold",
   },
   imageContainer: {
     position: "absolute",
@@ -375,6 +278,68 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: "#FF6C00",
+  },
+  input: {
+    fontFamily: "Montserrat-Regular",
+    position: "relative",
+    height: 40,
+    width: "100%",
+    backgroundColor: "#F6F6F6",
+    borderColor: "#E8E8E8",
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+    marginBottom: 16,
+  },
+  errorMessage: {
+    fontFamily: "Montserrat-Regular",
+    position: "absolute",
+    fontSize: 12,
+    color: "red",
+    left: 0,
+  },
+  positionPass: {
+    fontFamily: "Montserrat-Regular",
+    position: "absolute",
+    bottom: 11,
+    right: 16,
+  },
+  button: {
+    borderRadius: 100,
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+    width: 343,
+    height: 51,
+    backgroundColor: "#FF6C00",
+  },
+  buttonDisabled: {
+    backgroundColor: "#CCCCCC",
+    pointerEvents: "none",
+  },
+  buttonText: {
+    fontFamily: "Montserrat-Regular",
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  textContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 15,
+  },
+  question: {
+    fontFamily: "Montserrat-Regular",
+    fontWeight: "400",
+    fontSize: 16,
+    lineHeight: 16,
+  },
+  logIn: {
+    fontFamily: "Montserrat-Bold",
+    fontSize: 16,
+    color: "blue",
+    textDecorationLine: "underline",
+    lineHeight: 16,
   },
 });
 

@@ -54,18 +54,14 @@ const UserInfoForm = ({ user, getUserInfoStorega }) => {
         </View>
       ) : (
         <View>
-          <View style={styles.row}>
-            <Text
-              style={[styles.alignStart, { fontFamily: "Montserrat-Bold" }]}
-            >
+          <View style={{ flexDirection: "row", marginBottom: 10 }}>
+            <Text style={{ minWidth: 80, fontFamily: "Montserrat-Bold" }}>
               Ім'я:
             </Text>
             <Text style={styles.value}>{userInfo.name}</Text>
           </View>
-          <View style={styles.row}>
-            <Text
-              style={[styles.alignStart, { fontFamily: "Montserrat-Bold" }]}
-            >
+          <View style={{ flexDirection: "row", marginBottom: 10 }}>
+            <Text style={{ minWidth: 80, fontFamily: "Montserrat-Bold" }}>
               email:
             </Text>
             <Text style={styles.value}>{userInfo.email}</Text>
@@ -96,13 +92,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     marginBottom: 20,
   },
-  row: {
-    flexDirection: "row",
-    marginBottom: 10,
-  },
-  alignStart: {
-    minWidth: 80,
-  },
+
   nameInput: {
     fontFamily: "Montserrat-Regular",
     width: "60%",

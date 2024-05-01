@@ -20,12 +20,13 @@ const Exercises = ({ route, navigation }) => {
     return (
       <View>
         <View style={styles.line}></View>
-
         <Pressable onPress={() => handleItemPress(item)}>
           <View style={styles.itemContainer}>
             <Image style={styles.image} source={{ uri: item.img }} />
             <View style={styles.contentContainer}>
-              <Text style={styles.text}>{item.name}</Text>
+              <Text style={{ fontSize: 24, marginBottom: 20 }}>
+                {item.name}
+              </Text>
               <Text>{item.time}</Text>
             </View>
             <View style={styles.iconContainer}>
@@ -51,12 +52,6 @@ const Exercises = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  itemContainer: {
-    paddingLeft: 10,
-    flexDirection: "row", 
-    alignItems: "center", 
-    marginBottom: 20,
-  },
   line: {
     height: 1,
     paddingLeft: 15,
@@ -64,30 +59,31 @@ const styles = StyleSheet.create({
     backgroundColor: "gray",
     marginBottom: 10,
   },
-  contentContainer: {
-    flexDirection: "column", 
-    marginLeft: 10, 
+  itemContainer: {
+    paddingLeft: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 20,
   },
   image: {
-    width: 150, 
-    height: 150, 
+    width: 150,
+    height: 150,
     resizeMode: "cover",
     marginRight: 10,
   },
-  text: {
-    fontSize: 24, 
-    marginBottom: 20, 
+  contentContainer: {
+    flexDirection: "column",
+    marginLeft: 10,
   },
   iconContainer: {
     flex: 1,
     alignItems: "flex-end",
-    paddingRight: 10, 
-    paddingTop: 5, 
+    paddingRight: 10,
+    paddingTop: 5,
   },
-
   heartIcon: {
-    fontSize: 24, 
-    color: "red", 
+    fontSize: 24,
+    color: "red",
   },
 });
 

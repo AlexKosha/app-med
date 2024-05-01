@@ -54,6 +54,7 @@ const MainMenu = () => {
   const handleNavigateToNews = () => {
     navigation.navigate("News");
   };
+
   return (
     <ImageBackground
       source={{
@@ -63,13 +64,13 @@ const MainMenu = () => {
     >
       <Image
         source={require("../img/logo.png")}
-        style={styles.image}
+        style={{ width: 350, height: 350 }}
         resizeMode="contain"
       />
       <Pressable style={styles.logOut} onPress={handleLogOut}>
         <Icon name="sign-out" size={30} color="black" />
       </Pressable>
-      <Pressable style={styles.btn} onPress={handleNavigateToQuotes}>
+      <Pressable style={{ marginBottom: 20 }} onPress={handleNavigateToQuotes}>
         <LinearGradient
           style={styles.gradiend}
           colors={["orange", "white", "orange"]}
@@ -79,7 +80,10 @@ const MainMenu = () => {
           <Text style={styles.positionPass}>Мудрість дня</Text>
         </LinearGradient>
       </Pressable>
-      <Pressable style={styles.btn} onPress={handleNavigateToArchangels}>
+      <Pressable
+        style={{ marginBottom: 20 }}
+        onPress={handleNavigateToArchangels}
+      >
         <LinearGradient
           style={styles.gradiend}
           colors={["orange", "white", "orange"]}
@@ -89,7 +93,10 @@ const MainMenu = () => {
           <Text style={styles.positionPass}>Ангельська терапія</Text>
         </LinearGradient>
       </Pressable>
-      <Pressable style={styles.btn} onPress={handleNavigateToMeditation}>
+      <Pressable
+        style={{ marginBottom: 20 }}
+        onPress={handleNavigateToMeditation}
+      >
         <LinearGradient
           style={styles.gradiend}
           colors={["orange", "white", "orange"]}
@@ -99,7 +106,7 @@ const MainMenu = () => {
           <Text style={styles.positionPass}>Медитації</Text>
         </LinearGradient>
       </Pressable>
-      <Pressable style={styles.btn} onPress={handleNavigateToNews}>
+      <Pressable style={{ marginBottom: 20 }} onPress={handleNavigateToNews}>
         <LinearGradient
           style={styles.gradiend}
           colors={["orange", "white", "orange"]}
@@ -124,13 +131,6 @@ const styles = StyleSheet.create({
     top: 50,
     right: 20,
   },
-  image: {
-    width: 350,
-    height: 350,
-  },
-  btn: {
-    marginBottom: 20,
-  },
   gradiend: {
     width: 270,
     height: 70,
@@ -140,9 +140,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   positionPass: {
+    fontFamily: "Montserrat-Medium",
     textAlign: "center",
     fontSize: 24,
-    fontFamily: "Montserrat-Medium",
   },
 });
 

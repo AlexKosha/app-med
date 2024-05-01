@@ -37,6 +37,13 @@ const styles = StyleSheet.create({
     paddingVertical: 30,
     paddingHorizontal: 15,
   },
+  closeButton: {
+    fontSize: 18,
+    color: "black",
+    position: "absolute",
+    right: -10,
+    top: -25,
+  },
   scrollBox: {
     borderWidth: 1,
     borderColor: "#e3cb96",
@@ -49,28 +56,16 @@ const styles = StyleSheet.create({
     overflow: "scroll",
   },
   title: {
+    fontFamily: "Montserrat-Bold",
     fontSize: 20,
     marginBottom: 15,
     color: "black",
-    fontFamily: "Montserrat-Bold",
   },
   firstParagraph: {
+    fontFamily: "Montserrat-Regular",
     fontSize: 16,
     marginBottom: 5,
     color: "black",
-    fontFamily: "Montserrat-Regular",
-  },
-  secondParagraph: {
-    fontSize: 16,
-    color: "black",
-    fontFamily: "Montserrat-Regular",
-  },
-  closeButton: {
-    fontSize: 18,
-    color: "black",
-    position: "absolute",
-    right: -10,
-    top: -25,
   },
 });
 

@@ -101,7 +101,7 @@ const Profile = () => {
                 Змінити аватар
               </Text>
             </TouchableOpacity>
-            <Text style={styles.textName}>{user.name}</Text>
+            <Text style={styles.userName}>{user.name}</Text>
           </View>
 
           {user.name && (
@@ -120,31 +120,29 @@ const styles = StyleSheet.create({
     paddingVertical: 50,
     paddingHorizontal: 20,
   },
-
   container: {
     flex: 1,
     paddingTop: 20,
     alignItems: "center",
     position: "relative",
   },
-
   avatar: {
     width: 120,
     height: 120,
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
   },
-  textName: {
-    fontSize: 30,
-    marginVertical: 10,
-  },
-
   btnAvatar: {
     backgroundColor: "#FF6C00",
     borderRadius: 100,
     paddingVertical: 5,
     paddingHorizontal: 10,
     marginVertical: 10,
+  },
+  userName: {
+    fontSize: 30,
+    marginVertical: 10,
+    fontFamily: "Montserrat-Bold",
   },
 });
 

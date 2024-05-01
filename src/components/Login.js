@@ -81,17 +81,19 @@ const LoginScreen = () => {
       style={styles.backgroundImage}
     >
       <TouchableOpacity
-        style={styles.TouchableOpacity}
+        style={{ flex: 1 }}
         onPress={dismissKeyboard}
         activeOpacity={1}
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.inner}
+          style={{ flex: 1, justifyContent: "flex-end" }}
         >
           <View style={styles.container}>
-            <Text style={styles.title}>Увійти</Text>
-            <View style={styles.inputContainer}>
+            <Text style={{ fontFamily: "Montserrat-Medium", fontSize: 30 }}>
+              Увійти
+            </Text>
+            <View style={{ width: "100%", position: "relative" }}>
               <TextInput
                 style={styles.input}
                 placeholder="Email"
@@ -100,7 +102,7 @@ const LoginScreen = () => {
                 onChangeText={handleEmailChange}
               />
               <TextInput
-                style={[styles.input, styles.lastInput]}
+                style={[styles.input, { marginBottom: 0 }]}
                 placeholder="Password"
                 secureTextEntry={!showPassword}
                 value={password}
@@ -108,7 +110,7 @@ const LoginScreen = () => {
                 onChangeText={handlePasswordChange}
               />
               <Pressable
-                style={styles.positionPass}
+                // style={styles.positionPass}
                 onPress={toggleShowPassword}
               >
                 <Text style={styles.showPasswordText}>
@@ -118,7 +120,11 @@ const LoginScreen = () => {
             </View>
             <View>
               <Pressable
-                style={[styles.button, !isFormValid && styles.buttonDisabled]}
+                style={[
+                  styles.button,
+                  styles.buttonActive,
+                  !isFormValid && styles.buttonDisabled,
+                ]}
                 title="Register"
                 onPress={handleRegister}
                 disabled={!isFormValid}
@@ -144,21 +150,10 @@ const LoginScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  TouchableOpacity: {
-    flex: 1,
-  },
   backgroundImage: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",
-  },
-  inner: {
-    flex: 1,
-    justifyContent: "flex-end",
-  },
-  title: {
-    fontSize: 30,
-    fontFamily: "Montserrat-Medium",
   },
   container: {
     position: "relative",
@@ -170,13 +165,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 16,
   },
-  inputContainer: {
-    width: "100%",
-    position: "relative",
-  },
   input: {
-    backgroundColor: "#F6F6F6",
     fontFamily: "Montserrat-Regular",
+    backgroundColor: "#F6F6F6",
     height: 40,
     width: "100%",
     height: 50,
@@ -186,54 +177,32 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginBottom: 16,
   },
-  lastInput: {
-    marginBottom: 0,
-  },
-  errorTextEmail: {
-    position: "absolute",
-    top: -18,
-    left: 0,
-    color: "red",
-    fontSize: 12,
-    fontFamily: "Montserrat-Regular",
-  },
-  errorTextPassword: {
-    color: "red",
-    fontSize: 12,
-    position: "absolute",
-    top: 50,
-    left: 0,
-    fontFamily: "Montserrat-Regular",
-  },
   showPasswordText: {
+    fontFamily: "Montserrat-Regular",
     position: "absolute",
     bottom: 16,
     right: 16,
-    fontFamily: "Montserrat-Regular",
   },
   button: {
-    backgroundColor: "#FF6C00",
     borderRadius: 100,
     paddingVertical: 16,
     paddingHorizontal: 32,
     width: 343,
     height: 51,
+  },
+  buttonActive: {
+    backgroundColor: "#FF6C00",
     marginBottom: 10,
   },
   buttonDisabled: {
-    backgroundColor: "#CCCCCC", // Якийсь блідий колір
-    borderRadius: 100,
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    width: 343,
-    height: 51,
-    pointerEvents: "none", // Вимикаємо можливість курсора
+    backgroundColor: "#CCCCCC",
+    pointerEvents: "none",
   },
   buttonText: {
+    fontFamily: "Montserrat-Bold",
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
-    fontFamily: "Montserrat-Bold",
   },
   textContainer: {
     flexDirection: "row",
@@ -242,19 +211,36 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   question: {
+    fontFamily: "Montserrat-Regular",
     fontFamily: "Roboto",
     fontWeight: "400",
     fontSize: 16,
     lineHeight: 16,
-    fontFamily: "Montserrat-Regular",
   },
   logIn: {
+    fontFamily: "Montserrat-Bold",
     fontSize: 16,
     color: "blue",
     textDecorationLine: "underline",
     lineHeight: 16,
-    fontFamily: "Montserrat-Bold",
   },
+  //
+  // errorTextEmail: {
+  //   position: "absolute",
+  //   top: -18,
+  //   left: 0,
+  //   color: "red",
+  //   fontSize: 12,
+  //   fontFamily: "Montserrat-Regular",
+  // },
+  // errorTextPassword: {
+  //   color: "red",
+  //   fontSize: 12,
+  //   position: "absolute",
+  //   top: 50,
+  //   left: 0,
+  //   fontFamily: "Montserrat-Regular",
+  // },
 });
 
 export default LoginScreen;

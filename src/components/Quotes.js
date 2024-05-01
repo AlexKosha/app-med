@@ -34,7 +34,7 @@ const Quotes = () => {
       <Pressable onPress={() => toggleModal(imagesQuotes[index])}>
         <View style={styles.imageContainer}>
           <ImageBackground
-            style={styles.imagesBack}
+            style={{ width: 200, height: "100%" }}
             source={imagesQuotes[index]}
             resizeMode="cover"
           />
@@ -43,7 +43,7 @@ const Quotes = () => {
     );
   };
   return (
-    <View style={styles.container}>
+    <View style={{ flex: 1 }}>
       <View style={styles.headerContainer}>
         <Image source={require("../img/logo.png")} style={styles.imageLogo} />
         <Pressable onPress={handleNavigationToHome} style={{ marginTop: 20 }}>
@@ -58,7 +58,13 @@ const Quotes = () => {
         </Pressable>
       </View>
       <View style={styles.quotesContainer}>
-        <Text style={styles.headerText}>Вибери картинку</Text>
+        <Text style={styles.text}>
+          Друзі, ми подбали про те, щоб корисні афірмації завжди були у вас під
+          рукою. Гортайте галерею із зображеннями, обирайте ту, що відгукується
+          - і завантажуйте у форматі заставки на телефон. Або натисніть кнопку і
+          активуйте щоденне автоматизоване відправлення однієї нової афірмації
+          на ваш мобільний телефон.
+        </Text>
         <FlatList
           data={imagesQuotes}
           keyExtractor={(item) => item}
@@ -81,14 +87,17 @@ const Quotes = () => {
         </MainModal>
       </View>
       <View style={styles.btnContainer}>
-        <Pressable style={styles.btn} onPress={handleNavigationToHome}>
+        <Pressable
+          style={{ marginBottom: 20 }}
+          onPress={handleNavigationToHome}
+        >
           <LinearGradient
             style={styles.gradient}
             colors={["orange", "white", "orange"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
           >
-            <Text style={styles.headerText}>Автоматичне відправлення</Text>
+            <Text style={styles.text}>Автоматичне відправлення</Text>
           </LinearGradient>
         </Pressable>
       </View>
@@ -97,8 +106,11 @@ const Quotes = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  imageContainer: {
+    marginTop: 10,
+    borderRadius: 16,
+    overflow: "hidden",
+    marginRight: 10,
   },
   headerContainer: {
     flexDirection: "row",
@@ -119,61 +131,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   positionPass: {
-    textAlign: "center",
-    fontSize: 20,
     fontFamily: "Montserrat-Bold",
-  },
-  headerText: {
     textAlign: "center",
     fontSize: 20,
-    fontFamily: "Montserrat-Medium",
   },
   quotesContainer: {
     flex: 2,
     padding: 10,
+    paddingTop: 0,
   },
-  imageContainer: {
-    marginTop: 10,
-    borderRadius: 16,
-    overflow: "hidden",
-    marginRight: 10,
-  },
-  imagesBack: {
-    width: 200,
-    height: "100%",
+  text: {
+    fontFamily: "Montserrat-Medium",
+    textAlign: "center",
+    fontSize: 17,
   },
   modalContainer: {
     position: "relative",
     height: "100%",
     paddingVertical: 15,
     paddingHorizontal: 15,
-  },
-  btnContainer: {
-    marginTop: 20,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  btn: {
-    marginBottom: 20,
-  },
-  gradient: {
-    width: 200,
-    height: 60,
-    borderRadius: 50,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  modalContent: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-  closeButtonSave: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    backgroundColor: "orange",
-    borderRadius: 8,
   },
   closeButton: {
     fontSize: 18,
@@ -182,10 +158,28 @@ const styles = StyleSheet.create({
     right: -10,
     top: -10,
   },
+  closeButtonSave: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: "orange",
+    borderRadius: 8,
+  },
   buttonText: {
+    fontFamily: "Montserrat-Bold",
     textAlign: "center",
     fontSize: 16,
-    fontFamily: "Montserrat-Bold",
+  },
+  btnContainer: {
+    marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  gradient: {
+    width: 200,
+    height: 60,
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 

@@ -20,7 +20,7 @@ const News = () => {
 
   const renderItem = () => {
     return (
-      <Pressable style={styles.itemContainer} onPress={() => toggleModal()}>
+      <Pressable style={{ marginBottom: 20 }} onPress={() => toggleModal()}>
         <View style={styles.item}>
           <Text style={styles.title}>Title</Text>
           <Text style={styles.description}>Description</Text>
@@ -66,15 +66,6 @@ const News = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 20,
-    paddingTop: 20,
-    backgroundColor: "#f0f0f0",
-  },
-  itemContainer: {
-    marginBottom: 20,
-  },
   item: {
     backgroundColor: "#fff",
     padding: 20,
@@ -83,15 +74,22 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
   },
   title: {
-    fontSize: 18,
     fontFamily: "Montserrat-Bold",
+    fontSize: 18,
     marginBottom: 5,
   },
   description: {
+    fontFamily: "Montserrat-Bold",
     fontSize: 16,
     color: "#666",
-    fontFamily: "Montserrat-Bold",
   },
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    backgroundColor: "#f0f0f0",
+  },
+
   modalContainer: {
     position: "relative",
     backgroundColor: "grey",

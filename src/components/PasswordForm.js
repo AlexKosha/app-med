@@ -20,7 +20,7 @@ const PasswordForm = () => {
   };
 
   return (
-    <View style={styles.infoContainer}>
+    <View style={styles.container}>
       <TextInput
         style={styles.passInput}
         placeholder="Старий пароль"
@@ -52,7 +52,7 @@ const PasswordForm = () => {
 };
 
 const styles = StyleSheet.create({
-  infoContainer: {
+  container: {
     justifyContent: "center",
     alignContent: "center",
     padding: 12,

@@ -52,16 +52,16 @@ const NotesModalForm = ({ route }) => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.modalContent}>
+      <View style={styles.container}>
         <KeyboardAvoidingView
           behavior={Platform.OS == "ios" ? "padding" : "height"}
           keyboardVerticalOffset={
-            Platform.OS === "android" ? 100 : Platform.OS === "ios" ? 100 : 0
+            Platform.OS === "android" ? 135 : Platform.OS === "ios" ? 100 : 0
           }
-          style={styles.inner}
+          style={styles.innerKeyboard}
         >
           <TextInput
-            style={styles.titleInput}
+            style={[styles.input, styles.titleInput]}
             placeholder="Тема"
             placeholderTextColor="#d3d3d3"
             value={newNote.title}
@@ -69,9 +69,8 @@ const NotesModalForm = ({ route }) => {
               setNewNote((prevNote) => ({ ...prevNote, title: text }))
             }
           />
-
           <TextInput
-            style={styles.descriptionInput}
+            style={[styles.input, styles.descriptionInput]}
             multiline={true}
             placeholder="Ваші роздуми"
             placeholderTextColor="#d3d3d3"
@@ -80,20 +79,17 @@ const NotesModalForm = ({ route }) => {
               setNewNote((prevNote) => ({ ...prevNote, description: text }))
             }
           />
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              paddingHorizontal: 5,
-            }}
-          >
-            <TouchableOpacity style={styles.saveButton} onPress={() => func()}>
+          <View style={styles.containerButton}>
+            <TouchableOpacity
+              style={[styles.button, { backgroundColor: "green" }]}
+              onPress={() => func()}
+            >
               <Text style={{ color: "#fff", textAlign: "center" }}>
                 {leftButtonTitle}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={styles.closeButton}
+              style={[styles.button, { backgroundColor: "red" }]}
               onPress={() => onClose()}
             >
               <Text style={{ color: "#fff", textAlign: "center" }}>
@@ -109,51 +105,40 @@ const NotesModalForm = ({ route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // padding: 20,
-  },
-  modalContent: {
     backgroundColor: "#fff",
     padding: 15,
     borderRadius: 10,
     flex: 1,
-    // width: "100%",
   },
-  inner: {
+  innerKeyboard: {
     flex: 1,
     paddingBottom: 10,
   },
-  titleInput: {
-    fontSize: 20,
-    fontFamily: "Montserrat-Bold",
+  input: {
     marginBottom: 10,
-    borderWidth: 1,
-    borderColor: "#ccc",
     padding: 10,
     borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "#ccc",
+  },
+  titleInput: {
+    fontFamily: "Montserrat-Bold",
+    fontSize: 20,
   },
   descriptionInput: {
     height: "85%",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 10,
     textAlignVertical: "top",
   },
-  saveButton: {
-    padding: 7,
-    borderRadius: 5,
-    fontSize: 18,
-    backgroundColor: "green",
-    width: 70,
+  containerButton: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 5,
   },
-  closeButton: {
+  button: {
     padding: 7,
     borderRadius: 5,
     fontSize: 18,
     width: 70,
-    backgroundColor: "red",
   },
 });
 

@@ -73,22 +73,20 @@ const Diary = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => {
           return (
-            <View style={[styles.inputContainer, styles.noteItem]}>
-              <View style={styles.groupNote}>
+            <View style={styles.noteContainer}>
+              <View style={styles.textNoteContainer}>
                 <Text style={[styles.input, { fontFamily: "Montserrat-Bold" }]}>
                   {item.title}
                 </Text>
-                <Text style={[styles.input, styles.inputDescr]}>
-                  {item.description}
-                </Text>
+                <Text style={styles.input}>{item.description}</Text>
               </View>
               <TouchableOpacity onPress={() => deleteNote(item.id)}>
-                <Text style={styles.deleteButton}>
+                <Text style={styles.deleteNoteButton}>
                   <Icon name="delete" size={20} color={"black"} />
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => openUpdateModal(item)}>
-                <Text style={styles.editButton}>
+                <Text style={styles.editNoteButton}>
                   <Icon name="edit" size={20} color={"black"} />
                 </Text>
               </TouchableOpacity>
@@ -96,8 +94,8 @@ const Diary = () => {
           );
         }}
       />
-      <TouchableOpacity style={styles.addButton} onPress={openModal}>
-        <Text style={styles.buttonText}>
+      <TouchableOpacity style={styles.addNoteButton} onPress={openModal}>
+        <Text style={styles.addNoteButtonText}>
           <Icon name="pluscircleo" size={20} color={"black"} />
         </Text>
       </TouchableOpacity>
@@ -114,110 +112,44 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     fontWeight: "bold",
   },
-  addButton: {
-    backgroundColor: "lightgreen",
-    padding: 10,
-    borderRadius: 5,
-    alignContent: "center",
-    marginTop: 20,
+  list: {
+    flex: 1,
   },
-  buttonText: {
-    textAlign: "center",
-  },
-  inputContainer: {
+  noteContainer: {
     flexDirection: "row",
     alignItems: "flex-start",
     justifyContent: "space-between",
     marginBottom: 10,
     borderBottomWidth: 1,
-    // borderWidth: 1,
     borderBottomColor: "#ccc",
     padding: 10,
   },
-  groupNote: {
+  textNoteContainer: {
     flex: 1,
     marginRight: 10,
   },
   input: {
     fontSize: 18,
     marginBottom: 5,
-    // width: "100%",
   },
-  // inputDescr: {
-  //   width: "100%",
-  // },
-  deleteButton: {
+  deleteNoteButton: {
     padding: 3,
     backgroundColor: "red",
     marginRight: 5,
   },
-  editButton: {
+  editNoteButton: {
     padding: 3,
     backgroundColor: "orange",
   },
-  list: {
-    flex: 1,
-  },
-  modalContainer: {
-    padding: 20,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  modalContent: {
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    padding: 20,
-    width: "100%",
-    height: "100%",
-    position: "relative",
-  },
-  plusButton: {
-    fontSize: 18,
-    color: "green",
-    position: "absolute",
-    right: -5,
-    top: -15,
-  },
-
-  titleInput: {
-    fontSize: 20,
-    fontFamily: "Montserrat-Bold",
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: "#ccc",
+  addNoteButton: {
+    backgroundColor: "lightgreen",
     padding: 10,
     borderRadius: 5,
+    alignContent: "center",
+    marginTop: 20,
   },
-  descriptionInput: {
-    height: "70%",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 10,
-    marginBottom: 20,
-    borderRadius: 5,
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  saveButton: {
-    padding: 10,
-    borderRadius: 5,
-    fontSize: 18,
-    position: "absolute",
-    left: 20,
-    bottom: 20,
-    backgroundColor: "green",
-  },
-  closeButton: {
-    fontSize: 18,
-    position: "absolute",
-    right: 20,
-    bottom: 20,
-    backgroundColor: "red",
-    padding: 10,
-    borderRadius: 5,
+  addNoteButtonText: {
+    textAlign: "center",
   },
 });
 
