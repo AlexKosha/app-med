@@ -13,6 +13,7 @@ import {
   Platform,
   ImageBackground,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import * as imagePicker from "expo-image-picker";
 import Icon from "react-native-vector-icons/Octicons";
@@ -20,6 +21,7 @@ import IconClose from "react-native-vector-icons/AntDesign";
 import * as Validate from "../helpers/validationInput";
 import { singUp } from "../service/authService";
 import { createFormDataRegister } from "../helpers/createFormDataRegister";
+import { CheckBox } from "react-native-btr";
 
 const RegistrationScreen = () => {
   const [name, setName] = useState("");
@@ -31,6 +33,9 @@ const RegistrationScreen = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [avatarSource, setAvatarSource] = useState(null);
   const [isFormValid, setIsFormValid] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [isCheckedValid, setIsCheckedValid] = useState(false);
+  // const [checkedError, setCheckedError] = useState("");
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -73,6 +78,11 @@ const RegistrationScreen = () => {
       await SecureStore.setItemAsync("user", userString);
       setIsFormValid(true);
       navigation.navigate("Home");
+      Alert.alert(
+        "",
+        "Вітаємо! Ви успішно зареєструвалися! Хочемо вам повідомити, що у нашого додатку широкі офлайн можливості. Користуйтеся із задоволенням. З піклуванням про вас, команда",
+        [{ text: "Закрити" }]
+      );
       return data;
     } catch (error) {
       console.log(error);
@@ -128,6 +138,11 @@ const RegistrationScreen = () => {
 
   const renderError = (error, errorMessage) => {
     return error ? <Text style={errorMessage}>{error}</Text> : null;
+  };
+
+  const toggleCheckBox = () => {
+    setIsChecked(!isChecked);
+    setIsCheckedValid(!isCheckedValid);
   };
 
   return (
@@ -210,15 +225,28 @@ const RegistrationScreen = () => {
                 </Text>
               </Pressable>
             </View>
+
             <View>
+              <View style={{ flexDirection: "row", padding: 10 }}>
+                <Text> Погодитися з умовами конфіденційності</Text>
+                <CheckBox
+                  checked={isChecked}
+                  onPress={toggleCheckBox}
+                  color={"blue"}
+                />
+              </View>
               <Pressable
-                style={[styles.button, !isFormValid && styles.buttonDisabled]}
+                style={[
+                  styles.button,
+                  (!isFormValid || !isCheckedValid) && styles.buttonDisabled,
+                ]}
                 title="Register"
                 onPress={handleRegister}
                 disabled={!isFormValid}
               >
                 <Text style={styles.buttonText}>Зареєстуватися</Text>
               </Pressable>
+
               <View style={styles.textContainer}>
                 <Text style={styles.question}>Вже є акаунт?</Text>
 

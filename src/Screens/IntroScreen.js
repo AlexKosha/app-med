@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, Image, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { Video } from "expo-av";
 
 const IntroScreen = () => {
   const navigation = useNavigation();
@@ -8,22 +9,27 @@ const IntroScreen = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigation.navigate("Registration");
-    }, 5000);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../img/logo.png")}
-        style={styles.image}
-        resizeMode="contain"
-      />
-      <Image
-        source={require("../img/intro.gif")}
-        style={styles.gif}
-        resizeMode="contain"
+      <Video
+        source={require("../img/firstvideo.mp4")} // шлях до вашого відеофайлу
+        style={styles.video}
+        resizeMode="cover"
+        shouldPlay
+        isLooping={false}
+        // onPlaybackStatusUpdate={(status) => {
+        //   if (
+        //     !status.isPlaying &&
+        //     status.durationMillis === status.positionMillis
+        //   ) {
+        //     navigation.navigate("Registration");
+        //   }
+        // }}
       />
     </View>
   );
@@ -35,14 +41,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  gif: {
-    width: 300,
-    height: 300,
-  },
-  image: {
-    marginBottom: 10,
-    width: 250,
-    height: 250,
+  video: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
   },
 });
 
