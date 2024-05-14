@@ -13,7 +13,7 @@ const Exercises = ({ route, navigation }) => {
   const { text, exercise } = route.params.item;
 
   const handleItemPress = (item) => {
-    navigation.navigate("DetailsExercise", { item });
+    navigation.navigate("Practice", { item });
   };
 
   const renderItem = ({ item }) => {
