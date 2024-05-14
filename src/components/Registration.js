@@ -34,8 +34,6 @@ const RegistrationScreen = () => {
   const [avatarSource, setAvatarSource] = useState(null);
   const [isFormValid, setIsFormValid] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
-  const [isCheckedValid, setIsCheckedValid] = useState(false);
-  // const [checkedError, setCheckedError] = useState("");
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -142,7 +140,6 @@ const RegistrationScreen = () => {
 
   const toggleCheckBox = () => {
     setIsChecked(!isChecked);
-    setIsCheckedValid(!isCheckedValid);
   };
 
   return (
@@ -238,7 +235,7 @@ const RegistrationScreen = () => {
               <Pressable
                 style={[
                   styles.button,
-                  (!isFormValid || !isCheckedValid) && styles.buttonDisabled,
+                  (!isFormValid || !isChecked) && styles.buttonDisabled,
                 ]}
                 title="Register"
                 onPress={handleRegister}
