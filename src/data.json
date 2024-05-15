@@ -8,41 +8,23 @@
       {
         "id": "1",
         "type": "відпочинок",
-        "name": "name1",
+        "name": "name",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "7 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Усвідомлений рух"
-        }
+        "time": "7 хвилин"
       },
       {
         "id": "2",
         "type": "спокій",
-        "name": "name2",
+        "name": "name5",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "10 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Усвідомлений рух"
-        }
+        "time": "10 хвилин"
       },
       {
         "id": "3",
         "type": "мотивація",
-        "name": "name3",
+        "name": "name6",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "5 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Усвідомлений рух"
-        }
+        "time": "5 хвилин"
       }
     ]
   },
@@ -56,39 +38,21 @@
         "type": "сон",
         "name": "name1",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "7 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "7 хвилин"
       },
       {
         "id": "2",
         "type": "сила волі",
         "name": "name2",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "10 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "10 хвилин"
       },
       {
         "id": "3",
         "type": "сила волі",
         "name": "name3",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "5 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "5 хвилин"
       }
     ]
   },
@@ -102,39 +66,21 @@
         "type": "відпочинок",
         "name": "name1",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "7 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Зосередження"
-        }
+        "time": "7 хвилин"
       },
       {
         "id": "2",
         "type": "спокій",
         "name": "name2",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "10 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Зосередження"
-        }
+        "time": "10 хвилин"
       },
       {
         "id": "3",
         "type": "сон",
         "name": "name3",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "5 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Зосередження"
-        }
+        "time": "5 хвилин"
       }
     ]
   },
@@ -148,39 +94,21 @@
         "type": "сила волі",
         "name": "name1",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "7 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Від тривог"
-        }
+        "time": "7 хвилин"
       },
       {
         "id": "2",
         "type": "дисцепліна",
         "name": "name2",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "10 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Від тривог"
-        }
+        "time": "10 хвилин"
       },
       {
         "id": "3",
         "type": "дисцепліна",
         "name": "name3",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "5 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Від тривог"
-        }
+        "time": "5 хвилин"
       }
     ]
   },
@@ -193,13 +121,7 @@
         "id": "1",
         "type": "дисцепліна",
         "name": "name1",
-        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Сон та релаксація..."
-        }
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU"
       },
       {
         "id": "2",
@@ -226,39 +148,21 @@
         "type": "сила волі",
         "name": "name1",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "7 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Пізнай себе"
-        }
+        "time": "7 хвилин"
       },
       {
         "id": "2",
         "type": "дисцепліна",
         "name": "name2",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "10 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Пізнай себе"
-        }
+        "time": "10 хвилин"
       },
       {
         "id": "3",
         "name": "name3",
         "type": "дисцепліна",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "5 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Пізнай себе"
-        }
+        "time": "5 хвилин"
       }
     ]
   },
@@ -364,39 +268,21 @@
         "type": "сон",
         "name": "name1",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "7 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "7 хвилин"
       },
       {
         "id": "2",
         "type": "сила волі",
         "name": "name2",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "10 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "10 хвилин"
       },
       {
         "id": "3",
         "type": "сила волі",
         "name": "name3",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "5 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "5 хвилин"
       }
     ]
   },
@@ -410,39 +296,21 @@
         "type": "сон",
         "name": "name1",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "7 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "7 хвилин"
       },
       {
         "id": "2",
         "type": "сила волі",
         "name": "name2",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "10 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "10 хвилин"
       },
       {
         "id": "3",
         "type": "сила волі",
         "name": "name3",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "5 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "5 хвилин"
       }
     ]
   },
@@ -456,39 +324,21 @@
         "type": "сон",
         "name": "name1",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "7 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "7 хвилин"
       },
       {
         "id": "2",
         "type": "сила волі",
         "name": "name2",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "10 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "10 хвилин"
       },
       {
         "id": "3",
         "type": "сила волі",
         "name": "name3",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "5 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "5 хвилин"
       }
     ]
   },
@@ -502,39 +352,21 @@
         "type": "сон",
         "name": "name1",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "7 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "7 хвилин"
       },
       {
         "id": "2",
         "type": "сила волі",
         "name": "name2",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "10 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "10 хвилин"
       },
       {
         "id": "3",
         "type": "сила волі",
         "name": "name3",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "5 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "5 хвилин"
       }
     ]
   },
@@ -548,39 +380,21 @@
         "type": "сон",
         "name": "name1",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "7 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "7 хвилин"
       },
       {
         "id": "2",
         "type": "сила волі",
         "name": "name2",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "10 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "10 хвилин"
       },
       {
         "id": "3",
         "type": "сила волі",
         "name": "name3",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "5 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "5 хвилин"
       }
     ]
   },
@@ -594,39 +408,21 @@
         "type": "сон",
         "name": "name1",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "7 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "7 хвилин"
       },
       {
         "id": "2",
         "type": "сила волі",
         "name": "name2",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "10 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "10 хвилин"
       },
       {
         "id": "3",
         "type": "сила волі",
         "name": "name3",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "5 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "5 хвилин"
       }
     ]
   },
@@ -640,39 +436,21 @@
         "type": "сон",
         "name": "name1",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "7 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "7 хвилин"
       },
       {
         "id": "2",
         "type": "сила волі",
         "name": "name2",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "10 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "10 хвилин"
       },
       {
         "id": "3",
         "type": "сила волі",
         "name": "name3",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "5 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "5 хвилин"
       }
     ]
   },
@@ -686,39 +464,21 @@
         "type": "сон",
         "name": "name1",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "7 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "7 хвилин"
       },
       {
         "id": "2",
         "type": "сила волі",
         "name": "name2",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "10 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "10 хвилин"
       },
       {
         "id": "3",
         "type": "сила волі",
         "name": "name3",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "5 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "5 хвилин"
       }
     ]
   },
@@ -732,39 +492,21 @@
         "type": "сон",
         "name": "name1",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "7 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "7 хвилин"
       },
       {
         "id": "2",
         "type": "сила волі",
         "name": "name2",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "10 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "10 хвилин"
       },
       {
         "id": "3",
         "type": "сила волі",
         "name": "name3",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "5 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "5 хвилин"
       }
     ]
   },
@@ -778,39 +520,21 @@
         "type": "сон",
         "name": "name1",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "7 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "7 хвилин"
       },
       {
         "id": "2",
         "type": "сила волі",
         "name": "name2",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "10 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "10 хвилин"
       },
       {
         "id": "3",
         "type": "сила волі",
         "name": "name3",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-        "time": "5 хвилин",
-        "detailsExercise": {
-          "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
-          "audio": "https://melodiimp3.ru/besplatnye_melodii/melodii_iz_filmov_i_tv/muzyka_na_zvonok_iz_filma_ot_zakata_do_rassveta",
-          "video": "https://www.youtube.com/watch?v=xx6K6HV9W_Q&pp=ygUS0LzQtdC00LjRgtCw0YbRltGP",
-          "text": "Ранковий настрій"
-        }
+        "time": "5 хвилин"
       }
     ]
   }
