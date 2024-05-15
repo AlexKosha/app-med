@@ -18,6 +18,8 @@ const Practice = () => {
     setSound(sound);
     const status = await sound.getStatusAsync();
     setDuration(status.durationMillis);
+    await sound.playAsync();
+    setIsPlaying(true);
   };
 
   useEffect(() => {
@@ -59,10 +61,15 @@ const Practice = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Track is {isPlaying ? "Playing" : "Stopped"}</Text>
-      <Text>{`Position: ${Math.round(position / 1000)}s / ${Math.round(
-        duration / 1000
-      )}s`}</Text>
+      <Text style={styles.text}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
+        odio. Praesent libero. Sed cursus ante dapibus diam.
+      </Text>
+      <Text>
+        {progress
+          ? `${Math.round(position / 1000)}s / ${Math.round(duration / 1000)}s`
+          : ""}
+      </Text>
       <View style={styles.progressBarContainer}>
         <View style={[styles.progressBar, { width: `${progress}%` }]} />
       </View>
@@ -77,9 +84,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#ecf0f1",
-    padding: 10,
-    justifyContent: "center",
+    padding: 20,
+    // justifyContent: "center",
     alignItems: "center",
+  },
+  text: {
+    fontFamily: "Montserrat-Bold",
+    marginBottom: 20,
   },
   icon: {
     fontSize: 24,
@@ -90,7 +101,8 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#ddd",
     borderRadius: 10,
-    marginTop: 20,
+    marginTop: 10,
+    marginBottom: 10,
   },
   progressBar: {
     height: "100%",
@@ -98,70 +110,5 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
 });
-
-// const Practice = () => {
-//   const [sound, setSound] = useState();
-//   const [isPlaying, setIsPlaying] = useState(false);
-
-//   const loadSound = async () => {
-//     const { sound } = await Audio.Sound.createAsync(
-//       require("../img/Kate_Bush-Running_up_That_Hill.mp3"),
-//       {},
-//       onPlaybackStatusUpdate
-//     );
-//     setSound(sound);
-//   };
-
-//   useEffect(() => {
-//     return sound
-//       ? () => {
-//           console.log("Unloading Sound");
-//           sound.unloadAsync();
-//         }
-//       : undefined;
-//   }, [sound]);
-
-//   const onPlaybackStatusUpdate = (status) => {
-//     if (status.didJustFinish) {
-//       setIsPlaying(false);
-//     }
-//   };
-
-//   const togglePlayPause = async () => {
-//     if (!sound) {
-//       await loadSound();
-//     }
-//     if (isPlaying) {
-//       console.log("Pausing Sound");
-//       await sound.pauseAsync();
-//       setIsPlaying(false);
-//     } else {
-//       console.log("Playing Sound");
-//       await sound.playAsync();
-//       setIsPlaying(true);
-//     }
-//   };
-
-//   return (
-//     <View style={styles.container}>
-//       <Text>Track is {isPlaying ? "Playing" : "Stopped"}</Text>
-//       <Pressable onPress={togglePlayPause}>
-//         <Icon name={isPlaying ? "pause" : "play"} style={styles.icon} />
-//       </Pressable>
-//     </View>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#ecf0f1",
-//     padding: 10,
-//   },
-//   heartIcon: {
-//     fontSize: 24,
-//     color: "red",
-//   },
-// });
 
 export default Practice;
