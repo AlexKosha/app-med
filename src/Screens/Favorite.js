@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FlatList,
   Text,
@@ -8,9 +8,41 @@ import {
   Pressable,
 } from "react-native";
 import IconHeart from "react-native-vector-icons/AntDesign";
-import exercise from "../exercise.json";
+import * as SecureStore from "expo-secure-store";
 
 const Favorite = () => {
+  const [favorite, setFavorites] = useState([]);
+
+  useEffect(() => {
+    const loadFavorites = async () => {
+      try {
+        const storedFavorites = await SecureStore.getItemAsync("meditations");
+        const favorites = storedFavorites ? JSON.parse(storedFavorites) : [];
+        setFavorites(favorites);
+      } catch (error) {
+        console.error("Failed to load favorites:", error);
+      }
+    };
+
+    loadFavorites();
+  }, []);
+  const addMeditation = async (item) => {
+    const isMeditationExists = favorite.some(
+      (meditation) => meditation.name === item.name
+    );
+
+    if (isMeditationExists) {
+      const newFavorites = favorite.filter(
+        (meditation) => meditation.name !== item.name
+      );
+      await SecureStore.setItemAsync(
+        "meditations",
+        JSON.stringify(newFavorites)
+      );
+      setFavorites(newFavorites);
+    }
+  };
+
   const renderItem = ({ item }) => {
     return (
       <View>
@@ -23,7 +55,7 @@ const Favorite = () => {
               <Text>{item.time}</Text>
             </View>
             <View style={styles.iconContainer}>
-              <Pressable onPress={() => addMedation()}>
+              <Pressable onPress={() => addMeditation(item)}>
                 <IconHeart name="heart" style={styles.heartIcon} />
               </Pressable>
             </View>
@@ -35,11 +67,13 @@ const Favorite = () => {
 
   return (
     <View>
-      <FlatList
-        data={exercise}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-      />
+      {favorite.length !== 0 && (
+        <FlatList
+          data={favorite}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+        />
+      )}
     </View>
   );
 };
