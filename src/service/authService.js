@@ -39,7 +39,8 @@ export const logout = async () => {
   }
 };
 
-export const getProfile = async () => {
+export const getProfile = async (token) => {
+  setToken(`Bearer ${token}`);
   const { data } = await instance.get("/users/current");
   return data;
 };
