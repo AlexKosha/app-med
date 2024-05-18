@@ -21,29 +21,48 @@ const fetchFonts = () => {
   });
 };
 
+const fetchAndStoreUserProfile = async (token) => {
+  try {
+    const data = await getProfile(token);
+    await SecureStore.setItemAsync("user", JSON.stringify(data));
+  } catch (error) {
+    console.log("Error fetching and storing user profile:", error);
+    throw error;
+  }
+};
+
 export default function App() {
   const MainStack = createStackNavigator();
   const [dataLoaded, setDataLoaded] = useState(false);
-  const [isToken, setIsToken] = useState(null); // Ініціалізуємо як null для стану завантаження
+  const [isToken, setIsToken] = useState(null);
+
+  const loadFonts = async () => {
+    try {
+      await fetchFonts();
+    } catch (error) {
+      console.log("Error loading fonts:", error);
+    }
+  };
+
+  const checkToken = async () => {
+    try {
+      const storedToken = await SecureStore.getItemAsync("token");
+      if (storedToken) {
+        await fetchAndStoreUserProfile(storedToken);
+        setIsToken(true);
+      } else {
+        setIsToken(false);
+      }
+    } catch (error) {
+      setIsToken(false);
+      console.log("Error checking token:", error);
+    }
+  };
 
   useEffect(() => {
     const loadAppData = async () => {
-      try {
-        await fetchFonts();
-        const storedToken = await SecureStore.getItemAsync("token");
-        if (storedToken) {
-          const data = await getProfile(storedToken);
-          await SecureStore.setItemAsync("user", JSON.stringify(data));
-          setIsToken(true);
-        } else {
-          setIsToken(false);
-        }
-      } catch (error) {
-        setIsToken(false);
-        console.log(error);
-      } finally {
-        setDataLoaded(true); // Завантаження завершено
-      }
+      await Promise.all([loadFonts(), checkToken()]);
+      setDataLoaded(true);
     };
 
     loadAppData();
@@ -84,66 +103,6 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-// export default function App() {
-//   const MainStack = createStackNavigator();
-//   const [dataLoaded, setDataLoaded] = useState(false);
-//   const [isToken, setIsToken] = useState(null);
-
-//   useEffect(() => {
-//     const loadData = async () => {
-//       await fetchFonts();
-//       setDataLoaded(true);
-//     };
-
-//     const fetchUser = async () => {
-//       const storedToken = await SecureStore.getItemAsync("token");
-//       try {
-//         const data = await getProfile(storedToken);
-//         setIsToken(true);
-//         await SecureStore.setItemAsync("user", JSON.stringify(data));
-//       } catch (error) {
-//         setIsToken(false);
-//         console.log(error);
-//       }
-//     };
-
-//     fetchUser();
-//     loadData();
-//   }, []);
-
-//   if (!dataLoaded) {
-//     console.log(isToken);
-//     return <Text>Loading</Text>;
-//   }
-
-//   return (
-//     <NavigationContainer style={styles.container}>
-//       <MainStack.Navigator initialRouteName={isToken ? "Home" : "IntroScreen"}>
-//         <MainStack.Screen
-//           name="IntroScreen"
-//           component={IntroScreen}
-//           options={{ headerShown: false }}
-//         />
-//         <MainStack.Screen
-//           name="Registration"
-//           component={Registration}
-//           options={{ headerShown: false }}
-//         />
-//         <MainStack.Screen
-//           name="Login"
-//           component={Login}
-//           options={{ headerShown: false }}
-//         />
-//         <MainStack.Screen
-//           name="Home"
-//           component={TabNavigate}
-//           options={{ headerShown: false }}
-//         />
-//       </MainStack.Navigator>
-//     </NavigationContainer>
-//   );
-// }
 
 const styles = StyleSheet.create({
   container: {

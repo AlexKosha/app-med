@@ -46,7 +46,7 @@ const Quotes = () => {
     <View style={{ flex: 1 }}>
       <View style={styles.headerContainer}>
         <Image source={require("../img/logo.png")} style={styles.imageLogo} />
-        <Pressable onPress={handleNavigationToHome} style={{ marginTop: 20 }}>
+        <Pressable onPress={handleNavigationToHome}>
           <LinearGradient
             style={styles.btnGoBack}
             colors={["orange", "white", "orange"]}
@@ -61,9 +61,11 @@ const Quotes = () => {
         <Text style={styles.text}>
           Друзі, ми подбали про те, щоб корисні афірмації завжди були у вас під
           рукою. Гортайте галерею із зображеннями, обирайте ту, що відгукується
-          - і завантажуйте у форматі заставки на телефон. Або натисніть кнопку і
-          активуйте щоденне автоматизоване відправлення однієї нової афірмації
-          на ваш мобільний телефон.
+          - і завантажуйте у форматі заставки на телефон.
+        </Text>
+        <Text style={styles.text}>
+          Або натисніть кнопку і активуйте щоденне автоматизоване відправлення
+          однієї нової афірмації на ваш мобільний телефон.
         </Text>
         <FlatList
           data={imagesQuotes}
@@ -115,13 +117,13 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: "row",
     paddingHorizontal: 20,
+    paddingTop: 40,
     justifyContent: "space-evenly",
     alignItems: "center",
   },
   imageLogo: {
-    width: 150,
-    height: 170,
-    marginTop: 20,
+    width: 170,
+    height: 100,
   },
   btnGoBack: {
     width: 170,
@@ -142,8 +144,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "Montserrat-Medium",
-    textAlign: "center",
-    fontSize: 17,
+    fontSize: 16,
   },
   modalContainer: {
     position: "relative",
