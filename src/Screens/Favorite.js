@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   FlatList,
   Text,
@@ -8,25 +8,31 @@ import {
   Pressable,
 } from "react-native";
 import IconHeart from "react-native-vector-icons/AntDesign";
-import * as SecureStore from "expo-secure-store";
+import { useFocusEffect } from "@react-navigation/native";
+import {
+  getStoredFavorites,
+  saveMeditationsToStorage,
+} from "../helpers/favoriteMeditationsStorage";
 
 const Favorite = () => {
   const [favorite, setFavorites] = useState([]);
 
-  useEffect(() => {
-    const loadFavorites = async () => {
-      try {
-        const storedFavorites = await SecureStore.getItemAsync("meditations");
-        const favorites = storedFavorites ? JSON.parse(storedFavorites) : [];
-        setFavorites(favorites);
-      } catch (error) {
-        console.error("Failed to load favorites:", error);
-      }
-    };
+  const loadFavorites = async () => {
+    try {
+      const favorites = await getStoredFavorites();
+      setFavorites(favorites);
+    } catch (error) {
+      console.error("Failed to load favorites:", error);
+    }
+  };
 
-    loadFavorites();
-  }, []);
-  const addMeditation = async (item) => {
+  useFocusEffect(
+    useCallback(() => {
+      loadFavorites();
+    }, [])
+  );
+
+  const removeMeditation = async (item) => {
     const isMeditationExists = favorite.some(
       (meditation) => meditation.name === item.name
     );
@@ -35,10 +41,7 @@ const Favorite = () => {
       const newFavorites = favorite.filter(
         (meditation) => meditation.name !== item.name
       );
-      await SecureStore.setItemAsync(
-        "meditations",
-        JSON.stringify(newFavorites)
-      );
+      await saveMeditationsToStorage(newFavorites);
       setFavorites(newFavorites);
     }
   };
@@ -55,7 +58,7 @@ const Favorite = () => {
               <Text>{item.time}</Text>
             </View>
             <View style={styles.iconContainer}>
-              <Pressable onPress={() => addMeditation(item)}>
+              <Pressable onPress={() => removeMeditation(item)}>
                 <IconHeart name="heart" style={styles.heartIcon} />
               </Pressable>
             </View>

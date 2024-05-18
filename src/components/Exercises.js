@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   FlatList,
   Text,
@@ -8,26 +8,38 @@ import {
   Pressable,
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
-import * as SecureStore from "expo-secure-store";
+import { useFocusEffect } from "@react-navigation/native";
+import {
+  getStoredFavorites,
+  saveMeditationsToStorage,
+} from "../helpers/favoriteMeditationsStorage";
 
 const Exercises = ({ route, navigation }) => {
   const { text, exercise } = route.params.item;
-
   const [favorites, setFavorites] = useState([]);
 
-  useEffect(() => {
-    const loadFavorites = async () => {
-      try {
-        const storedFavorites = await SecureStore.getItemAsync("meditations");
-        const favorites = storedFavorites ? JSON.parse(storedFavorites) : [];
-        setFavorites(favorites);
-      } catch (error) {
-        console.error("Failed to load favorites:", error);
-      }
-    };
+  const removeDuplicateMeditations = (favorites, item) =>
+    favorites.filter((meditation) => meditation.name !== item.name);
 
-    loadFavorites();
-  }, []);
+  const isFavorite = (item) => {
+    return favorites.some((meditation) => meditation.name === item.name);
+  };
+
+  const loadFavorites = async () => {
+    try {
+      const favorites = await getStoredFavorites();
+      setFavorites(favorites);
+    } catch (error) {
+      console.error("Failed to load favorites:", error);
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      loadFavorites();
+      console.log(2);
+    }, [])
+  );
 
   const handleItemPress = (item) => {
     navigation.navigate("Practice", { item });
@@ -35,42 +47,22 @@ const Exercises = ({ route, navigation }) => {
 
   const addMeditation = async (item) => {
     try {
-      const storedFavorites = await SecureStore.getItemAsync("meditations");
-      console.log(storedFavorites, "----Storage----");
-      const favorites = storedFavorites ? JSON.parse(storedFavorites) : [];
-      console.log(favorites);
-      const isMeditationExists = favorites.some(
-        (meditation) => meditation.name === item.name
-      );
-
+      const favorites = await getStoredFavorites();
+      const isMeditationExists = isFavorite(item);
       if (isMeditationExists) {
-        // If the item exists, remove it
-        const newFavorites = favorites.filter(
-          (meditation) => meditation.name !== item.name
-        );
-        await SecureStore.setItemAsync(
-          "meditations",
-          JSON.stringify(newFavorites)
-        );
+        const newFavorites = removeDuplicateMeditations(favorites, item);
+        await saveMeditationsToStorage(newFavorites);
         setFavorites(newFavorites);
         console.log("Meditation removed:", item);
       } else {
-        // If the item does not exist, add it
         favorites.push(item);
-        await SecureStore.setItemAsync(
-          "meditations",
-          JSON.stringify(favorites)
-        );
+        await saveMeditationsToStorage(favorites);
         setFavorites(favorites);
         console.log("Meditation added:", item);
       }
     } catch (error) {
       console.error("Failed to add meditation:", error);
     }
-  };
-
-  const isFavorite = (item) => {
-    return favorites.some((meditation) => meditation.name === item.name);
   };
 
   const renderItem = ({ item }) => {

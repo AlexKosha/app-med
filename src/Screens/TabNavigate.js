@@ -6,7 +6,6 @@ import IconForProfile from "react-native-vector-icons/Ionicons";
 import Profile from "./Profile";
 import Favorite from "./Favorite";
 import HomeNavigate from "./HomeNavigate";
-import Diary from "./Diary";
 import DiaryNavigate from "./DiaryNavigate";
 
 const Tab = createBottomTabNavigator();
@@ -21,6 +20,7 @@ const TabNavigate = () => {
           paddingHorizontal: 40,
           paddingTop: 5,
         },
+        lazy: true,
       }}
     >
       <Tab.Screen
