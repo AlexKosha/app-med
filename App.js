@@ -59,12 +59,14 @@ export default function App() {
     }
   };
 
-  useEffect(() => {
-    const loadAppData = async () => {
-      await Promise.all([loadFonts(), checkToken()]);
-      setDataLoaded(true);
-    };
+  const loadAppData = async () => {
+    await Promise.all([loadFonts(), checkToken()]);
 
+    setDataLoaded(true);
+  };
+
+  useEffect(() => {
+    console.log(1);
     loadAppData();
   }, []);
 

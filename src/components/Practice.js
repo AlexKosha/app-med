@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import { Audio } from "expo-av";
+import Slider from "@react-native-community/slider";
 
 const Practice = () => {
   const [sound, setSound] = useState();
@@ -40,6 +41,12 @@ const Practice = () => {
     }
   };
 
+  const handleSliderChange = async (value) => {
+    if (sound) {
+      await sound.setPositionAsync(value);
+    }
+  };
+
   const togglePlayPause = async () => {
     if (!sound) {
       await loadSound();
@@ -57,6 +64,12 @@ const Practice = () => {
     }
   };
 
+  const formatTime = (timeMillis) => {
+    const minutes = Math.floor(timeMillis / 60000);
+    const seconds = Math.floor((timeMillis % 60000) / 1000);
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
+
   const progress = position ? (position / duration) * 100 : 0;
 
   return (
@@ -66,13 +79,21 @@ const Practice = () => {
         odio. Praesent libero. Sed cursus ante dapibus diam.
       </Text>
       <Text>
-        {progress
-          ? `${Math.round(position / 1000)}s / ${Math.round(duration / 1000)}s`
-          : ""}
+        {progress ? `${formatTime(position)} / ${formatTime(duration)}` : ""}
       </Text>
-      <View style={styles.progressBarContainer}>
+      {/* <View style={styles.progressBarContainer}>
         <View style={[styles.progressBar, { width: `${progress}%` }]} />
-      </View>
+      </View> */}
+      <Slider
+        style={styles.slider}
+        minimumValue={0}
+        maximumValue={duration}
+        value={position}
+        onSlidingComplete={handleSliderChange}
+        minimumTrackTintColor="#1EB1FC"
+        maximumTrackTintColor="#8E8E93"
+        thumbTintColor="#1EB1FC"
+      />
       <Pressable onPress={togglePlayPause}>
         <Icon name={isPlaying ? "pause" : "play"} style={styles.icon} />
       </Pressable>
@@ -85,7 +106,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#ecf0f1",
     padding: 20,
-    // justifyContent: "center",
     alignItems: "center",
   },
   text: {
@@ -108,6 +128,10 @@ const styles = StyleSheet.create({
     height: "100%",
     backgroundColor: "blue",
     borderRadius: 10,
+  },
+  slider: {
+    width: "100%",
+    height: 40,
   },
 });
 

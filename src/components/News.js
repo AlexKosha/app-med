@@ -22,8 +22,11 @@ const News = () => {
     return (
       <Pressable style={{ marginBottom: 20 }} onPress={() => toggleModal()}>
         <View style={styles.item}>
-          <Text style={styles.title}>Title</Text>
-          <Text style={styles.description}>Description</Text>
+          <Text style={styles.title}>Lorem ipsum dolor</Text>
+          <Text style={styles.description}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
+            odio. Praesent libero. Sed cursus ante dapibus diam.
+          </Text>
         </View>
       </Pressable>
     );
