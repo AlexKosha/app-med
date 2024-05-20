@@ -8,7 +8,7 @@ import {
   Pressable,
 } from "react-native";
 import IconHeart from "react-native-vector-icons/AntDesign";
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import {
   getStoredFavorites,
   saveMeditationsToStorage,
@@ -16,6 +16,7 @@ import {
 
 const Favorite = () => {
   const [favorite, setFavorites] = useState([]);
+  const navigation = useNavigation();
 
   const loadFavorites = async () => {
     try {
@@ -45,12 +46,14 @@ const Favorite = () => {
       setFavorites(newFavorites);
     }
   };
-
+  const handleItemPress = (item) => {
+    navigation.navigate("Practice", { item });
+  };
   const renderItem = ({ item }) => {
     return (
       <View>
         <View style={styles.line}></View>
-        <Pressable>
+        <Pressable onPress={() => handleItemPress(item)}>
           <View style={styles.itemContainer}>
             <Image style={styles.image} source={{ uri: item.img }} />
             <View style={styles.contentContainer}>

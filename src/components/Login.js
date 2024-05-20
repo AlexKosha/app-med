@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
   },
   question: {
     fontFamily: "Montserrat-Regular",
-    fontFamily: "Roboto",
+
     fontWeight: "400",
     fontSize: 16,
     lineHeight: 16,
