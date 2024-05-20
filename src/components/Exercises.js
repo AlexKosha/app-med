@@ -15,7 +15,7 @@ import {
 } from "../helpers/favoriteMeditationsStorage";
 
 const Exercises = ({ route, navigation }) => {
-  const { text, exercise } = route.params.item;
+  const { exercise } = route.params.item;
   const [favorites, setFavorites] = useState([]);
 
   const removeDuplicateMeditations = (favorites, item) =>

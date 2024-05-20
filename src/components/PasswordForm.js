@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   submitBtn: {
     position: "absolute",
     right: 25,
-    top: 15,
+    top: 22,
   },
 });
 
