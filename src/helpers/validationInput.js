@@ -1,10 +1,11 @@
 export const validateName = (name) => {
-  const regex = /^[A-Z][a-zA-Z]{3,}$/; // Перевірка першої великої букви і мінімум 3 букв
+  const regex = /^[A-Z][a-zA-Z]{2,}$/; // Перевірка першої великої букви і мінімум 3 букв
   return regex.test(name);
 };
 
 export const validateEmail = (email) => {
-  return email.includes("@");
+  const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  return emailRegex.test(email);
 };
 
 export const validatePassword = (password) => {

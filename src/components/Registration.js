@@ -15,21 +15,26 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import { CheckBox } from "react-native-btr";
 import * as imagePicker from "expo-image-picker";
 import Icon from "react-native-vector-icons/Octicons";
 import IconClose from "react-native-vector-icons/AntDesign";
 import * as Validate from "../helpers/validationInput";
 import { singUp } from "../service/authService";
 import { createFormDataRegister } from "../helpers/createFormDataRegister";
-import { CheckBox } from "react-native-btr";
+import { handleChange } from "../helpers/handleChangeInput";
 
 const RegistrationScreen = () => {
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [nameError, setNameError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [formErrors, setFormErrors] = useState({
+    nameError: "",
+    emailError: "",
+    passwordError: "",
+  });
   const [showPassword, setShowPassword] = useState(false);
   const [avatarSource, setAvatarSource] = useState(null);
   const [isFormValid, setIsFormValid] = useState(false);
@@ -38,7 +43,7 @@ const RegistrationScreen = () => {
 
   useEffect(() => {
     validateForm();
-  }, [name, email, password, nameError, emailError, passwordError]);
+  }, [formData, formErrors]);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -63,17 +68,14 @@ const RegistrationScreen = () => {
 
   const register = async () => {
     newUser = {
-      name,
-      email,
+      ...formData,
       avatarURL: avatarSource,
-      password,
     };
     try {
       setIsFormValid(false);
       const data = await singUp(createFormDataRegister(newUser));
       await SecureStore.setItemAsync("token", data.token);
-      const userString = JSON.stringify(data.user);
-      await SecureStore.setItemAsync("user", userString);
+      await SecureStore.setItemAsync("user", JSON.stringify(data.user));
       setIsFormValid(true);
       navigation.navigate("Home");
       Alert.alert(
@@ -81,55 +83,47 @@ const RegistrationScreen = () => {
         "Вітаємо! Ви успішно зареєструвалися! Хочемо вам повідомити, що у нашого додатку широкі офлайн можливості. Користуйтеся із задоволенням. З піклуванням про вас, команда",
         [{ text: "Закрити" }]
       );
-      return data;
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleRegister = async () => {
-    register();
+    await register();
     return;
   };
 
-  const dismissKeyboard = () => {
-    Keyboard.dismiss();
-  };
+  const handleNameChange = handleChange(
+    setFormData,
+    "name",
+    Validate.validateName,
+    setFormErrors,
+    "nameError",
+    "Починатися з великої літери і мінімум 3 букви"
+  );
 
-  const handleNameChange = (text) => {
-    const trimmedText = text.trim();
-    setName(trimmedText);
-    if (!Validate.validateName(trimmedText)) {
-      setNameError("Починатися з великої літери і мінімум 3 букви");
-    } else {
-      setNameError("");
-    }
-  };
+  const handleEmailChange = handleChange(
+    setFormData,
+    "email",
+    Validate.validateEmail,
+    setFormErrors,
+    "emailError",
+    "Введіть коректну електронну пошту"
+  );
 
-  const handleEmailChange = (text) => {
-    const trimmedText = text.trim();
-    setEmail(trimmedText);
-    if (!Validate.validateEmail(trimmedText)) {
-      setEmailError("Введіть коректну електронну пошту");
-    } else {
-      setEmailError("");
-    }
-  };
-
-  const handlePasswordChange = (text) => {
-    const trimmedText = text.trim();
-    setPassword(trimmedText);
-    if (!Validate.validatePassword(trimmedText)) {
-      setPasswordError("Пароль повинен містити щонайменше 6 символів");
-    } else {
-      setPasswordError("");
-    }
-  };
+  const handlePasswordChange = handleChange(
+    setFormData,
+    "password",
+    Validate.validatePassword,
+    setFormErrors,
+    "passwordError",
+    "Пароль повинен містити щонайменше 6 символів"
+  );
 
   const validateForm = () => {
-    const isNameValid = name && !nameError;
-    const isEmailValid = email && !emailError;
-    const isPasswordValid = password && !passwordError;
+    const isNameValid = formData.name && !formErrors.nameError;
+    const isEmailValid = formData.email && !formErrors.emailError;
+    const isPasswordValid = formData.password && !formErrors.passwordError;
 
     setIsFormValid(isNameValid && isEmailValid && isPasswordValid);
   };
@@ -151,7 +145,7 @@ const RegistrationScreen = () => {
     >
       <TouchableOpacity
         style={{ flex: 1 }}
-        onPress={dismissKeyboard}
+        onPress={Keyboard.dismiss}
         activeOpacity={1}
       >
         <KeyboardAvoidingView
@@ -194,14 +188,20 @@ const RegistrationScreen = () => {
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handleNameChange}
               />
-              {renderError(nameError, [styles.errorMessage, { top: -20 }])}
+              {renderError(formErrors.nameError, [
+                styles.errorMessage,
+                { top: -20 },
+              ])}
               <TextInput
                 style={styles.input}
                 placeholder="Email"
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handleEmailChange}
               />
-              {renderError(emailError, [styles.errorMessage, { top: 38 }])}
+              {renderError(formErrors.emailError, [
+                styles.errorMessage,
+                { top: 38 },
+              ])}
               <TextInput
                 style={[styles.input, { marginBottom: 0 }]}
                 placeholder="Password"
@@ -209,14 +209,11 @@ const RegistrationScreen = () => {
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handlePasswordChange}
               />
-              {renderError(passwordError, [
+              {renderError(formErrors.passwordError, [
                 styles.errorMessage,
                 { bottom: 40 },
               ])}
-              <Pressable
-                // style={styles.positionBtn}
-                onPress={toggleShowPassword}
-              >
+              <Pressable onPress={toggleShowPassword}>
                 <Text style={styles.positionPass}>
                   {showPassword ? "Сховати" : "Показати"}
                 </Text>
@@ -224,8 +221,22 @@ const RegistrationScreen = () => {
             </View>
 
             <View>
-              <View style={{ flexDirection: "row", padding: 10 }}>
-                <Text> Погодитися з умовами конфіденційності</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  padding: 10,
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    marginRight: 5,
+                    fontFamily: "Montserrat-Medium",
+                    fontSize: 12,
+                  }}
+                >
+                  Погодитися з умовами конфіденційності
+                </Text>
                 <CheckBox
                   checked={isChecked}
                   onPress={toggleCheckBox}
