@@ -7,6 +7,7 @@ import Profile from "./Profile";
 import Favorite from "./Favorite";
 import HomeNavigate from "./HomeNavigate";
 import DiaryNavigate from "./DiaryNavigate";
+import FavoriteNavigate from "./FavoriteNavigate";
 
 const Tab = createBottomTabNavigator();
 const TabNavigate = () => {
@@ -59,9 +60,10 @@ const TabNavigate = () => {
         })}
       />
       <Tab.Screen
-        name="Favorite"
-        component={Favorite}
+        name="FavoriteNavigate"
+        component={FavoriteNavigate}
         options={() => ({
+          headerShown: false,
           title: "Обрані",
           headerTitleAlign: "center",
           tabBarLabel: "",

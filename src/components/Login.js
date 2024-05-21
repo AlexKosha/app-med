@@ -50,10 +50,6 @@ const LoginScreen = () => {
     return;
   };
 
-  const dismissKeyboard = () => {
-    Keyboard.dismiss();
-  };
-
   const handleEmailChange = (text) => {
     setEmail(text.trim());
     if (text.trim().length === 0) {
@@ -82,7 +78,7 @@ const LoginScreen = () => {
     >
       <TouchableOpacity
         style={{ flex: 1 }}
-        onPress={dismissKeyboard}
+        onPress={Keyboard.dismiss}
         activeOpacity={1}
       >
         <KeyboardAvoidingView
@@ -102,21 +98,24 @@ const LoginScreen = () => {
                 onChangeText={handleEmailChange}
               />
               <TextInput
-                style={[styles.input, { marginBottom: 0 }]}
+                style={[styles.input, { marginBottom: 5 }]}
                 placeholder="Password"
                 secureTextEntry={!showPassword}
                 value={password}
                 placeholderTextColor="#BDBDBD"
                 onChangeText={handlePasswordChange}
               />
-              <Pressable
-                // style={styles.positionPass}
-                onPress={toggleShowPassword}
-              >
+              <Pressable onPress={toggleShowPassword}>
                 <Text style={styles.showPasswordText}>
                   {showPassword ? "Сховати" : "Показати"}
                 </Text>
               </Pressable>
+              <Text
+                onPress={() => navigation.navigate("Registration")}
+                style={styles.forgotPass}
+              >
+                Забули пароль
+              </Text>
             </View>
             <View>
               <Pressable
@@ -224,23 +223,12 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
     lineHeight: 16,
   },
-  //
-  // errorTextEmail: {
-  //   position: "absolute",
-  //   top: -18,
-  //   left: 0,
-  //   color: "red",
-  //   fontSize: 12,
-  //   fontFamily: "Montserrat-Regular",
-  // },
-  // errorTextPassword: {
-  //   color: "red",
-  //   fontSize: 12,
-  //   position: "absolute",
-  //   top: 50,
-  //   left: 0,
-  //   fontFamily: "Montserrat-Regular",
-  // },
+  forgotPass: {
+    width: 100,
+    fontFamily: "Montserrat-Bold",
+    fontSize: 12,
+    lineHeight: 16,
+  },
 });
 
 export default LoginScreen;
