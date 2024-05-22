@@ -3,23 +3,13 @@ import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import * as Font from "expo-font";
 import * as SecureStore from "expo-secure-store";
-import Registration from "./src/components/Registration";
-import Login from "./src/components/Login";
+import Registration from "./src/components/Registration/Registration";
+import Login from "./src/components/Login/Login";
 import IntroScreen from "./src/Screens/IntroScreen";
 import TabNavigate from "./src/Screens/TabNavigate";
 import { getProfile } from "./src/service/authService";
-
-const fetchFonts = () => {
-  return Font.loadAsync({
-    "Montserrat-Regular": require("./assets/fonts/Montserrat-Regular.ttf"),
-    "Montserrat-Bold": require("./assets/fonts/Montserrat-Bold.ttf"),
-    "Montserrat-Black": require("./assets/fonts/Montserrat-Black.ttf"),
-    "Montserrat-ExtraBold": require("./assets/fonts/Montserrat-ExtraBold.ttf"),
-    "Montserrat-Medium": require("./assets/fonts/Montserrat-Medium.ttf"),
-  });
-};
+import { fetchFonts } from "./src/helpers/fetchFonts";
 
 const fetchAndStoreUserProfile = async (token) => {
   try {

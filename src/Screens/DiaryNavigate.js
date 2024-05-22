@@ -1,8 +1,8 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import Icon from "react-native-vector-icons/AntDesign";
 import { TouchableOpacity } from "react-native";
-import NotesModalForm from "../components/NotesModalForm";
-import Diary from "./Diary";
+import NotesModalForm from "../components/NotesModalForm/NotesModalForm";
+import Diary from "./Diary/Diary";
 
 const DiaryNavigate = () => {
   const MainStack = createStackNavigator();
