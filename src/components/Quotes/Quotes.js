@@ -8,7 +8,11 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Alert,
 } from "react-native";
+import * as FileSystem from "expo-file-system";
+import { shareAsync } from "expo-sharing";
+import * as MediaLibrary from "expo-media-library";
 import Icon from "react-native-vector-icons/AntDesign";
 import { LinearGradient } from "expo-linear-gradient";
 import { imagesQuotes } from "../../helpers/imagesQuotes";
@@ -19,6 +23,7 @@ const Quotes = () => {
   const navigation = useNavigation();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalImgUrl, setModalImgUrl] = useState(null);
+  const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
 
   const handleNavigationToHome = () => {
     navigation.navigate("MainMenu");
@@ -29,6 +34,41 @@ const Quotes = () => {
     setIsModalVisible(!isModalVisible);
   };
 
+  const downloadFormUrl = async () => {
+    const filename = "quotes.png";
+    const results = await FileSystem.downloadAsync(
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
+      FileSystem.documentDirectory + filename
+    );
+    console.log(results.uri);
+
+    downloadAndSaveImage(results.uri);
+  };
+
+  // const saveImage = (uri) => {
+  //   shareAsync(uri);
+  // };
+  const downloadAndSaveImage = async (uri) => {
+    try {
+      console.log(permissionResponse);
+      if (permissionResponse.status !== "granted") {
+        await requestPermission();
+        Alert.alert(
+          "Permission Denied",
+          "Storage permission is required to save photos."
+        );
+        return;
+      }
+
+      console.log(2);
+      MediaLibrary.saveToLibraryAsync(uri);
+      Alert.alert("Success", "Photo saved to gallery!");
+      toggleModal(null); // Close modal after saving
+    } catch (error) {
+      console.error("Saving Error:", error);
+      Alert.alert("Saving Error", error.message);
+    }
+  };
   const renderItem = ({ index }) => {
     return (
       <Pressable onPress={() => toggleModal(imagesQuotes[index])}>
@@ -84,7 +124,7 @@ const Quotes = () => {
             </Pressable>
           </ImageBackground>
           <TouchableOpacity
-            onPress={() => toggleModal(null)}
+            onPress={() => downloadFormUrl()}
             style={styles.closeButtonSave}
           >
             <Text style={styles.buttonText}>Завантажити в галерею</Text>
