@@ -1,13 +1,13 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import Icon from "react-native-vector-icons/AntDesign";
-import Quotes from "../components/Quotes";
-import Archangels from "../components/Archangels";
+import Quotes from "../components/Quotes/Quotes";
+import Archangels from "../components/Archangles/Archangels";
 import Meditation from "../components/Meditation";
-import Exercises from "../components/Exercises";
+import Exercises from "../components/Exercises/Exercises";
 import MainMenu from "../components/MainMenu";
 import News from "../components/News";
 import { TouchableOpacity } from "react-native";
-import Practice from "../components/Practice";
+import Practice from "../components/Practice/Practice";
 
 const HomeNavigate = () => {
   const MainStack = createStackNavigator();

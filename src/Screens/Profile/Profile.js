@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-// import IconSetting from "react-native-vector-icons/Ionicons";
 import * as SecureStore from "expo-secure-store";
 import {
   Image,
   ImageBackground,
   KeyboardAvoidingView,
   Platform,
-  Pressable,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
@@ -15,9 +12,10 @@ import {
   Keyboard,
 } from "react-native";
 import * as imagePicker from "expo-image-picker";
-import PasswordForm from "../components/PasswordForm";
-import UserInfoForm from "../components/UserInfoForm";
-import { updateAvatar } from "../service/authService";
+import PasswordForm from "../../components/PasswordForm";
+import UserInfoForm from "../../components/UserInfoForm";
+import { updateAvatar } from "../../service/authService";
+import { styles } from "./ProfileStyles";
 
 const Profile = () => {
   const [user, setUser] = useState({ name: "", email: "", avatarURL: "" });
@@ -113,37 +111,5 @@ const Profile = () => {
     </ImageBackground>
   );
 };
-
-const styles = StyleSheet.create({
-  backImage: {
-    flex: 1,
-    paddingVertical: 50,
-    paddingHorizontal: 20,
-  },
-  container: {
-    flex: 1,
-    paddingTop: 20,
-    alignItems: "center",
-    position: "relative",
-  },
-  avatar: {
-    width: 120,
-    height: 120,
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-  },
-  btnAvatar: {
-    backgroundColor: "#FF6C00",
-    borderRadius: 100,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    marginVertical: 10,
-  },
-  userName: {
-    fontSize: 30,
-    marginVertical: 10,
-    fontFamily: "Montserrat-Bold",
-  },
-});
 
 export default Profile;

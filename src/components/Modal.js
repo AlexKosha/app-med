@@ -4,9 +4,7 @@ import {
   Modal,
   StyleSheet,
   TouchableWithoutFeedback,
-  KeyboardAvoidingView,
-  Platform,
-} from "react-native";
+  } from "react-native";
 
 const MainModal = ({ isVisible, children, onClose }) => {
   return (

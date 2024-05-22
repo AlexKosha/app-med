@@ -1,18 +1,12 @@
 import React, { useCallback, useState } from "react";
-import {
-  FlatList,
-  Text,
-  View,
-  Image,
-  StyleSheet,
-  Pressable,
-} from "react-native";
+import { FlatList, Text, View, Image, Pressable } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import { useFocusEffect } from "@react-navigation/native";
 import {
   getStoredFavorites,
   saveMeditationsToStorage,
-} from "../helpers/favoriteMeditationsStorage";
+} from "../../helpers/favoriteMeditationsStorage";
+import { styles } from "./ExercisesStyles";
 
 const Exercises = ({ route, navigation }) => {
   const { exercise } = route.params.item;
@@ -53,12 +47,10 @@ const Exercises = ({ route, navigation }) => {
         const newFavorites = removeDuplicateMeditations(favorites, item);
         await saveMeditationsToStorage(newFavorites);
         setFavorites(newFavorites);
-        console.log("Meditation removed:", item);
       } else {
         favorites.push(item);
         await saveMeditationsToStorage(favorites);
         setFavorites(favorites);
-        console.log("Meditation added:", item);
       }
     } catch (error) {
       console.error("Failed to add meditation:", error);
@@ -103,41 +95,5 @@ const Exercises = ({ route, navigation }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  line: {
-    height: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-    backgroundColor: "gray",
-    marginBottom: 10,
-  },
-  itemContainer: {
-    paddingLeft: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  image: {
-    width: 150,
-    height: 150,
-    resizeMode: "cover",
-    marginRight: 10,
-  },
-  contentContainer: {
-    flexDirection: "column",
-    marginLeft: 10,
-  },
-  iconContainer: {
-    flex: 1,
-    alignItems: "flex-end",
-    paddingRight: 10,
-    paddingTop: 5,
-  },
-  heartIcon: {
-    fontSize: 24,
-    color: "red",
-  },
-});
 
 export default Exercises;

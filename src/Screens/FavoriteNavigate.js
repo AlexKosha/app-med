@@ -1,8 +1,8 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import Icon from "react-native-vector-icons/AntDesign";
 import { TouchableOpacity } from "react-native";
-import Favorite from "./Favorite";
-import Practice from "../components/Practice";
+import Favorite from "./Favorite/Favorite";
+import Practice from "../components/Practice/Practice";
 
 const FavoriteNavigate = () => {
   const MainStack = createStackNavigator();

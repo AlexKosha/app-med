@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import { Audio } from "expo-av";
 import Slider from "@react-native-community/slider";
+import { styles } from "./PracticeStyles";
 
 const Practice = () => {
   const [sound, setSound] = useState();
@@ -12,7 +13,7 @@ const Practice = () => {
 
   const loadSound = async () => {
     const { sound } = await Audio.Sound.createAsync(
-      require("../img/Kate_Bush-Running_up_That_Hill.mp3"),
+      require("../../img/Kate_Bush-Running_up_That_Hill.mp3"),
       {},
       onPlaybackStatusUpdate
     );
@@ -100,39 +101,5 @@ const Practice = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#ecf0f1",
-    padding: 20,
-    alignItems: "center",
-  },
-  text: {
-    fontFamily: "Montserrat-Bold",
-    marginBottom: 20,
-  },
-  icon: {
-    fontSize: 24,
-    color: "red",
-  },
-  progressBarContainer: {
-    height: 20,
-    width: "100%",
-    backgroundColor: "#ddd",
-    borderRadius: 10,
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  progressBar: {
-    height: "100%",
-    backgroundColor: "blue",
-    borderRadius: 10,
-  },
-  slider: {
-    width: "100%",
-    height: 40,
-  },
-});
 
 export default Practice;
