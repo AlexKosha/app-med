@@ -1,23 +1,67 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { styles } from "./DiaryStyles";
+import {
+  getStoredFavoritesDiaries,
+  saveDiaryToStorage,
+} from "../../helpers/diaryStorage";
 
 const Diary = () => {
   const [notes, setNotes] = useState([]);
   const navigation = useNavigation();
 
-  const addNote = (newNote) => {
-    setNotes((prevNotes) => [...prevNotes, newNote]);
+  const loadFavoritesDiary = async () => {
+    try {
+      const favorites = await getStoredFavoritesDiaries();
+      setNotes(favorites);
+    } catch (error) {
+      console.error("Failed to load favorites:", error);
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      loadFavoritesDiary();
+    }, [])
+  );
+
+  // const addNote = async (newNote) => {
+  //   await saveDiaryToStorage(newNote);
+  //   setNotes((prevNotes) => [...prevNotes, newNote]);
+  //   navigation.navigate("Diary");
+  // };
+
+  const addNote = async (newNote) => {
+    setNotes((prevNotes) => {
+      console.log("====================================");
+      console.log("prevNotes type:", typeof prevNotes);
+      console.log("prevNotes isArray:", Array.isArray(prevNotes));
+      console.log("====================================");
+
+      const updatedNotes = Array.isArray(prevNotes)
+        ? [...prevNotes, newNote]
+        : [newNote];
+      saveDiaryToStorage(updatedNotes);
+      return updatedNotes;
+    });
     navigation.navigate("Diary");
   };
 
-  const deleteNote = (id) => {
-    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+  // const deleteNote = (id) => {
+  //   setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
+  // };
+
+  const deleteNote = async (id) => {
+    setNotes((prevNotes) => {
+      const updatedNotes = prevNotes.filter((note) => note.id !== id);
+      saveDiaryToStorage(updatedNotes);
+      return updatedNotes;
+    });
   };
 
-  const updateNote = (updatedNote) => {
+  const updateNote = async (updatedNote) => {
     if (
       updatedNote.title.trim() === "" ||
       updatedNote.description.trim() === ""
@@ -28,9 +72,14 @@ const Diary = () => {
       return;
     }
 
-    const filteredNotes = notes.filter((note) => note.id !== updatedNote.id);
+    // const filteredNotes = notes.filter((note) => note.id !== updatedNote.id);
 
-    setNotes([...filteredNotes, updatedNote]);
+    // setNotes([...filteredNotes, updatedNote]);
+    // navigation.navigate("Diary");
+    const filteredNotes = notes.filter((note) => note.id !== updatedNote.id);
+    const updatedNotes = [...filteredNotes, updatedNote];
+    await saveDiaryToStorage(updatedNotes);
+    setNotes(updatedNotes);
     navigation.navigate("Diary");
   };
 
