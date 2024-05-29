@@ -10,7 +10,6 @@ import { lazy, Suspense } from "react";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 
-// Динамічне завантаження компонентів
 const Quotes = lazy(() => import("../components/Quotes/Quotes"));
 const Archangels = lazy(() => import("../components/Archangles/Archangels"));
 const Meditation = lazy(() => import("../components/Meditation"));

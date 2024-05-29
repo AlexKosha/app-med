@@ -11,3 +11,7 @@ export const validateEmail = (email) => {
 export const validatePassword = (password) => {
   return password.length >= 6;
 };
+
+export const validateOtp = (otp) => {
+  return otp.length > 0;
+};
