@@ -1,8 +1,9 @@
 import "react-native-gesture-handler";
 import { Suspense, lazy, useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import Icon from "react-native-vector-icons/AntDesign";
 import * as SecureStore from "expo-secure-store";
 // import Registration from "./src/components/Registration/Registration";
 // import Login from "./src/components/Login/Login";
@@ -15,8 +16,8 @@ const Registration = lazy(() =>
   import("./src/components/Registration/Registration")
 );
 const Login = lazy(() => import("./src/components/Login/Login"));
+const ResetPassword = lazy(() => import("./src/components/ResetPassword"));
 const IntroScreen = lazy(() => import("./src/Screens/IntroScreen"));
-// const TabNavigate = lazy(() => import("./src/Screens/TabNavigate"));
 
 const fetchAndStoreUserProfile = async (token) => {
   try {
@@ -99,6 +100,24 @@ export default function App() {
             name="Registration"
             component={Registration}
             options={{ headerShown: false }}
+          />
+          <MainStack.Screen
+            name="ResetPassword"
+            component={ResetPassword}
+            options={({ navigation }) => ({
+              title: "Відновити пароль",
+              headerTitleAlign: "center",
+              headerLeft: () => (
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                  <Icon
+                    name="arrowleft"
+                    size={30}
+                    color="black"
+                    style={{ marginLeft: 10 }}
+                  />
+                </TouchableOpacity>
+              ),
+            })}
           />
           <MainStack.Screen
             name="Login"
