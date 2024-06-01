@@ -13,5 +13,6 @@ export const validatePassword = (password) => {
 };
 
 export const validateOtp = (otp) => {
-  return otp.length > 0;
+  return otp.length > 1;
 };
+
