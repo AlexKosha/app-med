@@ -12,6 +12,8 @@ import {
   View,
 } from "react-native";
 import { handleChange } from "../helpers/handleChangeInput";
+import { forgotPass, restorePassword } from "../service/authService";
+import { useNavigation } from "@react-navigation/native";
 
 const ResetPassword = () => {
   const [formData, setFormData] = useState({
@@ -26,14 +28,52 @@ const ResetPassword = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isOtpCode, setIsOtpCode] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
     validateForm();
   }, [formData, formErrors]);
 
+  const handleSendOtpCode = async () => {
+    try {
+      await forgotPass({ email: formData.email });
+      setFormData({
+        ...formData,
+        otp: "",
+        password: "",
+      });
+      setIsOtpCode(true);
+      setIsPasswordValid(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChangePassword = async () => {
+    const newPassword = { email: formData.email, password: formData.password };
+    try {
+      const data = await restorePassword(formData.otp, newPassword);
+      navigation.navigate("Login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleBackToEmail = () => {
+    setFormData({
+      ...formData,
+      otp: "",
+      password: "",
+    });
+    setIsOtpCode(false);
+    setIsPasswordValid(false);
+  };
+
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
+    console.log(formData);
   };
 
   const handleOtpChange = handleChange(
@@ -70,9 +110,10 @@ const ResetPassword = () => {
   const validateForm = () => {
     const isEmailValid = formData.email && !formErrors.emailError;
     const isPasswordValid = formData.password && !formErrors.passwordError;
-    const isOtpValid = formData.password && !formErrors.otpError;
+    const isOtpValid = formData.otp && !formErrors.otpError;
 
-    setIsFormValid(isEmailValid && isPasswordValid && isOtpValid);
+    setIsEmailValid(isEmailValid);
+    setIsPasswordValid(isOtpValid && isPasswordValid);
   };
 
   return (
@@ -83,21 +124,22 @@ const ResetPassword = () => {
     >
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ flex: 1, justifyContent: "flex-start" }}
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
       >
-        <View style={{ position: "relative", width: "100%" }}>
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            placeholderTextColor="#BDBDBD"
-            onChangeText={handleEmailChange}
-          />
-          {renderError(formErrors.emailError, [
-            styles.errorMessage,
-            { top: 38 },
-          ])}
+        <View style={styles.container}>
           {isOtpCode ? (
-            <View>
+            <View style={styles.form}>
+              <TextInput
+                style={[styles.input, { marginBottom: 16 }]}
+                placeholder="Новий пароль"
+                secureTextEntry={!showPassword}
+                placeholderTextColor="#BDBDBD"
+                onChangeText={handlePasswordChange}
+              />
+              {renderError(formErrors.passwordError, [
+                styles.errorMessage,
+                { top: -20 },
+              ])}
               <TextInput
                 style={styles.input}
                 placeholder="Код"
@@ -106,40 +148,51 @@ const ResetPassword = () => {
               />
               {renderError(formErrors.otpError, [
                 styles.errorMessage,
-                { top: -20 },
+                { top: 47 },
               ])}
-              <TextInput
-                style={[styles.input, { marginBottom: 0 }]}
-                placeholder="Password"
-                secureTextEntry={!showPassword}
-                placeholderTextColor="#BDBDBD"
-                onChangeText={handlePasswordChange}
-              />
-              {renderError(formErrors.passwordError, [
-                styles.errorMessage,
-                { bottom: 40 },
-              ])}
-              <Pressable onPress={toggleShowPassword}>
-                <Text style={styles.positionPass}>
+              <Pressable onPress={toggleShowPassword} style={styles.togglePass}>
+                <Text style={styles.togglePassText}>
                   {showPassword ? "Сховати" : "Показати"}
                 </Text>
               </Pressable>
               <Pressable
-                style={styles.button}
-                disabled={!isFormValid}
-                onPress={() => setIsOtpCode(true)}
+                disabled={!isPasswordValid}
+                style={[
+                  styles.button,
+                  !isPasswordValid && styles.buttonDisabled,
+                ]}
+                onPress={handleChangePassword}
+              >
+                <Text style={styles.buttonText}>Змінити пароль</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.button, styles.backButton]}
+                onPress={handleBackToEmail}
+              >
+                <Text style={styles.buttonText}>Назад</Text>
+              </Pressable>
+            </View>
+          ) : (
+            <View style={styles.form}>
+              <TextInput
+                style={styles.input}
+                value={formData.email}
+                placeholder="Email"
+                placeholderTextColor="#BDBDBD"
+                onChangeText={handleEmailChange}
+              />
+              {renderError(formErrors.emailError, [
+                styles.errorMessage,
+                { top: -20 },
+              ])}
+              <Pressable
+                disabled={!isEmailValid}
+                style={[styles.button, !isEmailValid && styles.buttonDisabled]}
+                onPress={handleSendOtpCode}
               >
                 <Text style={styles.buttonText}>Відправити</Text>
               </Pressable>
             </View>
-          ) : (
-            <Pressable
-              //   disabled={!isFormValid}
-              style={styles.button}
-              onPress={() => setIsOtpCode(true)}
-            >
-              <Text style={styles.buttonText}>Відправити</Text>
-            </Pressable>
           )}
         </View>
       </KeyboardAvoidingView>
@@ -148,17 +201,24 @@ const ResetPassword = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    width: "90%",
+    // alignItems: "center",
+  },
+  form: {
+    width: "100%",
+    // alignItems: "center",
+  },
   input: {
     fontFamily: "Montserrat-Regular",
-    position: "relative",
-    height: 40,
+    height: 50,
     width: "100%",
     backgroundColor: "#F6F6F6",
     borderColor: "#E8E8E8",
     borderWidth: 1,
     marginBottom: 10,
-    paddingHorizontal: 10,
-    marginBottom: 16,
+    paddingHorizontal: 15,
+    borderRadius: 10,
   },
   errorMessage: {
     fontFamily: "Montserrat-Regular",
@@ -167,29 +227,37 @@ const styles = StyleSheet.create({
     color: "red",
     left: 0,
   },
-  positionPass: {
-    fontFamily: "Montserrat-Regular",
+  togglePass: {
     position: "absolute",
-    bottom: 11,
-    right: 16,
+    right: 15,
+    top: 15,
+  },
+  togglePassText: {
+    fontFamily: "Montserrat-Regular",
+    fontSize: 14,
+    color: "#FF6C00",
   },
   button: {
-    borderRadius: 100,
-    paddingVertical: 16,
+    borderRadius: 10,
+    paddingVertical: 15,
     paddingHorizontal: 32,
-    width: 343,
-    height: 51,
+    width: "100%",
     backgroundColor: "#FF6C00",
+    marginTop: 10,
   },
   buttonDisabled: {
     backgroundColor: "#CCCCCC",
     pointerEvents: "none",
   },
   buttonText: {
-    fontFamily: "Montserrat-Regular",
+    fontFamily: "Montserrat-Bold",
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
+  },
+  backButton: {
+    backgroundColor: "#FF6C00",
+    marginTop: 15,
   },
 });
 

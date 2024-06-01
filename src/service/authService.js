@@ -69,11 +69,11 @@ export const verify = async () => {
   return data;
 };
 
-export const forgotPass = async () => {
+export const forgotPass = async (body) => {
   const data = await instance.post("/users/forgotPassword", body);
   return data;
 };
 
-export const restorePassword = async () => {
+export const restorePassword = async (otp, body) => {
   const data = await instance.post(`/users//restorePassword/${otp}`, body);
 };
