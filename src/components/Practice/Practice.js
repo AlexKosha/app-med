@@ -8,12 +8,14 @@ import { styles } from "./PracticeStyles";
 const Practice = () => {
   const [sound, setSound] = useState();
   const [isPlaying, setIsPlaying] = useState(false);
-  const [duration, setDuration] = useState(0); // Total duration of the audio
-  const [position, setPosition] = useState(0); // Current position of the audio playback
+  const [duration, setDuration] = useState(0);
+  const [position, setPosition] = useState(0);
 
   const loadSound = async () => {
     const { sound } = await Audio.Sound.createAsync(
-      require("../../img/Kate_Bush-Running_up_That_Hill.mp3"),
+      {
+        uri: "https://drive.google.com/uc?export=open&id=1OFOd5Tj-Z6-ITSKYmIkovFaYePsKTfch",
+      },
       {},
       onPlaybackStatusUpdate
     );

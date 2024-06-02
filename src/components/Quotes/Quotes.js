@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FlatList,
   Image,
@@ -9,9 +9,9 @@ import {
   View,
   TouchableOpacity,
   Alert,
+  s,
 } from "react-native";
 import * as FileSystem from "expo-file-system";
-import { shareAsync } from "expo-sharing";
 import * as MediaLibrary from "expo-media-library";
 import Icon from "react-native-vector-icons/AntDesign";
 import { LinearGradient } from "expo-linear-gradient";
@@ -37,20 +37,15 @@ const Quotes = () => {
   const downloadFormUrl = async () => {
     const filename = "quotes.png";
     const results = await FileSystem.downloadAsync(
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
+      "https://drive.google.com/uc?export=view&id=1N2SKbzvg7g1ypeHJSvjL5B-S9cV7o232",
       FileSystem.documentDirectory + filename
     );
-    console.log(results.uri);
 
     downloadAndSaveImage(results.uri);
   };
 
-  // const saveImage = (uri) => {
-  //   shareAsync(uri);
-  // };
   const downloadAndSaveImage = async (uri) => {
     try {
-      console.log(permissionResponse);
       if (permissionResponse.status !== "granted") {
         await requestPermission();
         Alert.alert(
@@ -60,15 +55,15 @@ const Quotes = () => {
         return;
       }
 
-      console.log(2);
       MediaLibrary.saveToLibraryAsync(uri);
       Alert.alert("Success", "Photo saved to gallery!");
-      toggleModal(null); // Close modal after saving
+      toggleModal(null);
     } catch (error) {
       console.error("Saving Error:", error);
       Alert.alert("Saving Error", error.message);
     }
   };
+
   const renderItem = ({ index }) => {
     return (
       <Pressable onPress={() => toggleModal(imagesQuotes[index])}>
@@ -82,6 +77,7 @@ const Quotes = () => {
       </Pressable>
     );
   };
+
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.headerContainer}>
@@ -132,10 +128,7 @@ const Quotes = () => {
         </MainModal>
       </View>
       <View style={styles.btnContainer}>
-        <Pressable
-          style={{ marginBottom: 20 }}
-          onPress={handleNavigationToHome}
-        >
+        <Pressable style={{ marginBottom: 20 }}>
           <LinearGradient
             style={styles.gradient}
             colors={["orange", "white", "orange"]}
