@@ -7,7 +7,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 import * as SecureStore from "expo-secure-store";
 // import Registration from "./src/components/Registration/Registration";
 // import Login from "./src/components/Login/Login";
-// import IntroScreen from "./src/Screens/IntroScreen";
+import IntroScreen from "./src/Screens/IntroScreen";
 import TabNavigate from "./src/Screens/TabNavigate";
 import { getProfile } from "./src/service/authService";
 import { fetchFonts } from "./src/helpers/fetchFonts";
@@ -17,7 +17,7 @@ const Registration = lazy(() =>
 );
 const Login = lazy(() => import("./src/components/Login/Login"));
 const ResetPassword = lazy(() => import("./src/components/ResetPassword"));
-const IntroScreen = lazy(() => import("./src/Screens/IntroScreen"));
+// const IntroScreen = lazy(() => import("./src/Screens/IntroScreen"));
 
 const fetchAndStoreUserProfile = async (token) => {
   try {
