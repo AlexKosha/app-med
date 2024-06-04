@@ -5,7 +5,8 @@ import { Audio } from "expo-av";
 import Slider from "@react-native-community/slider";
 import { styles } from "./PracticeStyles";
 
-const Practice = () => {
+const Practice = ({ route }) => {
+  const { audio, description } = route.params.item;
   const [sound, setSound] = useState();
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(0);
@@ -14,7 +15,7 @@ const Practice = () => {
   const loadSound = async () => {
     const { sound } = await Audio.Sound.createAsync(
       {
-        uri: "https://drive.google.com/uc?export=open&id=1OFOd5Tj-Z6-ITSKYmIkovFaYePsKTfch",
+        uri: audio,
       },
       {},
       onPlaybackStatusUpdate
@@ -77,16 +78,10 @@ const Practice = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-        odio. Praesent libero. Sed cursus ante dapibus diam.
-      </Text>
+      <Text style={styles.text}>{description}</Text>
       <Text>
         {progress ? `${formatTime(position)} / ${formatTime(duration)}` : ""}
       </Text>
-      {/* <View style={styles.progressBarContainer}>
-        <View style={[styles.progressBar, { width: `${progress}%` }]} />
-      </View> */}
       <Slider
         style={styles.slider}
         minimumValue={0}

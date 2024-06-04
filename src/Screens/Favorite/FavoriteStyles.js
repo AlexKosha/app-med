@@ -38,13 +38,13 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
   },
   image: {
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 100,
     resizeMode: "cover",
     marginRight: 10,
   },
   text: {
-    fontSize: 24,
+    fontSize: 16,
     marginBottom: 20,
   },
   iconContainer: {

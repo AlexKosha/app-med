@@ -58,7 +58,7 @@ const HomeNavigate = () => {
           name="Exercises"
           component={Exercises}
           options={({ route, navigation }) => ({
-            title: route.params.item.text,
+            title: route.params.item.name,
             headerTitleAlign: "center",
             headerLeft: () => (
               <TouchableOpacity onPress={() => navigation.goBack()}>

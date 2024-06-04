@@ -11,12 +11,12 @@ export const styles = StyleSheet.create({
   itemContainer: {
     paddingLeft: 10,
     flexDirection: "row",
-    alignItems: "center",
+    // alignItems: "center",
     marginBottom: 20,
   },
   image: {
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 100,
     resizeMode: "cover",
     marginRight: 10,
   },
@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
   iconContainer: {
     flex: 1,
     alignItems: "flex-end",
+    justifyContent: "center",
     paddingRight: 10,
     paddingTop: 5,
   },

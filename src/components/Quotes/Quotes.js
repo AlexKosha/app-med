@@ -18,12 +18,27 @@ import { LinearGradient } from "expo-linear-gradient";
 import { imagesQuotes } from "../../helpers/imagesQuotes";
 import MainModal from "../Modal";
 import { styles } from "./QuotesStyles";
+import { fetchQuotes } from "../../service/quoteService";
 
 const Quotes = () => {
   const navigation = useNavigation();
+  const [quotesData, setQuotesData] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalImgUrl, setModalImgUrl] = useState(null);
   const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
+
+  const getQuotes = async () => {
+    try {
+      const data = await fetchQuotes();
+      setQuotesData(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getQuotes();
+  }, []);
 
   const handleNavigationToHome = () => {
     navigation.navigate("MainMenu");
@@ -37,7 +52,7 @@ const Quotes = () => {
   const downloadFormUrl = async () => {
     const filename = "quotes.png";
     const results = await FileSystem.downloadAsync(
-      "https://drive.google.com/uc?export=view&id=1N2SKbzvg7g1ypeHJSvjL5B-S9cV7o232",
+      modalImgUrl,
       FileSystem.documentDirectory + filename
     );
 
@@ -64,13 +79,13 @@ const Quotes = () => {
     }
   };
 
-  const renderItem = ({ index }) => {
+  const renderItem = ({ item }) => {
     return (
-      <Pressable onPress={() => toggleModal(imagesQuotes[index])}>
+      <Pressable onPress={() => toggleModal(item.img)}>
         <View style={styles.imageContainer}>
           <ImageBackground
             style={{ width: 200, height: "100%" }}
-            source={imagesQuotes[index]}
+            source={{ uri: item.img }}
             resizeMode="cover"
           />
         </View>
@@ -106,15 +121,20 @@ const Quotes = () => {
           Або натисніть кнопку і активуйте щоденне автоматизоване відправлення
           однієї нової афірмації на ваш мобільний телефон.
         </Text>
-        <FlatList
-          data={imagesQuotes}
-          keyExtractor={(item) => item}
-          renderItem={renderItem}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        />
+        {quotesData && (
+          <FlatList
+            data={quotesData}
+            keyExtractor={(item) => item._id}
+            renderItem={renderItem}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          />
+        )}
         <MainModal isVisible={isModalVisible} onClose={() => toggleModal(null)}>
-          <ImageBackground style={styles.modalContainer} source={modalImgUrl}>
+          <ImageBackground
+            style={styles.modalContainer}
+            source={{ uri: modalImgUrl }}
+          >
             <Pressable onPress={() => toggleModal(null)}>
               <Icon style={styles.closeButton} name="closecircleo" />
             </Pressable>

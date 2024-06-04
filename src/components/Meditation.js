@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FlatList,
   Image,
@@ -9,10 +9,23 @@ import {
   View,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import data from "../data.json";
+import * as GroupService from "../service/groupService";
 
 const Meditation = () => {
   const navigation = useNavigation();
+  [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchGroup = async () => {
+      try {
+        const data = await GroupService.fetchGroups();
+        setData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchGroup();
+  }, []);
 
   const handleNavigationToHome = () => {
     navigation.navigate("MainMenu");
@@ -25,18 +38,14 @@ const Meditation = () => {
   const renderSeparator = () => <View style={{ marginBottom: 20 }} />;
 
   const renderItem = ({ item }) => (
-    <Pressable
-      // style={styles.btnList}
-      onPress={() => handleNavigationToExercises(item)}
-    >
+    <Pressable onPress={() => handleNavigationToExercises(item)}>
       <LinearGradient
         style={styles.listItem}
         colors={["#3498db", "white", "#3498db"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 0 }}
-        // style={styles.gradientt}
       >
-        <Text>{item.text}</Text>
+        <Text>{item.name}</Text>
       </LinearGradient>
     </Pressable>
   );
@@ -60,7 +69,7 @@ const Meditation = () => {
         <FlatList
           style={{ width: "100%" }}
           data={data}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item._id}
           renderItem={renderItem}
           contentContainerStyle={{ alignItems: "center" }}
           ItemSeparatorComponent={renderSeparator}

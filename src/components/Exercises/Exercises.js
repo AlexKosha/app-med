@@ -7,10 +7,12 @@ import {
   saveMeditationsToStorage,
 } from "../../helpers/favoriteMeditationsStorage";
 import { styles } from "./ExercisesStyles";
+import { fetchLessons } from "../../service/lessonService";
 
 const Exercises = ({ route, navigation }) => {
-  const { exercise } = route.params.item;
+  const groupId = route.params.item._id;
   const [favorites, setFavorites] = useState([]);
+  const [exercise, setExercise] = useState(null);
 
   const removeDuplicateMeditations = (favorites, item) =>
     favorites.filter((meditation) => meditation.name !== item.name);
@@ -28,10 +30,20 @@ const Exercises = ({ route, navigation }) => {
     }
   };
 
+  const getLessons = async () => {
+    try {
+      const data = await fetchLessons(groupId);
+      setExercise(data);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useFocusEffect(
     useCallback(() => {
+      getLessons();
       loadFavorites();
-      console.log(2);
     }, [])
   );
 
@@ -64,12 +76,19 @@ const Exercises = ({ route, navigation }) => {
         <View style={styles.line}></View>
         <Pressable onPress={() => handleItemPress(item)}>
           <View style={styles.itemContainer}>
-            <Image style={styles.image} source={{ uri: item.img }} />
+            <Image
+              style={styles.image}
+              source={{
+                uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
+              }}
+            />
             <View style={styles.contentContainer}>
-              <Text style={{ fontSize: 24, marginBottom: 20 }}>
+              <Text
+                style={{ fontSize: 16, marginBottom: 20, flexWrap: "wrap" }}
+              >
                 {item.name}
               </Text>
-              <Text>{item.time}</Text>
+              {/* <Text>{item.time}</Text> */}
             </View>
             <View style={styles.iconContainer}>
               <Pressable onPress={() => addMeditation(item)}>
@@ -87,11 +106,13 @@ const Exercises = ({ route, navigation }) => {
 
   return (
     <View>
-      <FlatList
-        data={exercise}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-      />
+      {exercise && (
+        <FlatList
+          data={exercise}
+          keyExtractor={(item) => item._id}
+          renderItem={renderItem}
+        />
+      )}
     </View>
   );
 };
