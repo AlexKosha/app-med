@@ -49,10 +49,15 @@ const Favorite = () => {
         <View style={styles.line}></View>
         <Pressable onPress={() => handleItemPress(item)}>
           <View style={styles.itemContainer}>
-            <Image style={styles.image} source={{ uri: item.img }} />
+            <Image
+              style={styles.image}
+              source={{
+                uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3UubEVL_bKP-josaiwfP3DLytoThxWCx6Yg&usqp=CAU",
+              }}
+            />
             <View style={styles.contentContainer}>
               <Text style={styles.text}>{item.name}</Text>
-              <Text>{item.time}</Text>
+              {/* <Text>{item.time}</Text> */}
             </View>
             <View style={styles.iconContainer}>
               <Pressable onPress={() => removeMeditation(item)}>
