@@ -1,12 +1,14 @@
 import React, { useCallback, useState } from "react";
 import { View, Text, TouchableOpacity, FlatList, Alert } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
+import * as SecureStore from "expo-secure-store";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { styles } from "./DiaryStyles";
 import {
   getStoredFavoritesDiaries,
   saveDiaryToStorage,
 } from "../../helpers/diaryStorage";
+import { deleteDiary, fetchDiary } from "../../service/diaryServices";
 
 const Diary = () => {
   const [notes, setNotes] = useState([]);
@@ -14,8 +16,16 @@ const Diary = () => {
 
   const loadFavoritesDiary = async () => {
     try {
-      const favorites = await getStoredFavoritesDiaries();
+      let favorites = await getStoredFavoritesDiaries();
+
+      if (favorites.length === 0) {
+        favorites = await fetchDiary();
+        await saveDiaryToStorage(favorites);
+      }
       setNotes(favorites);
+
+      // await SecureStore.deleteItemAsync("diaries");
+      // setNotes([]);
     } catch (error) {
       console.error("Failed to load favorites:", error);
     }
@@ -27,38 +37,42 @@ const Diary = () => {
     }, [])
   );
 
-  // const addNote = async (newNote) => {
-  //   await saveDiaryToStorage(newNote);
-  //   setNotes((prevNotes) => [...prevNotes, newNote]);
-  //   navigation.navigate("Diary");
-  // };
-
   const addNote = async (newNote) => {
     setNotes((prevNotes) => {
-      console.log("====================================");
-      console.log("prevNotes type:", typeof prevNotes);
-      console.log("prevNotes isArray:", Array.isArray(prevNotes));
-      console.log("====================================");
-
       const updatedNotes = Array.isArray(prevNotes)
         ? [...prevNotes, newNote]
         : [newNote];
-      saveDiaryToStorage(updatedNotes);
+
       return updatedNotes;
     });
-    navigation.navigate("Diary");
+
+    try {
+      const updatedNotes = await SecureStore.getItemAsync("diaries");
+      const parsedNotes = updatedNotes ? JSON.parse(updatedNotes) : [];
+      parsedNotes.push(newNote);
+
+      await saveDiaryToStorage(parsedNotes);
+
+      navigation.navigate("Diary");
+    } catch (error) {
+      console.error("Failed to add note:", error);
+    }
   };
 
-  // const deleteNote = (id) => {
-  //   setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
-  // };
-
   const deleteNote = async (id) => {
-    setNotes((prevNotes) => {
-      const updatedNotes = prevNotes.filter((note) => note.id !== id);
-      saveDiaryToStorage(updatedNotes);
-      return updatedNotes;
-    });
+    try {
+      await deleteDiary(id);
+      setNotes((prevNotes) => {
+        const updatedNotes = prevNotes.filter((note) => note._id !== id);
+        saveDiaryToStorage(updatedNotes);
+        return updatedNotes;
+      });
+    } catch (error) {
+      console.error(
+        "Error deleting note:",
+        error.response?.data || error.message
+      );
+    }
   };
 
   const updateNote = async (updatedNote) => {
@@ -72,15 +86,20 @@ const Diary = () => {
       return;
     }
 
-    // const filteredNotes = notes.filter((note) => note.id !== updatedNote.id);
-
-    // setNotes([...filteredNotes, updatedNote]);
-    // navigation.navigate("Diary");
-    const filteredNotes = notes.filter((note) => note.id !== updatedNote.id);
-    const updatedNotes = [...filteredNotes, updatedNote];
-    await saveDiaryToStorage(updatedNotes);
-    setNotes(updatedNotes);
-    navigation.navigate("Diary");
+    try {
+      const filteredNotes = notes.filter(
+        (note) => note._id !== updatedNote._id
+      );
+      const updatedNotes = [...filteredNotes, updatedNote];
+      await saveDiaryToStorage(updatedNotes);
+      setNotes(updatedNotes);
+      navigation.navigate("Diary");
+    } catch (error) {
+      console.error(
+        "Error updating note:",
+        error.response?.data || error.message
+      );
+    }
   };
 
   const openModal = () => {
@@ -88,7 +107,6 @@ const Diary = () => {
       leftButtonTitle: "Додати",
       onCreateNote: addNote,
       note: {
-        id: Math.random().toString(),
         title: "",
         description: "",
       },
@@ -113,7 +131,7 @@ const Diary = () => {
       <FlatList
         style={styles.list}
         data={notes}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item._id}
         renderItem={({ item }) => {
           return (
             <View style={styles.noteContainer}>
@@ -123,7 +141,7 @@ const Diary = () => {
                 </Text>
                 <Text style={styles.input}>{item.description}</Text>
               </View>
-              <TouchableOpacity onPress={() => deleteNote(item.id)}>
+              <TouchableOpacity onPress={() => deleteNote(item._id)}>
                 <Text style={styles.deleteNoteButton}>
                   <Icon name="delete" size={20} color={"black"} />
                 </Text>

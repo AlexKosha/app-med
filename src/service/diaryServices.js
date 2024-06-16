@@ -1,14 +1,8 @@
-import { instance, setToken } from "./authService";
+import { instance } from "./authService";
 
-export const instance = axios.create({
-  baseURL: "https://task-pro-7x3t.onrender.com",
-});
-
-
-export const fetchDiary = async (token) => {
-  setToken(`Bearer ${token}`);
+export const fetchDiary = async () => {
   const { data } = await instance.get("/diary");
-  return data
+  return data;
 };
 
 export const addDiary = async (body) => {

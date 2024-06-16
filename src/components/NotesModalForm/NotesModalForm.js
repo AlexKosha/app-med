@@ -12,6 +12,7 @@ import {
   Alert,
 } from "react-native";
 import { styles } from "./NotesModalFormStyles";
+import { addDiary, updateDiary } from "../../service/diaryServices";
 
 const NotesModalForm = ({ route }) => {
   const { leftButtonTitle, onCreateNote, note } = route.params;
@@ -24,26 +25,44 @@ const NotesModalForm = ({ route }) => {
 
   useEffect(() => {
     setNewNote({
-      id: note.id || "",
+      id: note._id || "",
       title: note.title || "",
       description: note.description || "",
     });
   }, [note]);
 
-  const func = () => {
+  const func = async () => {
     if (newNote.title.trim() === "" || newNote.description.trim() === "") {
       Alert.alert("Ой лишенько!", "Тема та вміст нотатки є обов'язковими", [
         { text: "Закрити" },
       ]);
       return;
     }
-    const noteNote = { ...newNote };
-    setNewNote({
-      id: "",
-      title: "",
-      description: "",
-    });
-    onCreateNote(noteNote);
+    const noteNote = {
+      title: newNote.title,
+      description: newNote.description,
+    };
+
+    try {
+      let data = "";
+      if (leftButtonTitle === "Додати") {
+        data = await addDiary(noteNote);
+      } else {
+        data = await updateDiary(newNote.id, noteNote);
+      }
+
+      setNewNote({
+        id: "",
+        title: "",
+        description: "",
+      });
+      onCreateNote(data);
+    } catch (error) {
+      console.error(
+        "Error updating note:",
+        error.response?.data || error.message
+      );
+    }
   };
 
   const onClose = () => {

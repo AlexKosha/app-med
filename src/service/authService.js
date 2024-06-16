@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export const instance = axios.create({
-  baseURL: "https://med-app-back.onrender.com",
+  // baseURL: "https://med-app-back.onrender.com",
+  baseURL: "http://192.168.1.193:3333",
 });
 
 export const setToken = (token) => {
